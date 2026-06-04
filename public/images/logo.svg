@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Loan platform logo">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d9488"/>
+      <stop offset="50%" style="stop-color:#0284c7"/>
+      <stop offset="100%" style="stop-color:#4f46e5"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#logoGrad)"/>
+  <path fill="#ffffff" d="M18 42V22h8.5c5.2 0 8.5 2.8 8.5 7.2 0 2.6-1.2 4.6-3.2 5.7L38 42h-6.2l-3.8-6.2H24v6.2H18zm6-10.5h2.2c2.1 0 3.3-1 3.3-2.7s-1.2-2.6-3.3-2.6H24v5.3zm16.5 10.8c-5.4 0-9-3.5-9-9.5s3.6-9.5 9.3-9.5c3.4 0 6 1.4 7.4 3.8l-4.8 2.8c-.7-1.2-1.8-1.8-3.2-1.8-2.4 0-4 1.7-4 4.7s1.6 4.7 4.1 4.7c1.5 0 2.7-.6 3.4-1.9l4.8 2.7c-1.5 2.5-4.2 4-7 4z"/>
+</svg>
