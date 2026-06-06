@@ -1,4 +1,8 @@
 import { useMemo, useState } from 'react';
+import {
+    LoanApplicationCollateralFields,
+    type CollateralTypeOption,
+} from '@/components/loan-applications/loan-application-collateral-fields';
 import { FormField } from '@/components/form-field';
 import { Input } from '@/components/ui/input';
 import { NativeSelect } from '@/components/ui/native-select';
@@ -18,6 +22,7 @@ export type PortalProductOption = {
 type Props = {
     errors: Record<string, string | undefined>;
     products: PortalProductOption[];
+    collateralTypes: CollateralTypeOption[];
     currency: string;
     values?: {
         loan_product_id?: number | string;
@@ -30,6 +35,7 @@ type Props = {
 export function PortalApplicationFormFields({
     errors,
     products,
+    collateralTypes,
     currency,
     values,
 }: Props) {
@@ -163,6 +169,12 @@ export function PortalApplicationFormFields({
                     />
                 </FormField>
             </section>
+
+            <LoanApplicationCollateralFields
+                errors={errors}
+                collateralTypes={collateralTypes}
+                currency={currency}
+            />
         </div>
     );
 }

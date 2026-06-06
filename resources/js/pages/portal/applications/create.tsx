@@ -22,11 +22,18 @@ type Product = {
     term_max_days: number;
 };
 
+type CollateralTypeOption = {
+    value: string;
+    label: string;
+};
+
 export default function PortalApplicationCreate({
     products,
+    collateralTypes,
     currency,
 }: {
     products: Product[];
+    collateralTypes: CollateralTypeOption[];
     currency: string;
 }) {
     return (
@@ -100,6 +107,7 @@ export default function PortalApplicationCreate({
                                             <PortalApplicationFormFields
                                                 errors={errors}
                                                 products={products}
+                                                collateralTypes={collateralTypes}
                                                 currency={currency}
                                             />
                                             <div className="flex flex-wrap gap-3 border-t pt-6">

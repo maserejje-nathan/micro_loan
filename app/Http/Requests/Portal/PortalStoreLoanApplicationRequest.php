@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Portal;
 
+use App\Http\Requests\Concerns\ValidatesLoanApplicationCollaterals;
 use App\Models\LoanProduct;
 use App\Support\LoanProductLimitValidator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -9,6 +10,8 @@ use Illuminate\Validation\Validator;
 
 class PortalStoreLoanApplicationRequest extends FormRequest
 {
+    use ValidatesLoanApplicationCollaterals;
+
     public function authorize(): bool
     {
         return $this->user('portal') !== null;
@@ -24,6 +27,7 @@ class PortalStoreLoanApplicationRequest extends FormRequest
             'requested_amount' => ['required', 'integer', 'min:1'],
             'term_days' => ['required', 'integer', 'min:1'],
             'purpose' => ['nullable', 'string', 'max:1000'],
+            ...$this->collateralRules(),
         ];
     }
 

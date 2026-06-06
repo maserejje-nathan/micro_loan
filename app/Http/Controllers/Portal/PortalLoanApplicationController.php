@@ -11,6 +11,7 @@ use App\Models\LoanProduct;
 use App\Services\LoanApplicationService;
 use App\Services\ReferenceNumberGenerator;
 use App\Support\ListPagination;
+use App\Support\LoanApplicationCollateralData;
 use App\Support\OrganizationContext;
 use App\Support\OrganizationPortalSettings;
 use Illuminate\Http\RedirectResponse;
@@ -100,7 +101,7 @@ class PortalLoanApplicationController extends Controller
     {
         $this->authorizeApplication($request, $loanApplication);
 
-        $loanApplication->load(['loanProduct', 'loan']);
+        $loanApplication->load(['loanProduct', 'loan', 'collaterals']);
 
         $product = $loanApplication->loanProduct;
 
@@ -119,6 +120,9 @@ class PortalLoanApplicationController extends Controller
                 'reviewed_at' => $loanApplication->reviewed_at?->toDateTimeString(),
                 'created_at' => $loanApplication->created_at->toDateTimeString(),
                 'loan_id' => $loanApplication->loan?->id,
+                'collaterals' => LoanApplicationCollateralData::serializeCollection(
+                    $loanApplication->collaterals,
+                ),
             ],
             'product' => [
                 'min_amount' => $product->min_amount,
@@ -139,6 +143,7 @@ class PortalLoanApplicationController extends Controller
         );
 
         return Inertia::render('portal/applications/create', [
+            'collateralTypes' => LoanApplicationCollateralData::typeOptions(),
             'products' => LoanProduct::query()
                 ->where('is_active', true)
                 ->get([
@@ -157,6 +162,7 @@ class PortalLoanApplicationController extends Controller
     public function store(
         PortalStoreLoanApplicationRequest $request,
         ReferenceNumberGenerator $referenceNumberGenerator,
+        LoanApplicationService $loanApplicationService,
     ): RedirectResponse {
         abort_unless(
             OrganizationPortalSettings::for(OrganizationContext::get())['allow_applications'],
@@ -166,8 +172,12 @@ class PortalLoanApplicationController extends Controller
         /** @var Customer $customer */
         $customer = $request->user('portal');
 
+        $validated = $request->validated();
+        $collaterals = $validated['collaterals'] ?? [];
+        unset($validated['collaterals']);
+
         $application = LoanApplication::query()->create([
-            ...$request->validated(),
+            ...$validated,
             'organization_id' => $customer->organization_id,
             'customer_id' => $customer->id,
             'reference_number' => $referenceNumberGenerator->generate(
@@ -177,6 +187,10 @@ class PortalLoanApplicationController extends Controller
             'status' => LoanApplicationStatus::Draft,
             'created_by' => null,
         ]);
+
+        if ($collaterals !== []) {
+            $loanApplicationService->storeCollaterals($application, $collaterals);
+        }
 
         return redirect()
             ->route('portal.applications.show', $application)

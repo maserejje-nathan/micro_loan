@@ -17,13 +17,14 @@ use App\Services\LoanCalculator;
 use App\Services\LoanDisbursementService;
 use App\Services\ReferenceNumberGenerator;
 use App\Support\ListPagination;
+use App\Support\LoanApplicationCollateralData;
 use App\Support\MobileMoneyConfig;
 use App\Support\OrganizationContext;
 use Illuminate\Http\RedirectResponse;
-use InvalidArgumentException;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use InvalidArgumentException;
 
 class LoanApplicationController extends Controller
 {
@@ -69,6 +70,7 @@ class LoanApplicationController extends Controller
     public function create(): Response
     {
         return Inertia::render('loan-applications/create', [
+            'collateralTypes' => LoanApplicationCollateralData::typeOptions(),
             'customers' => Customer::query()->orderBy('first_name')->get(['id', 'first_name', 'last_name', 'phone']),
             'products' => LoanProduct::query()
                 ->where('is_active', true)
@@ -88,9 +90,14 @@ class LoanApplicationController extends Controller
         StoreLoanApplicationRequest $request,
         ReferenceNumberGenerator $referenceNumberGenerator,
         AuditLogger $auditLogger,
+        LoanApplicationService $loanApplicationService,
     ): RedirectResponse {
+        $validated = $request->validated();
+        $collaterals = $validated['collaterals'] ?? [];
+        unset($validated['collaterals']);
+
         $application = LoanApplication::query()->create([
-            ...$request->validated(),
+            ...$validated,
             'reference_number' => $referenceNumberGenerator->generate(
                 new LoanApplication,
                 'APP',
@@ -99,6 +106,10 @@ class LoanApplicationController extends Controller
             'created_by' => $request->user()->id,
         ]);
 
+        if ($collaterals !== []) {
+            $loanApplicationService->storeCollaterals($application, $collaterals);
+        }
+
         $auditLogger->log('loan_application.created', $application);
 
         return redirect()->route('loan-applications.show', $application);
@@ -106,7 +117,7 @@ class LoanApplicationController extends Controller
 
     public function show(LoanApplication $loanApplication, LoanCalculator $calculator): Response
     {
-        $loanApplication->load(['customer', 'loanProduct', 'loan', 'reviewer']);
+        $loanApplication->load(['customer', 'loanProduct', 'loan', 'reviewer', 'collaterals']);
         $product = $loanApplication->loanProduct;
 
         $estimate = $calculator->estimate(
@@ -175,6 +186,9 @@ class LoanApplicationController extends Controller
                     'principal' => $loanApplication->loan->principal,
                     'outstanding_balance' => $loanApplication->loan->outstanding_balance,
                 ] : null,
+                'collaterals' => LoanApplicationCollateralData::serializeCollection(
+                    $loanApplication->collaterals,
+                ),
             ],
             'currency' => OrganizationContext::get()?->currency ?? 'UGX',
             'canApprove' => request()->user()?->hasPermission('loan_applications.approve') ?? false,
@@ -187,8 +201,7 @@ class LoanApplicationController extends Controller
         LoanApplication $loanApplication,
         LoanApplicationService $service,
         Request $request,
-    ): RedirectResponse
-    {
+    ): RedirectResponse {
         $service->submit($loanApplication, $request->user());
 
         return back();

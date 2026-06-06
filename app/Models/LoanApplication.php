@@ -4,14 +4,16 @@ namespace App\Models;
 
 use App\Enums\LoanApplicationStatus;
 use App\Models\Concerns\BelongsToOrganization;
+use Database\Factories\LoanApplicationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class LoanApplication extends Model
 {
-    /** @use HasFactory<\Database\Factories\LoanApplicationFactory> */
+    /** @use HasFactory<LoanApplicationFactory> */
     use BelongsToOrganization, HasFactory;
 
     /**
@@ -66,6 +68,14 @@ class LoanApplication extends Model
     public function reviewer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reviewed_by');
+    }
+
+    /**
+     * @return HasMany<LoanApplicationCollateral, $this>
+     */
+    public function collaterals(): HasMany
+    {
+        return $this->hasMany(LoanApplicationCollateral::class);
     }
 
     /**

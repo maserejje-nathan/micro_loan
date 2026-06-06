@@ -14,6 +14,10 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import LoanApplicationController from '@/actions/App/Http/Controllers/LoanApplicationController';
+import {
+    LoanApplicationCollateralList,
+    type CollateralItem,
+} from '@/components/loan-applications/loan-application-collateral-list';
 import { DisburseLoanFormFields } from '@/components/loans/disburse-loan-form-fields';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
 import { StatCard } from '@/components/stat-card';
@@ -87,6 +91,7 @@ type Application = {
     estimate: LoanEstimate;
     approved_estimate: LoanEstimate | null;
     loan: LinkedLoan | null;
+    collaterals: CollateralItem[];
 };
 
 function formatDateTime(dateTime: string): string {
@@ -421,6 +426,23 @@ export default function LoanApplicationsShow({
                                         </div>
                                     )}
                                 </dl>
+                            </CardContent>
+                        </Card>
+
+                        <Card>
+                            <CardHeader className="border-b">
+                                <CardTitle className="text-base">
+                                    Collateral
+                                </CardTitle>
+                                <CardDescription>
+                                    Security pledged against this application
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="pt-6">
+                                <LoanApplicationCollateralList
+                                    collaterals={application.collaterals}
+                                    currency={currency}
+                                />
                             </CardContent>
                         </Card>
 

@@ -19,12 +19,19 @@ type ProductOption = {
     max_amount: number;
 };
 
+type CollateralTypeOption = {
+    value: string;
+    label: string;
+};
+
 export default function LoanApplicationsCreate({
     customers,
     products,
+    collateralTypes,
 }: {
     customers: CustomerOption[];
     products: ProductOption[];
+    collateralTypes: CollateralTypeOption[];
 }) {
     const { auth } = usePage<{ auth: { organization?: { currency: string } } }>()
         .props;
@@ -48,6 +55,7 @@ export default function LoanApplicationsCreate({
                                 errors={errors}
                                 customers={customers}
                                 products={products}
+                                collateralTypes={collateralTypes}
                                 currency={currency}
                             />
                             <FormActions

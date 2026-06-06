@@ -7,6 +7,10 @@ import {
     Send,
     Wallet,
 } from 'lucide-react';
+import {
+    LoanApplicationCollateralList,
+    type CollateralItem,
+} from '@/components/loan-applications/loan-application-collateral-list';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
@@ -36,6 +40,7 @@ type Props = {
         reviewed_at: string | null;
         created_at: string;
         loan_id: number | null;
+        collaterals: CollateralItem[];
     };
     product: {
         min_amount: number;
@@ -365,6 +370,21 @@ export default function PortalApplicationShow({
                         </CardContent>
                     </Card>
                 </div>
+
+                <Card>
+                    <CardHeader className="border-b">
+                        <CardTitle className="text-base">Collateral</CardTitle>
+                        <CardDescription>
+                            Security you pledged for this application
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                        <LoanApplicationCollateralList
+                            collaterals={application.collaterals}
+                            currency={currency}
+                        />
+                    </CardContent>
+                </Card>
 
                 <Button variant="ghost" size="sm" asChild className="-ml-2 w-fit">
                     <Link href="/portal/applications">← Back to applications</Link>

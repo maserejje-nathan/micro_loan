@@ -166,4 +166,14 @@ class LoanApplicationService
 
         return $application->fresh();
     }
+
+    /**
+     * @param  list<array{type: string, description: string, estimated_value: int, identifier?: string|null}>  $collaterals
+     */
+    public function storeCollaterals(LoanApplication $application, array $collaterals): void
+    {
+        foreach ($collaterals as $collateral) {
+            $application->collaterals()->create($collateral);
+        }
+    }
 }
