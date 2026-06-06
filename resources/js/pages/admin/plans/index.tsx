@@ -1,6 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { Package, Plus, Search, TrendingUp, Users } from 'lucide-react';
-import { FormEvent, useState } from 'react';
+import type { FormEvent} from 'react';
+import { useState } from 'react';
 import { PlanRowActions } from '@/components/admin/plan-row-actions';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
@@ -27,10 +28,10 @@ import { formatEnumLabel } from '@/lib/format-label';
 import { formatMoney } from '@/lib/format-money';
 import { formatPlanLimits } from '@/lib/plan-limits';
 import { cn } from '@/lib/utils';
-import type { Paginated } from '@/types/pagination';
-import { paginatorTotal } from '@/types/pagination';
 import { create, index as plansIndex } from '@/routes/admin/plans';
 import { index as subscriptionsIndex } from '@/routes/admin/subscriptions';
+import type { Paginated } from '@/types/pagination';
+import { paginatorTotal } from '@/types/pagination';
 
 type Plan = {
     id: number;

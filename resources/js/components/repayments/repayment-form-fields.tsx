@@ -1,8 +1,6 @@
 import { Link } from '@inertiajs/react';
 import { useMemo, useState } from 'react';
 import { FormField } from '@/components/form-field';
-import { Input } from '@/components/ui/input';
-import { NativeSelect } from '@/components/ui/native-select';
 import {
     Card,
     CardContent,
@@ -10,14 +8,17 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { NativeSelect } from '@/components/ui/native-select';
+import { formatMoney } from '@/lib/format-money';
 import {
     MOBILE_MONEY_CHANNEL,
-    mobileMoneyChannelLabel,
-    type MobileMoneySummary,
+    mobileMoneyChannelLabel
+    
 } from '@/lib/mobile-money-channel-label';
-import { formatMoney } from '@/lib/format-money';
-import { show as loanShow } from '@/routes/loans';
+import type {MobileMoneySummary} from '@/lib/mobile-money-channel-label';
 import { cn } from '@/lib/utils';
+import { show as loanShow } from '@/routes/loans';
 
 export { MOBILE_MONEY_CHANNEL };
 

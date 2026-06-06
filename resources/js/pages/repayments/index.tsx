@@ -27,11 +27,11 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { formatMoney } from '@/lib/format-money';
+import { show as customerShow } from '@/routes/customers';
+import { show as loanShow } from '@/routes/loans';
+import { create, index as repaymentsIndex } from '@/routes/repayments';
 import type { Paginated } from '@/types/pagination';
 import { paginatorTotal } from '@/types/pagination';
-import { create, index as repaymentsIndex } from '@/routes/repayments';
-import { show as loanShow } from '@/routes/loans';
-import { show as customerShow } from '@/routes/customers';
 
 type Repayment = {
     id: number;

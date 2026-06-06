@@ -1,7 +1,7 @@
 import { usePage } from '@inertiajs/react';
 import type { PropsWithChildren } from 'react';
-import Heading from '@/components/heading';
 import { PlatformSettingsNav } from '@/components/admin/platform-settings-nav';
+import Heading from '@/components/heading';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { index as settingsIndex } from '@/routes/admin/settings';

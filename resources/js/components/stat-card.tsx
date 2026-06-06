@@ -4,9 +4,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import {
     statCardTones,
     toneFromAccentClass,
-    toneFromTitle,
-    type StatCardTone,
+    toneFromTitle
+    
 } from '@/lib/stat-card-tones';
+import type {StatCardTone} from '@/lib/stat-card-tones';
 import { cn } from '@/lib/utils';
 
 type StatCardProps = {

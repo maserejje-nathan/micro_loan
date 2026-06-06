@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
 import { ImageIcon } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import InputError from '@/components/input-error';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -91,6 +91,7 @@ export function WelcomeBannerSlideField({
                             aria-invalid={!!imageError}
                             onChange={(event) => {
                                 const file = event.target.files?.[0];
+
                                 if (!file) {
                                     return;
                                 }

@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
 import { Camera, User } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import InputError from '@/components/input-error';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -76,6 +76,7 @@ export function CustomerPhotoField({
                             aria-invalid={!!error}
                             onChange={(event) => {
                                 const file = event.target.files?.[0];
+
                                 if (!file) {
                                     return;
                                 }
@@ -104,6 +105,7 @@ export function CustomerPhotoField({
                                 onChange={(event) => {
                                     const checked = event.target.checked;
                                     setRemovePhoto(checked);
+
                                     if (checked) {
                                         setPreview(null);
                                     } else {

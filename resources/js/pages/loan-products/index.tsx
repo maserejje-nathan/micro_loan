@@ -22,9 +22,9 @@ import {
 } from '@/components/ui/table';
 import { formatEnumLabel } from '@/lib/format-label';
 import { formatMoney } from '@/lib/format-money';
+import { cn } from '@/lib/utils';
 import type { Paginated } from '@/types/pagination';
 import { paginatorTotal } from '@/types/pagination';
-import { cn } from '@/lib/utils';
 
 type LoanProduct = {
     id: number;

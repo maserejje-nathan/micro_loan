@@ -10,8 +10,8 @@ import {
     ShieldAlert,
     ShieldCheck,
 } from 'lucide-react';
-import { AuditCategoryBadge } from '@/components/audit-logs/audit-category-badge';
 import { HealthStatCard } from '@/components/admin/health-stat-card';
+import { AuditCategoryBadge } from '@/components/audit-logs/audit-category-badge';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
 import { StatCard } from '@/components/stat-card';

@@ -4,9 +4,10 @@ import { Input } from '@/components/ui/input';
 import { NativeSelect } from '@/components/ui/native-select';
 import {
     MOBILE_MONEY_CHANNEL,
-    mobileMoneyChannelLabel,
-    type MobileMoneySummary,
+    mobileMoneyChannelLabel
+    
 } from '@/lib/mobile-money-channel-label';
+import type {MobileMoneySummary} from '@/lib/mobile-money-channel-label';
 import { cn } from '@/lib/utils';
 
 export type { MobileMoneySummary };

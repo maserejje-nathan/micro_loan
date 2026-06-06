@@ -1,10 +1,14 @@
 import { Form, Head } from '@inertiajs/react';
+import {
+    testSms,
+    updateAfricasTalking,
+} from '@/actions/App/Http/Controllers/Admin/AdminPlatformSettingsController';
 import { IntegrationApiResponse } from '@/components/admin/integration-api-response';
 import { IntegrationStatusCard } from '@/components/admin/integration-status-card';
+import { PlatformSettingsPage } from '@/components/admin/platform-settings-page';
 import { SmsTestCard } from '@/components/admin/sms-test-card';
 import { FormActions } from '@/components/form-actions';
 import { FormField } from '@/components/form-field';
-import { PlatformSettingsPage } from '@/components/admin/platform-settings-page';
 import {
     Card,
     CardContent,
@@ -13,10 +17,6 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import {
-    testSms,
-    updateAfricasTalking,
-} from '@/actions/App/Http/Controllers/Admin/AdminPlatformSettingsController';
 import {
     africasTalking as africasTalkingRoutes,
     index as settingsIndex,

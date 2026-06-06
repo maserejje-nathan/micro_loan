@@ -7,11 +7,13 @@ import {
     Send,
     Wallet,
 } from 'lucide-react';
-import {
-    LoanApplicationCollateralList,
-    type CollateralItem,
-} from '@/components/loan-applications/loan-application-collateral-list';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
+import {
+    LoanApplicationCollateralList
+    
+} from '@/components/loan-applications/loan-application-collateral-list';
+import type {CollateralItem} from '@/components/loan-applications/loan-application-collateral-list';
+import { PortalPage } from '@/components/portal/portal-page';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,7 +23,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { PortalPage } from '@/components/portal/portal-page';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
 

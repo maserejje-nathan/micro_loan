@@ -7,7 +7,8 @@ import {
     Plus,
     Search,
 } from 'lucide-react';
-import { FormEvent, useState } from 'react';
+import type { FormEvent} from 'react';
+import { useState } from 'react';
 import { BillingStatusBadge } from '@/components/admin/billing-status-badge';
 import { InvoiceRowActions } from '@/components/admin/invoice-row-actions';
 import { DataTablePagination } from '@/components/data-table-pagination';
@@ -33,10 +34,10 @@ import {
 import { formatEnumLabel } from '@/lib/format-label';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
-import type { Paginated } from '@/types/pagination';
-import { paginatorTotal } from '@/types/pagination';
 import { create, index as invoicesIndex } from '@/routes/admin/invoices';
 import { show as organizationShow } from '@/routes/admin/organizations';
+import type { Paginated } from '@/types/pagination';
+import { paginatorTotal } from '@/types/pagination';
 
 type Invoice = {
     id: number;

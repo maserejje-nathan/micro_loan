@@ -21,14 +21,14 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard as adminDashboard } from '@/routes/admin';
-import { index as organizationsIndex } from '@/routes/admin/organizations';
-import { index as invoicesIndex } from '@/routes/admin/invoices';
-import { index as plansIndex } from '@/routes/admin/plans';
-import { index as subscriptionsIndex } from '@/routes/admin/subscriptions';
-import { index as settingsIndex } from '@/routes/admin/settings';
-import { index as systemIndex } from '@/routes/admin/system';
 import { dashboard } from '@/routes';
+import { dashboard as adminDashboard } from '@/routes/admin';
+import { index as invoicesIndex } from '@/routes/admin/invoices';
+import { index as organizationsIndex } from '@/routes/admin/organizations';
+import { index as plansIndex } from '@/routes/admin/plans';
+import { index as settingsIndex } from '@/routes/admin/settings';
+import { index as subscriptionsIndex } from '@/routes/admin/subscriptions';
+import { index as systemIndex } from '@/routes/admin/system';
 import type { NavItem } from '@/types';
 
 const adminNavItems: NavItem[] = [

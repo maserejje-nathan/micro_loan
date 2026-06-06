@@ -12,13 +12,12 @@ import {
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { CustomerAvatar } from '@/components/customer-avatar';
+import type { CustomerFormValues } from '@/components/customers/customer-form-fields';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
-import type { CustomerFormValues } from '@/components/customers/customer-form-fields';
 import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import {
     Card,
     CardContent,
@@ -26,6 +25,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
 import {
     Table,
     TableBody,

@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { formatEnumLabel } from '@/lib/format-label';
-import { cn } from '@/lib/utils';
 import type { BadgeTone } from '@/lib/status-badge';
+import { cn } from '@/lib/utils';
 
 function paymentChannelTone(channel: string): BadgeTone {
     switch (channel) {

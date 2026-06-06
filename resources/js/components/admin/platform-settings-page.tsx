@@ -1,4 +1,5 @@
 import type { PropsWithChildren, ReactNode } from 'react';
+import { PlatformSettingsFlash } from '@/components/admin/platform-settings-flash';
 import {
     Card,
     CardContent,
@@ -6,7 +7,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { PlatformSettingsFlash } from '@/components/admin/platform-settings-flash';
 import { cn } from '@/lib/utils';
 
 type PlatformSettingsPageProps = PropsWithChildren<{

@@ -4,9 +4,10 @@ import {
     formatStatusLabel,
     loanApplicationStatusTone,
     loanStatusTone,
-    scheduleInstallmentStatusTone,
-    type BadgeTone,
+    scheduleInstallmentStatusTone
+    
 } from '@/lib/status-badge';
+import type {BadgeTone} from '@/lib/status-badge';
 import { cn } from '@/lib/utils';
 
 type EntityStatusBadgeProps = {

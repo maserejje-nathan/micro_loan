@@ -1,7 +1,7 @@
 import { Form, Head } from '@inertiajs/react';
 import { Building2 } from 'lucide-react';
-import { FormField } from '@/components/form-field';
 import { FormActions } from '@/components/form-actions';
+import { FormField } from '@/components/form-field';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';

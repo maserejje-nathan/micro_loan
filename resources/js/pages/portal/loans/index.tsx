@@ -1,9 +1,9 @@
 import { Head, Link } from '@inertiajs/react';
-import { index as loansIndex } from '@/routes/portal/loans';
 import { ArrowRight, Banknote, CheckCircle2, TrendingUp, Wallet } from 'lucide-react';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
+import { PortalPage } from '@/components/portal/portal-page';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,9 +21,9 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { PortalPage } from '@/components/portal/portal-page';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
+import { index as loansIndex } from '@/routes/portal/loans';
 import type { Paginated } from '@/types/pagination';
 import { paginatorTotal } from '@/types/pagination';
 

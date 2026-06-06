@@ -14,12 +14,13 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import LoanApplicationController from '@/actions/App/Http/Controllers/LoanApplicationController';
-import {
-    LoanApplicationCollateralList,
-    type CollateralItem,
-} from '@/components/loan-applications/loan-application-collateral-list';
-import { DisburseLoanFormFields } from '@/components/loans/disburse-loan-form-fields';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
+import {
+    LoanApplicationCollateralList
+    
+} from '@/components/loan-applications/loan-application-collateral-list';
+import type {CollateralItem} from '@/components/loan-applications/loan-application-collateral-list';
+import { DisburseLoanFormFields } from '@/components/loans/disburse-loan-form-fields';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import {

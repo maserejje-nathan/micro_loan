@@ -4,7 +4,6 @@ import { EmptyState } from '@/components/empty-state';
 import { FormActions } from '@/components/form-actions';
 import { FormPageShell } from '@/components/form-page-shell';
 import { RepaymentFormFields } from '@/components/repayments/repayment-form-fields';
-import type { MobileMoneySummary } from '@/lib/mobile-money-channel-label';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -14,8 +13,9 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { formatMoney } from '@/lib/format-money';
-import { create, index, store } from '@/routes/repayments';
+import type { MobileMoneySummary } from '@/lib/mobile-money-channel-label';
 import { index as loansIndex } from '@/routes/loans';
+import { create, index, store } from '@/routes/repayments';
 
 type LoanOption = {
     id: number;

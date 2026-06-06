@@ -31,9 +31,9 @@ import {
 } from '@/components/ui/table';
 import { auditCategoryLabel } from '@/lib/audit-log';
 import { cn } from '@/lib/utils';
+import { index as auditLogsIndex } from '@/routes/audit-logs';
 import type { Paginated } from '@/types/pagination';
 import { paginatorTotal } from '@/types/pagination';
-import { index as auditLogsIndex } from '@/routes/audit-logs';
 
 type AuditLogEntry = {
     id: number;

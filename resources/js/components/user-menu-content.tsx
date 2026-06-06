@@ -1,6 +1,6 @@
 import { Link, router } from '@inertiajs/react';
-import { LogOut, Settings, Shield } from 'lucide-react';
 import { usePage } from '@inertiajs/react';
+import { LogOut, Settings, Shield } from 'lucide-react';
 import {
     DropdownMenuGroup,
     DropdownMenuItem,

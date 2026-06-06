@@ -12,6 +12,7 @@ import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
 import { PaymentChannelBadge } from '@/components/payment-channel-badge';
+import { PortalPage } from '@/components/portal/portal-page';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import {
@@ -30,7 +31,6 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { formatEnumLabel } from '@/lib/format-label';
-import { PortalPage } from '@/components/portal/portal-page';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
 import type { Paginated } from '@/types/pagination';

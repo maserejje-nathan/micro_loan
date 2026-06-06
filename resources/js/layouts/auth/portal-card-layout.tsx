@@ -1,7 +1,6 @@
 import { Link } from '@inertiajs/react';
 import type { PropsWithChildren } from 'react';
 import { AppBrandMark } from '@/components/app-brand-mark';
-import { cn } from '@/lib/utils';
 import {
     Card,
     CardContent,
@@ -9,6 +8,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 export default function PortalCardLayout({
     children,
     title,

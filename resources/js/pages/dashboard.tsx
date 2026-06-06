@@ -9,8 +9,12 @@ import {
     Users,
     Wallet,
 } from 'lucide-react';
-import { useClipboard } from '@/hooks/use-clipboard';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
+import {
+    LoanCalculatorWidget
+    
+} from '@/components/loan-calculator/loan-calculator-widget';
+import type {LoanCalculatorConfig} from '@/components/loan-calculator/loan-calculator-widget';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import {
@@ -28,10 +32,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import {
-    LoanCalculatorWidget,
-    type LoanCalculatorConfig,
-} from '@/components/loan-calculator/loan-calculator-widget';
+import { useClipboard } from '@/hooks/use-clipboard';
 import { formatMoney } from '@/lib/format-money';
 import { dashboard } from '@/routes';
 

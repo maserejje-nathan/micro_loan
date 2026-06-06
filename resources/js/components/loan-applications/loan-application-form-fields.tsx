@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
-import {
-    LoanApplicationCollateralFields,
-    type CollateralTypeOption,
-} from '@/components/loan-applications/loan-application-collateral-fields';
 import { FormField } from '@/components/form-field';
+import {
+    LoanApplicationCollateralFields
+    
+} from '@/components/loan-applications/loan-application-collateral-fields';
+import type {CollateralTypeOption} from '@/components/loan-applications/loan-application-collateral-fields';
 import { Input } from '@/components/ui/input';
 import { NativeSelect } from '@/components/ui/native-select';
 import { Textarea } from '@/components/ui/textarea';

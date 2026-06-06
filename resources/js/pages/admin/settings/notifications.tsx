@@ -1,12 +1,14 @@
 import { Form, Head } from '@inertiajs/react';
+import {
+    testSms,
+    updateNotifications,
+} from '@/actions/App/Http/Controllers/Admin/AdminPlatformSettingsController';
 import { IntegrationApiResponse } from '@/components/admin/integration-api-response';
 import { IntegrationStatusCard } from '@/components/admin/integration-status-card';
+import { PlatformSettingsPage } from '@/components/admin/platform-settings-page';
 import { SmsTestCard } from '@/components/admin/sms-test-card';
 import { FormActions } from '@/components/form-actions';
 import { FormField } from '@/components/form-field';
-import { PlatformSettingsPage } from '@/components/admin/platform-settings-page';
-import { NativeSelect } from '@/components/ui/native-select';
-import { Label } from '@/components/ui/label';
 import {
     Card,
     CardContent,
@@ -14,10 +16,8 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import {
-    testSms,
-    updateNotifications,
-} from '@/actions/App/Http/Controllers/Admin/AdminPlatformSettingsController';
+import { Label } from '@/components/ui/label';
+import { NativeSelect } from '@/components/ui/native-select';
 import {
     africasTalking as africasTalkingRoutes,
     index as settingsIndex,

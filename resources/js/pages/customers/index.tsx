@@ -1,7 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { Plus, Users } from 'lucide-react';
-import { DataTablePagination } from '@/components/data-table-pagination';
 import { CustomerAvatar } from '@/components/customer-avatar';
+import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
 import { Button } from '@/components/ui/button';

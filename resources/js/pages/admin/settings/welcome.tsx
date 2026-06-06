@@ -1,12 +1,12 @@
 import { Form, Head } from '@inertiajs/react';
+import { updateWelcome } from '@/actions/App/Http/Controllers/Admin/AdminPlatformSettingsController';
+import { PlatformSettingsPage } from '@/components/admin/platform-settings-page';
 import { FormActions } from '@/components/form-actions';
 import { FormField } from '@/components/form-field';
-import { PlatformSettingsPage } from '@/components/admin/platform-settings-page';
-import { PlatformLogoField } from '@/components/welcome/platform-logo-field';
-import { WelcomeBannerSlideField } from '@/components/welcome/welcome-banner-slide-field';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { updateWelcome } from '@/actions/App/Http/Controllers/Admin/AdminPlatformSettingsController';
+import { PlatformLogoField } from '@/components/welcome/platform-logo-field';
+import { WelcomeBannerSlideField } from '@/components/welcome/welcome-banner-slide-field';
 import { index as settingsIndex, welcome } from '@/routes/admin/settings';
 
 type Step = { title: string; description: string };

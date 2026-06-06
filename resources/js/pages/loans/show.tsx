@@ -11,11 +11,11 @@ import {
     User,
     Wallet,
 } from 'lucide-react';
-import { DisburseLoanFormFields } from '@/components/loans/disburse-loan-form-fields';
-import type { MobileMoneySummary } from '@/lib/mobile-money-channel-label';
+import { sendPaymentReminder } from '@/actions/App/Http/Controllers/LoanController';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
+import { DisburseLoanFormFields } from '@/components/loans/disburse-loan-form-fields';
 import { PaymentChannelBadge } from '@/components/payment-channel-badge';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
@@ -36,14 +36,14 @@ import {
 } from '@/components/ui/table';
 import { formatEnumLabel } from '@/lib/format-label';
 import { formatMoney } from '@/lib/format-money';
-import type { Paginated } from '@/types/pagination';
-import { paginatorTotal } from '@/types/pagination';
-import { sendPaymentReminder } from '@/actions/App/Http/Controllers/LoanController';
-import { disburse, index as loansIndex } from '@/routes/loans';
+import type { MobileMoneySummary } from '@/lib/mobile-money-channel-label';
+import { cn } from '@/lib/utils';
 import { show as customerShow } from '@/routes/customers';
 import { show as applicationShow } from '@/routes/loan-applications';
+import { disburse, index as loansIndex } from '@/routes/loans';
 import { create as createRepayment } from '@/routes/repayments';
-import { cn } from '@/lib/utils';
+import type { Paginated } from '@/types/pagination';
+import { paginatorTotal } from '@/types/pagination';
 
 type LoanCustomer = {
     id: number;

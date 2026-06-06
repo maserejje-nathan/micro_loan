@@ -1,8 +1,9 @@
 import { Form, Head } from '@inertiajs/react';
+import { updateYoPayments } from '@/actions/App/Http/Controllers/Admin/AdminPlatformSettingsController';
 import { IntegrationStatusCard } from '@/components/admin/integration-status-card';
+import { PlatformSettingsPage } from '@/components/admin/platform-settings-page';
 import { FormActions } from '@/components/form-actions';
 import { FormField } from '@/components/form-field';
-import { PlatformSettingsPage } from '@/components/admin/platform-settings-page';
 import {
     Card,
     CardContent,
@@ -10,11 +11,10 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { NativeSelect } from '@/components/ui/native-select';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { updateYoPayments } from '@/actions/App/Http/Controllers/Admin/AdminPlatformSettingsController';
+import { NativeSelect } from '@/components/ui/native-select';
 import {
     index as settingsIndex,
     yoPayments as yoPaymentsRoutes,

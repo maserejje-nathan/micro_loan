@@ -13,19 +13,20 @@ import {
     useCallback,
     useEffect,
     useMemo,
-    useState,
-    type ComponentType,
-    type MouseEvent,
+    useState
+    
+    
 } from 'react';
+import type {ComponentType, MouseEvent} from 'react';
 import { CustomerIdDocumentFields } from '@/components/customers/customer-id-document-fields';
 import { FormField } from '@/components/form-field';
+import PasswordInput from '@/components/password-input';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { NativeSelect } from '@/components/ui/native-select';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
-import PasswordInput from '@/components/password-input';
 import { cn } from '@/lib/utils';
 
 type SelectOption = { value: string; label: string };
@@ -72,6 +73,7 @@ export const PORTAL_REGISTER_FORM_ID = 'portal-registration-form';
 
 function getPortalRegisterForm(): HTMLFormElement | null {
     const el = document.getElementById(PORTAL_REGISTER_FORM_ID);
+
     return el instanceof HTMLFormElement ? el : null;
 }
 
@@ -113,8 +115,10 @@ function findStepForErrors(
     steps: StepConfig[],
 ): number {
     const keys = Object.keys(errors).filter((k) => errors[k]);
+
     for (let i = 0; i < steps.length; i++) {
         const fields = STEP_FIELDS[steps[i].id] ?? [];
+
         if (keys.some((key) => fields.includes(key.split('.')[0]))) {
             return i;
         }
@@ -138,8 +142,10 @@ function validateAccountStep(
 
     for (const name of required) {
         const field = form.elements.namedItem(name);
+
         if (field instanceof HTMLInputElement && !field.reportValidity()) {
             field.focus();
+
             return false;
         }
     }
@@ -155,8 +161,10 @@ function validateAccountStep(
             confirmation.setCustomValidity('Passwords do not match.');
             confirmation.reportValidity();
             confirmation.focus();
+
             return false;
         }
+
         confirmation.setCustomValidity('');
     }
 
@@ -166,6 +174,7 @@ function validateAccountStep(
 function validateProfileStep(form: HTMLFormElement): boolean {
     for (const name of ['id_front', 'id_back'] as const) {
         const field = form.elements.namedItem(name);
+
         if (!(field instanceof HTMLInputElement) || field.type !== 'file') {
             continue;
         }
@@ -178,6 +187,7 @@ function validateProfileStep(form: HTMLFormElement): boolean {
             );
             field.reportValidity();
             field.focus();
+
             return false;
         }
 
@@ -189,6 +199,7 @@ function validateProfileStep(form: HTMLFormElement): boolean {
 
 function hasIdFile(form: HTMLFormElement, name: 'id_front' | 'id_back'): boolean {
     const field = form.elements.namedItem(name);
+
     return (
         field instanceof HTMLInputElement &&
         field.type === 'file' &&
@@ -204,17 +215,21 @@ function buildReviewItems(
 ) {
     const value = (name: string) => {
         const field = form.elements.namedItem(name);
+
         if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
             return field.value.trim();
         }
+
         if (field instanceof HTMLSelectElement) {
             return field.value;
         }
+
         return '';
     };
 
     const labelFor = (name: string, options: SelectOption[]) => {
         const v = value(name);
+
         return options.find((o) => o.value === v)?.label ?? v;
     };
 
@@ -229,21 +244,26 @@ function buildReviewItems(
     if (value('email')) {
         items.push({ label: 'Email', value: value('email') });
     }
+
     if (value('national_id')) {
         items.push({ label: 'National ID', value: value('national_id') });
     }
+
     if (value('id_type')) {
         items.push({
             label: 'ID type',
             value: labelFor('id_type', idTypes),
         });
     }
+
     if (hasIdFile(form, 'id_front')) {
         items.push({ label: 'ID front', value: 'Uploaded' });
     }
+
     if (hasIdFile(form, 'id_back')) {
         items.push({ label: 'ID back', value: 'Uploaded' });
     }
+
     if (value('address') || value('city')) {
         items.push({
             label: 'Address',
@@ -252,6 +272,7 @@ function buildReviewItems(
                 .join(', '),
         });
     }
+
     if (value('occupation') || value('employment_status')) {
         items.push({
             label: 'Employment',
@@ -260,12 +281,14 @@ function buildReviewItems(
                 .join(' · '),
         });
     }
+
     if (value('monthly_income')) {
         items.push({
             label: 'Monthly income',
             value: `${Number(value('monthly_income')).toLocaleString()} ${currency}`,
         });
     }
+
     if (value('next_of_kin_name')) {
         items.push({
             label: 'Next of kin',
@@ -311,6 +334,7 @@ export function PortalRegistrationForm({
         if (Object.keys(errors).length === 0) {
             return;
         }
+
         setStep(findStepForErrors(errors, steps));
     }, [errors, steps]);
 
@@ -318,10 +342,13 @@ export function PortalRegistrationForm({
         if (steps[step]?.id !== 'review') {
             return;
         }
+
         const form = getPortalRegisterForm();
+
         if (!form) {
             return;
         }
+
         setReviewItems(
             buildReviewItems(form, idTypes, employmentStatuses, currency),
         );
@@ -329,6 +356,7 @@ export function PortalRegistrationForm({
 
     const goNext = useCallback(() => {
         const form = getPortalRegisterForm();
+
         if (!form) {
             return;
         }
@@ -345,11 +373,13 @@ export function PortalRegistrationForm({
         }
 
         const next = Math.min(step + 1, steps.length - 1);
+
         if (steps[next]?.id === 'review') {
             setReviewItems(
                 buildReviewItems(form, idTypes, employmentStatuses, currency),
             );
         }
+
         setStep(next);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [
@@ -370,10 +400,12 @@ export function PortalRegistrationForm({
         if (!isLastStep) {
             event.preventDefault();
             goNext();
+
             return;
         }
 
         const form = getPortalRegisterForm();
+
         if (!form) {
             return;
         }
@@ -381,6 +413,7 @@ export function PortalRegistrationForm({
         if (!validateAccountStep(form, requiresOrganizationSlug)) {
             event.preventDefault();
             setStep(0);
+
             return;
         }
 

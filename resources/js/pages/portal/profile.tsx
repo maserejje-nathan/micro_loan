@@ -1,5 +1,4 @@
 import { Form, Head, usePage } from '@inertiajs/react';
-import type { ComponentType } from 'react';
 import {
     Bell,
     Briefcase,
@@ -9,8 +8,11 @@ import {
     User,
     Users,
 } from 'lucide-react';
-import { PaymentReminderChannelsField } from '@/components/customers/payment-reminder-channels-field';
+import type { ComponentType } from 'react';
 import { CustomerAvatar } from '@/components/customer-avatar';
+import { PaymentReminderChannelsField } from '@/components/customers/payment-reminder-channels-field';
+import PasswordInput from '@/components/password-input';
+import { PortalPage } from '@/components/portal/portal-page';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -21,8 +23,6 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import PasswordInput from '@/components/password-input';
-import { PortalPage } from '@/components/portal/portal-page';
 import { Separator } from '@/components/ui/separator';
 
 type CustomerProfile = {

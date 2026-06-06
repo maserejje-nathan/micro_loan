@@ -8,6 +8,11 @@ import {
     Users,
 } from 'lucide-react';
 import { EmptyState } from '@/components/empty-state';
+import {
+    LoanCalculatorWidget
+    
+} from '@/components/loan-calculator/loan-calculator-widget';
+import type {LoanCalculatorConfig} from '@/components/loan-calculator/loan-calculator-widget';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import {
@@ -25,14 +30,10 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import {
-    LoanCalculatorWidget,
-    type LoanCalculatorConfig,
-} from '@/components/loan-calculator/loan-calculator-widget';
 import { formatMoney } from '@/lib/format-money';
 import { dashboard } from '@/routes/admin';
-import { index as organizationsIndex, show as organizationShow } from '@/routes/admin/organizations';
 import { index as invoicesIndex } from '@/routes/admin/invoices';
+import { index as organizationsIndex, show as organizationShow } from '@/routes/admin/organizations';
 import { index as plansIndex } from '@/routes/admin/plans';
 import { index as subscriptionsIndex } from '@/routes/admin/subscriptions';
 

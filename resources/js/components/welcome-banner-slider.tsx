@@ -28,6 +28,7 @@ export function WelcomeBannerSlider({
             if (count === 0) {
                 return;
             }
+
             setActiveIndex(((index % count) + count) % count);
         },
         [count],

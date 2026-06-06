@@ -1,7 +1,8 @@
 import type { LucideIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { statCardTones, type StatCardTone } from '@/lib/stat-card-tones';
+import { statCardTones  } from '@/lib/stat-card-tones';
+import type {StatCardTone} from '@/lib/stat-card-tones';
 import { cn } from '@/lib/utils';
 
 type HealthStatCardProps = {

@@ -15,17 +15,19 @@ import {
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import {
-    WelcomeBannerSlider,
-    type WelcomeBannerSlide,
-} from '@/components/welcome-banner-slider';
+    LoanCalculatorWidget
+    
+} from '@/components/loan-calculator/loan-calculator-widget';
+import type {LoanCalculatorConfig} from '@/components/loan-calculator/loan-calculator-widget';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import {
-    LoanCalculatorWidget,
-    type LoanCalculatorConfig,
-} from '@/components/loan-calculator/loan-calculator-widget';
+    WelcomeBannerSlider
+    
+} from '@/components/welcome-banner-slider';
+import type {WelcomeBannerSlide} from '@/components/welcome-banner-slider';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
 import { dashboard, login, register } from '@/routes';

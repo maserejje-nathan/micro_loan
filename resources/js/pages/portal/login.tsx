@@ -1,9 +1,9 @@
 import { Form, Head, Link } from '@inertiajs/react';
+import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import PasswordInput from '@/components/password-input';
-import { Checkbox } from '@/components/ui/checkbox';
 
 type Props = {
     organization: { name: string; slug: string } | null;

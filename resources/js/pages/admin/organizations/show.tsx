@@ -31,8 +31,8 @@ import {
 } from '@/components/ui/table';
 import { formatEnumLabel } from '@/lib/format-label';
 import { formatMoney } from '@/lib/format-money';
-import { index as organizationsIndex } from '@/routes/admin/organizations';
 import { index as invoicesIndex } from '@/routes/admin/invoices';
+import { index as organizationsIndex } from '@/routes/admin/organizations';
 import { update as updateSubscription } from '@/routes/admin/organizations/subscription';
 import type { Paginated } from '@/types/pagination';
 

@@ -1,12 +1,14 @@
 import { Form, Head, usePage } from '@inertiajs/react';
-import { IntegrationApiResponse } from '@/components/admin/integration-api-response';
+import {
+    testEmail,
+    updateSmtp,
+} from '@/actions/App/Http/Controllers/Admin/AdminPlatformSettingsController';
 import { EmailTestCard } from '@/components/admin/email-test-card';
+import { IntegrationApiResponse } from '@/components/admin/integration-api-response';
 import { IntegrationStatusCard } from '@/components/admin/integration-status-card';
 import { PlatformSettingsPage } from '@/components/admin/platform-settings-page';
 import { FormActions } from '@/components/form-actions';
 import { FormField } from '@/components/form-field';
-import { Input } from '@/components/ui/input';
-import { NativeSelect } from '@/components/ui/native-select';
 import {
     Card,
     CardContent,
@@ -14,10 +16,8 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import {
-    testEmail,
-    updateSmtp,
-} from '@/actions/App/Http/Controllers/Admin/AdminPlatformSettingsController';
+import { Input } from '@/components/ui/input';
+import { NativeSelect } from '@/components/ui/native-select';
 import {
     index as settingsIndex,
     smtp as smtpRoutes,

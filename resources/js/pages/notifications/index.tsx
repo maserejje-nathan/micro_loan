@@ -8,9 +8,9 @@ import {
     Wallet,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import type { InAppNotification } from '@/components/notification-bell';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
+import type { InAppNotification } from '@/components/notification-bell';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -20,9 +20,9 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import { index as notificationsIndex, read, readAll } from '@/routes/notifications';
 import type { Paginated } from '@/types/pagination';
 import { paginatorTotal } from '@/types/pagination';
-import { index as notificationsIndex, read, readAll } from '@/routes/notifications';
 
 const typeIcons: Record<string, LucideIcon> = {
     'loan_application.submitted': ClipboardList,

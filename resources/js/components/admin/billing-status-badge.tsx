@@ -2,9 +2,10 @@ import { Badge } from '@/components/ui/badge';
 import {
     formatStatusLabel,
     invoiceStatusTone,
-    subscriptionStatusTone,
-    type BadgeTone,
+    subscriptionStatusTone
+    
 } from '@/lib/status-badge';
+import type {BadgeTone} from '@/lib/status-badge';
 import { cn } from '@/lib/utils';
 
 type BillingStatusBadgeProps = {

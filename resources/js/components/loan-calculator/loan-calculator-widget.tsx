@@ -1,7 +1,6 @@
 import { Calculator } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { FormField } from '@/components/form-field';
-import { NativeSelect } from '@/components/ui/native-select';
 import {
     Card,
     CardContent,
@@ -10,14 +9,16 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { NativeSelect } from '@/components/ui/native-select';
 import { Separator } from '@/components/ui/separator';
-import {
-    calculateLoanEstimate,
-    type InterestType,
-    type RepaymentFrequency,
-} from '@/lib/loan-calculator';
 import { formatEnumLabel } from '@/lib/format-label';
 import { formatMoney } from '@/lib/format-money';
+import {
+    calculateLoanEstimate
+    
+    
+} from '@/lib/loan-calculator';
+import type {InterestType, RepaymentFrequency} from '@/lib/loan-calculator';
 import { cn } from '@/lib/utils';
 
 export type LoanCalculatorProduct = {
@@ -64,11 +65,13 @@ function clamp(value: number, min: number, max: number): number {
 
 function parsePositiveInteger(value: string): number | null {
     const digits = value.replace(/\D/g, '');
+
     if (digits === '') {
         return null;
     }
 
     const parsed = Number.parseInt(digits, 10);
+
     return Number.isNaN(parsed) ? null : parsed;
 }
 
@@ -117,6 +120,7 @@ export function LoanCalculatorWidget({
 
     const principalError = useMemo(() => {
         const parsed = parsePositiveInteger(principalInput);
+
         if (parsed === null) {
             return undefined;
         }
@@ -134,6 +138,7 @@ export function LoanCalculatorWidget({
 
     const principalValue = useMemo(() => {
         const parsed = parsePositiveInteger(principalInput);
+
         if (parsed === null) {
             return bounds.principalMin;
         }
@@ -143,6 +148,7 @@ export function LoanCalculatorWidget({
 
     const termError = useMemo(() => {
         const parsed = parsePositiveInteger(termInput);
+
         if (parsed === null) {
             return undefined;
         }
@@ -160,6 +166,7 @@ export function LoanCalculatorWidget({
 
     const termDaysValue = useMemo(() => {
         const parsed = parsePositiveInteger(termInput);
+
         if (parsed === null) {
             return bounds.termMin;
         }
@@ -190,6 +197,7 @@ export function LoanCalculatorWidget({
     const handleProductChange = (value: string) => {
         setProductId(value);
         const product = products.find((p) => String(p.id) === value);
+
         if (!product) {
             return;
         }

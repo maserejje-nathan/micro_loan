@@ -1,5 +1,4 @@
 import { Head, Link, usePage } from '@inertiajs/react';
-import type { ComponentType } from 'react';
 import {
     ArrowRight,
     Check,
@@ -11,9 +10,15 @@ import {
     User,
     Wallet,
 } from 'lucide-react';
-import { useClipboard } from '@/hooks/use-clipboard';
+import type { ComponentType } from 'react';
 import { EmptyState } from '@/components/empty-state';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
+import {
+    LoanCalculatorWidget
+    
+} from '@/components/loan-calculator/loan-calculator-widget';
+import type {LoanCalculatorConfig} from '@/components/loan-calculator/loan-calculator-widget';
+import { PortalPage } from '@/components/portal/portal-page';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import {
@@ -31,11 +36,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import {
-    LoanCalculatorWidget,
-    type LoanCalculatorConfig,
-} from '@/components/loan-calculator/loan-calculator-widget';
-import { PortalPage } from '@/components/portal/portal-page';
+import { useClipboard } from '@/hooks/use-clipboard';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
 

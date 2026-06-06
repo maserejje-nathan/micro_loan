@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 
 function formatMonthLabel(monthKey: string): string {
     const [year, month] = monthKey.split('-').map(Number);
+
     if (!year || !month) {
         return monthKey;
     }

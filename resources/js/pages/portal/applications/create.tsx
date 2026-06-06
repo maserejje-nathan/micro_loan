@@ -3,7 +3,6 @@ import { ArrowLeft, ClipboardList, Info } from 'lucide-react';
 import { PortalApplicationFormFields } from '@/components/portal/portal-application-form-fields';
 import { PortalPage } from '@/components/portal/portal-page';
 import { Button } from '@/components/ui/button';
-import { formatMoney } from '@/lib/format-money';
 import {
     Card,
     CardContent,
@@ -11,6 +10,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { formatMoney } from '@/lib/format-money';
 
 type Product = {
     id: number;

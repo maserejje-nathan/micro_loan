@@ -1,5 +1,4 @@
 import { Head } from '@inertiajs/react';
-import { platformSettingsOverviewLinks } from '@/config/admin-platform-settings-nav';
 import { IntegrationStatusBadge } from '@/components/admin/integration-status-badge';
 import { PlatformSettingsFlash } from '@/components/admin/platform-settings-flash';
 import { SettingsLinkCard } from '@/components/admin/settings-link-card';
@@ -10,6 +9,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { platformSettingsOverviewLinks } from '@/config/admin-platform-settings-nav';
 import {
     africasTalking,
     index as settingsIndex,
