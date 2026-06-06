@@ -167,7 +167,11 @@ export default function RepaymentsCreate({
                     </p>
                 )}
 
-                <Form {...store.form()} disableWhileProcessing className="space-y-6">
+                <Form
+                    {...store.form()}
+                    disableWhileProcessing
+                    className="space-y-6"
+                >
                     {({ processing, errors }) => (
                         <>
                             <RepaymentFormFields

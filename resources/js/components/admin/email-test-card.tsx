@@ -33,9 +33,17 @@ export function EmailTestCard({
                 <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
                         <Mail className="size-5 text-primary" />
-                        <CardTitle className="text-base">Send test email</CardTitle>
+                        <CardTitle className="text-base">
+                            Send test email
+                        </CardTitle>
                     </div>
-                    <Badge variant={mailDriver.sends_real_email ? 'default' : 'secondary'}>
+                    <Badge
+                        variant={
+                            mailDriver.sends_real_email
+                                ? 'default'
+                                : 'secondary'
+                        }
+                    >
                         {mailDriver.label}
                     </Badge>
                 </div>
@@ -46,7 +54,12 @@ export function EmailTestCard({
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <Form action={testUrl} method="post" preserveScroll className="space-y-4">
+                <Form
+                    action={testUrl}
+                    method="post"
+                    preserveScroll
+                    className="space-y-4"
+                >
                     {({ processing, errors }) => (
                         <>
                             <FormField

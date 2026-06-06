@@ -7,13 +7,10 @@ export function PlatformSettingsNav() {
     const { isCurrentUrl } = useCurrentUrl();
 
     return (
-        <nav
-            className="flex flex-col gap-6"
-            aria-label="Platform settings"
-        >
+        <nav className="flex flex-col gap-6" aria-label="Platform settings">
             {platformSettingsNavGroups.map((group) => (
                 <div key={group.label}>
-                    <p className="mb-2 px-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="mb-2 px-3 text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         {group.label}
                     </p>
                     <ul className="flex flex-col gap-0.5">
@@ -41,7 +38,7 @@ export function PlatformSettingsNav() {
                                             )}
                                         />
                                         <span className="min-w-0 flex-1">
-                                            <span className="block font-medium leading-none">
+                                            <span className="block leading-none font-medium">
                                                 {item.title}
                                             </span>
                                             {item.description && (

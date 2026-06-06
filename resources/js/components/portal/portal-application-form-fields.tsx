@@ -1,10 +1,7 @@
 import { useMemo, useState } from 'react';
 import { FormField } from '@/components/form-field';
-import {
-    LoanApplicationCollateralFields
-    
-} from '@/components/loan-applications/loan-application-collateral-fields';
-import type {CollateralTypeOption} from '@/components/loan-applications/loan-application-collateral-fields';
+import { LoanApplicationCollateralFields } from '@/components/loan-applications/loan-application-collateral-fields';
+import type { CollateralTypeOption } from '@/components/loan-applications/loan-application-collateral-fields';
 import { Input } from '@/components/ui/input';
 import { NativeSelect } from '@/components/ui/native-select';
 import { Textarea } from '@/components/ui/textarea';
@@ -53,7 +50,7 @@ export function PortalApplicationFormFields({
         <div className="space-y-8">
             <section className="space-y-4">
                 <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         Loan product
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">
@@ -102,7 +99,7 @@ export function PortalApplicationFormFields({
 
             <section className="space-y-4">
                 <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         Request details
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">

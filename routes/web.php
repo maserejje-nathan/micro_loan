@@ -1,19 +1,19 @@
 <?php
 
 use App\Http\Controllers\AcceptTeamInvitationController;
-use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoanApplicationController;
 use App\Http\Controllers\LoanController;
-use App\Http\Controllers\LoanStatementController;
 use App\Http\Controllers\LoanProductController;
+use App\Http\Controllers\LoanStatementController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OnboardingOrganizationController;
 use App\Http\Controllers\RepaymentController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Settings\BillingController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Middleware\EnsurePermission;
 use App\Http\Middleware\EnsureUserHasOrganization;
 use Illuminate\Support\Facades\Route;

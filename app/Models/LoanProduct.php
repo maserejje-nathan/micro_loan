@@ -5,13 +5,14 @@ namespace App\Models;
 use App\Enums\InterestType;
 use App\Enums\RepaymentFrequency;
 use App\Models\Concerns\BelongsToOrganization;
+use Database\Factories\LoanProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class LoanProduct extends Model
 {
-    /** @use HasFactory<\Database\Factories\LoanProductFactory> */
+    /** @use HasFactory<LoanProductFactory> */
     use BelongsToOrganization, HasFactory;
 
     /**

@@ -81,83 +81,85 @@ export default function AdminNotificationSettings({
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
-                <Form
-                    {...updateNotifications.form()}
-                    className="space-y-8"
-                >
-                    {({ processing, errors }) => (
-                        <>
-                            <FormField
-                                id="sms_driver"
-                                label="SMS driver"
-                                error={errors.sms_driver}
-                                required
-                                hint="Use log in development; Africa's Talking sends real SMS when configured."
-                            >
-                                <NativeSelect
-                                    id="sms_driver"
-                                    name="sms_driver"
-                                    defaultValue={settings.sms_driver}
-                                    required
-                                >
-                                    {smsDrivers.map((driver) => (
-                                        <option
-                                            key={driver.value}
-                                            value={driver.value}
+                        <Form
+                            {...updateNotifications.form()}
+                            className="space-y-8"
+                        >
+                            {({ processing, errors }) => (
+                                <>
+                                    <FormField
+                                        id="sms_driver"
+                                        label="SMS driver"
+                                        error={errors.sms_driver}
+                                        required
+                                        hint="Use log in development; Africa's Talking sends real SMS when configured."
+                                    >
+                                        <NativeSelect
+                                            id="sms_driver"
+                                            name="sms_driver"
+                                            defaultValue={settings.sms_driver}
+                                            required
                                         >
-                                            {driver.label}
-                                        </option>
-                                    ))}
-                                </NativeSelect>
-                            </FormField>
-
-                            <div className="space-y-4">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                                    Automated message types
-                                </p>
-                                <div className="space-y-3 rounded-lg border p-4">
-                                    {types.map((type) => (
-                                        <div
-                                            key={type.key}
-                                            className="flex items-start gap-3"
-                                        >
-                                            <input
-                                                type="hidden"
-                                                name={`enabled_types[${type.key}]`}
-                                                value="0"
-                                            />
-                                            <input
-                                                type="checkbox"
-                                                id={`type_${type.key}`}
-                                                name={`enabled_types[${type.key}]`}
-                                                value="1"
-                                                defaultChecked={type.enabled}
-                                                className="size-4 rounded border border-input"
-                                            />
-                                            <div className="grid gap-1">
-                                                <Label
-                                                    htmlFor={`type_${type.key}`}
-                                                    className="font-medium leading-none"
+                                            {smsDrivers.map((driver) => (
+                                                <option
+                                                    key={driver.value}
+                                                    value={driver.value}
                                                 >
-                                                    {type.label}
-                                                </Label>
-                                                <p className="text-xs text-muted-foreground font-mono">
-                                                    {type.key}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                                                    {driver.label}
+                                                </option>
+                                            ))}
+                                        </NativeSelect>
+                                    </FormField>
 
-                            <FormActions
-                                processing={processing}
-                                cancelHref={settingsIndex().url}
-                                submitLabel="Save notification settings"
-                            />
-                        </>
-                    )}
-                </Form>
+                                    <div className="space-y-4">
+                                        <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                                            Automated message types
+                                        </p>
+                                        <div className="space-y-3 rounded-lg border p-4">
+                                            {types.map((type) => (
+                                                <div
+                                                    key={type.key}
+                                                    className="flex items-start gap-3"
+                                                >
+                                                    <input
+                                                        type="hidden"
+                                                        name={`enabled_types[${type.key}]`}
+                                                        value="0"
+                                                    />
+                                                    <input
+                                                        type="checkbox"
+                                                        id={`type_${type.key}`}
+                                                        name={`enabled_types[${type.key}]`}
+                                                        value="1"
+                                                        defaultChecked={
+                                                            type.enabled
+                                                        }
+                                                        className="size-4 rounded border border-input"
+                                                    />
+                                                    <div className="grid gap-1">
+                                                        <Label
+                                                            htmlFor={`type_${type.key}`}
+                                                            className="leading-none font-medium"
+                                                        >
+                                                            {type.label}
+                                                        </Label>
+                                                        <p className="font-mono text-xs text-muted-foreground">
+                                                            {type.key}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <FormActions
+                                        processing={processing}
+                                        cancelHref={settingsIndex().url}
+                                        submitLabel="Save notification settings"
+                                    />
+                                </>
+                            )}
+                        </Form>
                     </CardContent>
                 </Card>
             </PlatformSettingsPage>

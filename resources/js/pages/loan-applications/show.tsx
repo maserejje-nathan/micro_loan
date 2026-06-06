@@ -15,11 +15,8 @@ import {
 import { useState } from 'react';
 import LoanApplicationController from '@/actions/App/Http/Controllers/LoanApplicationController';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
-import {
-    LoanApplicationCollateralList
-    
-} from '@/components/loan-applications/loan-application-collateral-list';
-import type {CollateralItem} from '@/components/loan-applications/loan-application-collateral-list';
+import { LoanApplicationCollateralList } from '@/components/loan-applications/loan-application-collateral-list';
+import type { CollateralItem } from '@/components/loan-applications/loan-application-collateral-list';
 import { DisburseLoanFormFields } from '@/components/loans/disburse-loan-form-fields';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
@@ -187,7 +184,7 @@ function EstimateSummary({
 }) {
     return (
         <div className="space-y-3">
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                 {title}
             </p>
             <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -233,11 +230,13 @@ export default function LoanApplicationsShow({
 }) {
     const page = usePage();
     const errors = page.props.errors as Record<string, string | undefined>;
-    const flash = page.props.flash as {
-        success?: string;
-        warning?: string;
-        error?: string;
-    } | undefined;
+    const flash = page.props.flash as
+        | {
+              success?: string;
+              warning?: string;
+              error?: string;
+          }
+        | undefined;
 
     const [disburseNow, setDisburseNow] = useState(
         canDisburse && mobileMoney.can_disburse,
@@ -299,13 +298,18 @@ export default function LoanApplicationsShow({
                             <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
                                 <span className="inline-flex items-center gap-1.5">
                                     <Calendar className="size-3.5" />
-                                    Submitted {formatDateTime(application.created_at)}
+                                    Submitted{' '}
+                                    {formatDateTime(application.created_at)}
                                 </span>
                                 {application.created_by_name && (
-                                    <span>By {application.created_by_name}</span>
+                                    <span>
+                                        By {application.created_by_name}
+                                    </span>
                                 )}
                             </div>
-                            {(flash?.success || flash?.warning || flash?.error) && (
+                            {(flash?.success ||
+                                flash?.warning ||
+                                flash?.error) && (
                                 <div className="space-y-2">
                                     {flash.success && (
                                         <p className="text-sm text-green-600">
@@ -328,7 +332,9 @@ export default function LoanApplicationsShow({
                         <div className="flex shrink-0 flex-wrap gap-2">
                             {application.loan && (
                                 <Button asChild>
-                                    <Link href={loanShow.url(application.loan.id)}>
+                                    <Link
+                                        href={loanShow.url(application.loan.id)}
+                                    >
                                         <Banknote className="mr-2 size-4" />
                                         View loan
                                     </Link>
@@ -340,7 +346,9 @@ export default function LoanApplicationsShow({
                                         application.id,
                                     )}
                                 >
-                                    <Button type="submit">Submit for review</Button>
+                                    <Button type="submit">
+                                        Submit for review
+                                    </Button>
                                 </Form>
                             )}
                         </div>
@@ -400,7 +408,9 @@ export default function LoanApplicationsShow({
                             </CardHeader>
                             <CardContent className="grid gap-4 pt-6 sm:grid-cols-2">
                                 <Link
-                                    href={customerShow.url(application.customer.id)}
+                                    href={customerShow.url(
+                                        application.customer.id,
+                                    )}
                                     className="flex items-start gap-3 rounded-lg border p-4 transition-colors hover:bg-muted"
                                 >
                                     <div className="flex size-10 items-center justify-center rounded-full bg-secondary">
@@ -418,12 +428,16 @@ export default function LoanApplicationsShow({
                                 <dl className="space-y-3 text-sm">
                                     <div className="flex items-center gap-2 text-muted-foreground">
                                         <Phone className="size-4 shrink-0" />
-                                        <span>{application.customer.phone}</span>
+                                        <span>
+                                            {application.customer.phone}
+                                        </span>
                                     </div>
                                     {application.customer.email && (
                                         <div className="flex items-center gap-2 text-muted-foreground">
                                             <Mail className="size-4 shrink-0" />
-                                            <span>{application.customer.email}</span>
+                                            <span>
+                                                {application.customer.email}
+                                            </span>
                                         </div>
                                     )}
                                 </dl>
@@ -456,7 +470,7 @@ export default function LoanApplicationsShow({
                             <CardContent className="space-y-6 pt-6">
                                 {application.purpose ? (
                                     <div>
-                                        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                        <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                             Purpose
                                         </p>
                                         <p className="mt-2 text-sm leading-relaxed">
@@ -504,7 +518,8 @@ export default function LoanApplicationsShow({
                                         Linked loan
                                     </CardTitle>
                                     <CardDescription>
-                                        Created when this application was approved
+                                        Created when this application was
+                                        approved
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent className="pt-6">
@@ -512,7 +527,8 @@ export default function LoanApplicationsShow({
                                         <DetailItem
                                             label="Loan reference"
                                             value={
-                                                application.loan.reference_number
+                                                application.loan
+                                                    .reference_number
                                             }
                                         />
                                         <DetailItem
@@ -531,14 +547,21 @@ export default function LoanApplicationsShow({
                                         <DetailItem
                                             label="Outstanding"
                                             value={formatMoney(
-                                                application.loan.outstanding_balance,
+                                                application.loan
+                                                    .outstanding_balance,
                                                 currency,
                                             )}
                                         />
                                     </dl>
-                                    <Button variant="outline" className="mt-4" asChild>
+                                    <Button
+                                        variant="outline"
+                                        className="mt-4"
+                                        asChild
+                                    >
                                         <Link
-                                            href={loanShow.url(application.loan.id)}
+                                            href={loanShow.url(
+                                                application.loan.id,
+                                            )}
                                         >
                                             <FileText className="mr-2 size-4" />
                                             Open loan
@@ -609,7 +632,9 @@ export default function LoanApplicationsShow({
                                     <div>
                                         <p className="font-medium">Created</p>
                                         <p className="text-muted-foreground">
-                                            {formatDateTime(application.created_at)}
+                                            {formatDateTime(
+                                                application.created_at,
+                                            )}
                                         </p>
                                     </div>
                                 </div>
@@ -625,7 +650,9 @@ export default function LoanApplicationsShow({
                                         />
                                         <div>
                                             <p className="font-medium">
-                                                {isApproved ? 'Approved' : 'Reviewed'}
+                                                {isApproved
+                                                    ? 'Approved'
+                                                    : 'Reviewed'}
                                             </p>
                                             <p className="text-muted-foreground">
                                                 {formatDateTime(
@@ -652,8 +679,8 @@ export default function LoanApplicationsShow({
                                         Review application
                                     </CardTitle>
                                     <CardDescription>
-                                        Approve to create a loan pending disbursement,
-                                        or reject with a reason.
+                                        Approve to create a loan pending
+                                        disbursement, or reject with a reason.
                                     </CardDescription>
                                 </div>
                             </div>
@@ -662,8 +689,8 @@ export default function LoanApplicationsShow({
                             {(termOutOfRange || amountOutOfRange) && (
                                 <p className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm text-amber-900 dark:text-amber-100">
                                     This request is outside the product limits.
-                                    Adjust the approved amount and/or term before
-                                    approving.
+                                    Adjust the approved amount and/or term
+                                    before approving.
                                 </p>
                             )}
 
@@ -692,7 +719,9 @@ export default function LoanApplicationsShow({
                                             placeholder={String(
                                                 application.requested_amount,
                                             )}
-                                            aria-invalid={!!errors.approved_amount}
+                                            aria-invalid={
+                                                !!errors.approved_amount
+                                            }
                                             className="h-10"
                                         />
                                         {errors.approved_amount && (
@@ -713,13 +742,21 @@ export default function LoanApplicationsShow({
                                         </p>
                                     </div>
                                     <div className="grid gap-2">
-                                        <Label htmlFor="term_days">Term (days)</Label>
+                                        <Label htmlFor="term_days">
+                                            Term (days)
+                                        </Label>
                                         <Input
                                             id="term_days"
                                             name="term_days"
                                             type="number"
-                                            min={application.product.term_min_days}
-                                            max={application.product.term_max_days}
+                                            min={
+                                                application.product
+                                                    .term_min_days
+                                            }
+                                            max={
+                                                application.product
+                                                    .term_max_days
+                                            }
                                             defaultValue={defaultApproveTerm}
                                             required
                                             aria-invalid={!!errors.term_days}
@@ -732,7 +769,8 @@ export default function LoanApplicationsShow({
                                         )}
                                         <p className="text-xs text-muted-foreground">
                                             {application.product.term_min_days}–
-                                            {application.product.term_max_days} days
+                                            {application.product.term_max_days}{' '}
+                                            days
                                         </p>
                                     </div>
                                 </div>
@@ -745,9 +783,13 @@ export default function LoanApplicationsShow({
                                                 name="disburse_via_mobile_money"
                                                 value="1"
                                                 checked={disburseNow}
-                                                disabled={!mobileMoney.can_disburse}
+                                                disabled={
+                                                    !mobileMoney.can_disburse
+                                                }
                                                 onCheckedChange={(checked) =>
-                                                    setDisburseNow(checked === true)
+                                                    setDisburseNow(
+                                                        checked === true,
+                                                    )
                                                 }
                                             />
                                             <div className="grid gap-1">
@@ -755,7 +797,8 @@ export default function LoanApplicationsShow({
                                                     htmlFor="disburse_via_mobile_money"
                                                     className="cursor-pointer font-medium"
                                                 >
-                                                    Disburse via mobile money on approval
+                                                    Disburse via mobile money on
+                                                    approval
                                                 </Label>
                                                 <p className="text-xs text-muted-foreground">
                                                     Send funds immediately using{' '}
@@ -768,7 +811,9 @@ export default function LoanApplicationsShow({
                                         {disburseNow && (
                                             <DisburseLoanFormFields
                                                 errors={errors}
-                                                paymentChannels={['mobile_money']}
+                                                paymentChannels={[
+                                                    'mobile_money',
+                                                ]}
                                                 defaultPhone={
                                                     application.customer.phone
                                                 }
@@ -795,7 +840,9 @@ export default function LoanApplicationsShow({
                                 className="space-y-4"
                             >
                                 <div className="grid gap-2">
-                                    <Label htmlFor="reason">Rejection reason</Label>
+                                    <Label htmlFor="reason">
+                                        Rejection reason
+                                    </Label>
                                     <Textarea
                                         id="reason"
                                         name="reason"
@@ -823,7 +870,5 @@ export default function LoanApplicationsShow({
 }
 
 LoanApplicationsShow.layout = {
-    breadcrumbs: [
-        { title: 'Applications', href: applicationsIndex().url },
-    ],
+    breadcrumbs: [{ title: 'Applications', href: applicationsIndex().url }],
 };

@@ -48,7 +48,7 @@ export function PaymentReminderChannelsField({
                         <div className="grid gap-0.5">
                             <Label
                                 htmlFor={`payment_reminder_channel_${channel.value}`}
-                                className="font-medium leading-none"
+                                className="leading-none font-medium"
                             >
                                 {channel.label}
                             </Label>

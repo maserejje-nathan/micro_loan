@@ -53,7 +53,7 @@ export function IntegrationStatusCard({
                     {status.api_url && (
                         <div className="sm:col-span-2">
                             <dt className="text-muted-foreground">API URL</dt>
-                            <dd className="break-all font-mono text-xs">
+                            <dd className="font-mono text-xs break-all">
                                 {status.api_url}
                             </dd>
                         </div>

@@ -54,7 +54,9 @@ export function toneFromTitle(title: string): StatCardTone {
     return statCardToneRotation[hash] ?? 'blue';
 }
 
-export function toneFromAccentClass(accentClassName?: string): StatCardTone | undefined {
+export function toneFromAccentClass(
+    accentClassName?: string,
+): StatCardTone | undefined {
     if (!accentClassName) {
         return undefined;
     }
@@ -79,7 +81,10 @@ export function toneFromAccentClass(accentClassName?: string): StatCardTone | un
         return 'rose';
     }
 
-    if (accentClassName.includes('destructive') || accentClassName.includes('red')) {
+    if (
+        accentClassName.includes('destructive') ||
+        accentClassName.includes('red')
+    ) {
         return 'destructive';
     }
 

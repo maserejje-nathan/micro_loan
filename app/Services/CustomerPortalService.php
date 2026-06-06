@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Enums\CustomerStatus;
 use App\Models\Customer;
 use App\Models\Organization;
-use App\Services\ReferenceNumberGenerator;
 use App\Support\OrganizationPortalSettings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;

@@ -69,7 +69,9 @@ export default function AdminPlanForm({
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="price">Price (minor units)</Label>
+                                    <Label htmlFor="price">
+                                        Price (minor units)
+                                    </Label>
                                     <Input
                                         id="price"
                                         name="price"
@@ -100,7 +102,7 @@ export default function AdminPlanForm({
                                         defaultValue={
                                             plan?.billing_interval ?? 'monthly'
                                         }
-                                        className="border rounded-md h-9 px-3 text-sm"
+                                        className="h-9 rounded-md border px-3 text-sm"
                                     >
                                         {billingIntervals.map((i) => (
                                             <option key={i} value={i}>
@@ -110,7 +112,9 @@ export default function AdminPlanForm({
                                     </select>
                                 </div>
                                 <div className="grid gap-2">
-                                    <Label htmlFor="trial_days">Trial days</Label>
+                                    <Label htmlFor="trial_days">
+                                        Trial days
+                                    </Label>
                                     <Input
                                         id="trial_days"
                                         name="trial_days"
@@ -156,11 +160,15 @@ export default function AdminPlanForm({
                                 </div>
                             </div>
                             <div className="grid gap-2">
-                                <Label htmlFor="features">Features (comma-separated)</Label>
+                                <Label htmlFor="features">
+                                    Features (comma-separated)
+                                </Label>
                                 <Input
                                     id="features"
                                     name="features"
-                                    defaultValue={(plan?.features ?? []).join(', ')}
+                                    defaultValue={(plan?.features ?? []).join(
+                                        ', ',
+                                    )}
                                 />
                             </div>
                             <div className="flex items-center gap-2">

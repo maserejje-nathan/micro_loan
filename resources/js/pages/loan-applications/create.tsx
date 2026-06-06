@@ -33,8 +33,9 @@ export default function LoanApplicationsCreate({
     products: ProductOption[];
     collateralTypes: CollateralTypeOption[];
 }) {
-    const { auth } = usePage<{ auth: { organization?: { currency: string } } }>()
-        .props;
+    const { auth } = usePage<{
+        auth: { organization?: { currency: string } };
+    }>().props;
     const currency = auth.organization?.currency ?? 'UGX';
 
     return (
@@ -48,7 +49,11 @@ export default function LoanApplicationsCreate({
                 cardTitle="Application details"
                 cardDescription="Fields marked with * are required."
             >
-                <Form {...store.form()} disableWhileProcessing className="space-y-6">
+                <Form
+                    {...store.form()}
+                    disableWhileProcessing
+                    className="space-y-6"
+                >
                     {({ processing, errors }) => (
                         <>
                             <LoanApplicationFormFields

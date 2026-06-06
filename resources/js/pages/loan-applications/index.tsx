@@ -105,8 +105,9 @@ export default function LoanApplicationsIndex({
                     <CardHeader className="border-b">
                         <CardTitle>All applications</CardTitle>
                         <CardDescription>
-                            {total} {total === 1 ? 'application' : 'applications'}{' '}
-                            · amounts in {currency}
+                            {total}{' '}
+                            {total === 1 ? 'application' : 'applications'} ·
+                            amounts in {currency}
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="p-0">
@@ -134,7 +135,7 @@ export default function LoanApplicationsIndex({
                                         <TableHead className="hidden md:table-cell">
                                             Product
                                         </TableHead>
-                                        <TableHead className="hidden lg:table-cell text-right">
+                                        <TableHead className="hidden text-right lg:table-cell">
                                             Term
                                         </TableHead>
                                         <TableHead className="text-right">
@@ -157,7 +158,9 @@ export default function LoanApplicationsIndex({
                                                     href={`/loan-applications/${application.id}`}
                                                     className="font-mono text-sm font-medium hover:underline"
                                                 >
-                                                    {application.reference_number}
+                                                    {
+                                                        application.reference_number
+                                                    }
                                                 </Link>
                                             </TableCell>
                                             <TableCell>
@@ -200,7 +203,9 @@ export default function LoanApplicationsIndex({
                                                     )}
                                             </TableCell>
                                             <TableCell className="hidden text-sm text-muted-foreground sm:table-cell">
-                                                {formatDate(application.created_at)}
+                                                {formatDate(
+                                                    application.created_at,
+                                                )}
                                             </TableCell>
                                             <TableCell>
                                                 <EntityStatusBadge
@@ -235,7 +240,5 @@ export default function LoanApplicationsIndex({
 }
 
 LoanApplicationsIndex.layout = {
-    breadcrumbs: [
-        { title: 'Loan applications', href: '/loan-applications' },
-    ],
+    breadcrumbs: [{ title: 'Loan applications', href: '/loan-applications' }],
 };

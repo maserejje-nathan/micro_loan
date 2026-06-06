@@ -21,12 +21,14 @@ export function PlatformLogoField({
 }: PlatformLogoFieldProps) {
     const [preview, setPreview] = useState<string | null>(previewUrl ?? null);
     const [removeLogo, setRemoveLogo] = useState(false);
+    const [prevPreviewUrl, setPrevPreviewUrl] = useState(previewUrl);
     const objectUrlRef = useRef<string | null>(null);
 
-    useEffect(() => {
+    if (previewUrl !== prevPreviewUrl) {
+        setPrevPreviewUrl(previewUrl);
         setPreview(previewUrl ?? null);
         setRemoveLogo(false);
-    }, [previewUrl]);
+    }
 
     useEffect(() => {
         return () => {
@@ -41,7 +43,7 @@ export function PlatformLogoField({
     return (
         <section className="space-y-4 rounded-lg border p-4">
             <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                     Application logo
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">

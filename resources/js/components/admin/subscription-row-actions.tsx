@@ -8,11 +8,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-    activate,
-    cancel,
-    renew,
-} from '@/routes/admin/subscriptions';
+import { activate, cancel, renew } from '@/routes/admin/subscriptions';
 
 type SubscriptionRowActionsProps = {
     id: number;
@@ -41,9 +37,7 @@ export function SubscriptionRowActions({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 {status !== 'active' && (
-                    <DropdownMenuItem
-                        onClick={() => post(activate.url(id))}
-                    >
+                    <DropdownMenuItem onClick={() => post(activate.url(id))}>
                         Activate
                     </DropdownMenuItem>
                 )}

@@ -28,12 +28,14 @@ export function WelcomeBannerSlideField({
 }: WelcomeBannerSlideFieldProps) {
     const [preview, setPreview] = useState<string | null>(previewUrl ?? null);
     const [removeImage, setRemoveImage] = useState(false);
+    const [prevPreviewUrl, setPrevPreviewUrl] = useState(previewUrl);
     const objectUrlRef = useRef<string | null>(null);
 
-    useEffect(() => {
+    if (previewUrl !== prevPreviewUrl) {
+        setPrevPreviewUrl(previewUrl);
         setPreview(previewUrl ?? null);
         setRemoveImage(false);
-    }, [previewUrl]);
+    }
 
     useEffect(() => {
         return () => {
@@ -150,7 +152,9 @@ export function WelcomeBannerSlideField({
 
             <div className="grid gap-4 sm:grid-cols-2">
                 <div className="grid gap-2">
-                    <Label htmlFor={`banner_slides_${index}_alt`}>Alt text</Label>
+                    <Label htmlFor={`banner_slides_${index}_alt`}>
+                        Alt text
+                    </Label>
                     <Input
                         id={`banner_slides_${index}_alt`}
                         name={`banner_slides[${index}][alt]`}

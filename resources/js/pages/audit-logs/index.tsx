@@ -114,63 +114,61 @@ function AuditLogRow({ log }: { log: AuditLogEntry }) {
                         <span className="inline-block size-8" />
                     )}
                 </TableCell>
-                    <TableCell className="align-top">
-                        <p className="font-medium">{log.action_label}</p>
-                        {log.summary && (
-                            <p className="mt-0.5 text-xs text-muted-foreground">
-                                {log.summary}
-                            </p>
-                        )}
-                    </TableCell>
-                    <TableCell className="hidden align-top md:table-cell">
-                        <AuditCategoryBadge category={log.category} />
-                    </TableCell>
-                    <TableCell className="align-top">
-                        <p>{log.user_name}</p>
-                        {log.ip_address && (
-                            <p className="mt-0.5 font-mono text-xs text-muted-foreground">
-                                {log.ip_address}
-                            </p>
-                        )}
-                    </TableCell>
-                    <TableCell className="hidden align-top lg:table-cell">
-                        {log.entity_label ? (
-                            log.entity_url ? (
-                                <Link
-                                    href={log.entity_url}
-                                    className="text-sm hover:underline"
-                                    onClick={(event) => event.stopPropagation()}
-                                >
-                                    {log.entity_label}
-                                </Link>
-                            ) : (
-                                <span className="text-sm">{log.entity_label}</span>
-                            )
+                <TableCell className="align-top">
+                    <p className="font-medium">{log.action_label}</p>
+                    {log.summary && (
+                        <p className="mt-0.5 text-xs text-muted-foreground">
+                            {log.summary}
+                        </p>
+                    )}
+                </TableCell>
+                <TableCell className="hidden align-top md:table-cell">
+                    <AuditCategoryBadge category={log.category} />
+                </TableCell>
+                <TableCell className="align-top">
+                    <p>{log.user_name}</p>
+                    {log.ip_address && (
+                        <p className="mt-0.5 font-mono text-xs text-muted-foreground">
+                            {log.ip_address}
+                        </p>
+                    )}
+                </TableCell>
+                <TableCell className="hidden align-top lg:table-cell">
+                    {log.entity_label ? (
+                        log.entity_url ? (
+                            <Link
+                                href={log.entity_url}
+                                className="text-sm hover:underline"
+                                onClick={(event) => event.stopPropagation()}
+                            >
+                                {log.entity_label}
+                            </Link>
                         ) : (
-                            <span className="text-sm text-muted-foreground">
-                                —
-                            </span>
-                        )}
-                        {log.entity_type && (
-                            <p className="text-xs text-muted-foreground">
-                                {log.entity_type}
-                            </p>
-                        )}
-                    </TableCell>
-                    <TableCell className="align-top text-sm text-muted-foreground">
-                        <span className="lg:hidden">
-                            <AuditCategoryBadge
-                                category={log.category}
-                                className="mb-1"
-                            />
-                        </span>
-                        {formatDateTime(log.created_at)}
-                    </TableCell>
+                            <span className="text-sm">{log.entity_label}</span>
+                        )
+                    ) : (
+                        <span className="text-sm text-muted-foreground">—</span>
+                    )}
+                    {log.entity_type && (
+                        <p className="text-xs text-muted-foreground">
+                            {log.entity_type}
+                        </p>
+                    )}
+                </TableCell>
+                <TableCell className="align-top text-sm text-muted-foreground">
+                    <span className="lg:hidden">
+                        <AuditCategoryBadge
+                            category={log.category}
+                            className="mb-1"
+                        />
+                    </span>
+                    {formatDateTime(log.created_at)}
+                </TableCell>
             </TableRow>
             {open && log.has_changes && (
                 <TableRow className="bg-muted hover:bg-muted">
                     <TableCell colSpan={6} className="p-4">
-                        <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                        <p className="mb-3 text-xs font-medium tracking-wide text-muted-foreground uppercase">
                             Field changes
                         </p>
                         <AuditLogChanges
@@ -211,7 +209,8 @@ export default function AuditLogsIndex({
                         Audit logs
                     </h1>
                     <p className="text-sm text-muted-foreground">
-                        Immutable activity trail for compliance and accountability
+                        Immutable activity trail for compliance and
+                        accountability
                     </p>
                 </div>
 
@@ -316,7 +315,9 @@ export default function AuditLogsIndex({
                                     action={
                                         activeCategory ? (
                                             <Button variant="outline" asChild>
-                                                <Link href={auditLogsIndex.url()}>
+                                                <Link
+                                                    href={auditLogsIndex.url()}
+                                                >
                                                     Show all events
                                                 </Link>
                                             </Button>

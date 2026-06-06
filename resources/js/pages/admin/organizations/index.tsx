@@ -8,7 +8,7 @@ import {
     UserX,
     Users,
 } from 'lucide-react';
-import type { FormEvent} from 'react';
+import type { FormEvent } from 'react';
 import { useState } from 'react';
 import { BillingStatusBadge } from '@/components/admin/billing-status-badge';
 import { DataTablePagination } from '@/components/data-table-pagination';
@@ -298,13 +298,13 @@ export default function AdminOrganizationsIndex({
                                             </TableHead>
                                             <TableHead>Plan</TableHead>
                                             <TableHead>Status</TableHead>
-                                            <TableHead className="hidden sm:table-cell text-right">
+                                            <TableHead className="hidden text-right sm:table-cell">
                                                 Team
                                             </TableHead>
-                                            <TableHead className="hidden lg:table-cell text-right">
+                                            <TableHead className="hidden text-right lg:table-cell">
                                                 Customers
                                             </TableHead>
-                                            <TableHead className="hidden xl:table-cell text-right">
+                                            <TableHead className="hidden text-right xl:table-cell">
                                                 Created
                                             </TableHead>
                                             <TableHead className="w-12 text-right">
@@ -419,7 +419,5 @@ export default function AdminOrganizationsIndex({
 }
 
 AdminOrganizationsIndex.layout = {
-    breadcrumbs: [
-        { title: 'Organizations', href: organizationsIndex().url },
-    ],
+    breadcrumbs: [{ title: 'Organizations', href: organizationsIndex().url }],
 };

@@ -18,7 +18,11 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import { index as notificationsIndex, read, readAll } from '@/routes/notifications';
+import {
+    index as notificationsIndex,
+    read,
+    readAll,
+} from '@/routes/notifications';
 
 export type InAppNotification = {
     id: string;

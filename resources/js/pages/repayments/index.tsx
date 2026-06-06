@@ -1,11 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import {
-    Banknote,
-    CalendarDays,
-    Plus,
-    TrendingUp,
-    Wallet,
-} from 'lucide-react';
+import { Banknote, CalendarDays, Plus, TrendingUp, Wallet } from 'lucide-react';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
 import { PaymentChannelBadge } from '@/components/payment-channel-badge';
@@ -84,7 +78,8 @@ export default function RepaymentsIndex({
                             Repayments
                         </h1>
                         <p className="text-sm text-muted-foreground">
-                            Payment history and collections across your portfolio
+                            Payment history and collections across your
+                            portfolio
                         </p>
                     </div>
                     {canRecordRepayment && (
@@ -127,9 +122,7 @@ export default function RepaymentsIndex({
                         description="Active loans with balance due"
                         icon={TrendingUp}
                         accentClassName="bg-amber-500/10 text-amber-600 dark:text-amber-400"
-                        href={
-                            canRecordRepayment ? create().url : undefined
-                        }
+                        href={canRecordRepayment ? create().url : undefined}
                     />
                 </div>
 

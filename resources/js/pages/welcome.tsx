@@ -14,20 +14,14 @@ import {
     Wallet,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
-import {
-    LoanCalculatorWidget
-    
-} from '@/components/loan-calculator/loan-calculator-widget';
-import type {LoanCalculatorConfig} from '@/components/loan-calculator/loan-calculator-widget';
+import { LoanCalculatorWidget } from '@/components/loan-calculator/loan-calculator-widget';
+import type { LoanCalculatorConfig } from '@/components/loan-calculator/loan-calculator-widget';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import {
-    WelcomeBannerSlider
-    
-} from '@/components/welcome-banner-slider';
-import type {WelcomeBannerSlide} from '@/components/welcome-banner-slider';
+import { WelcomeBannerSlider } from '@/components/welcome-banner-slider';
+import type { WelcomeBannerSlide } from '@/components/welcome-banner-slider';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
 import { dashboard, login, register } from '@/routes';
@@ -67,14 +61,7 @@ const featureAccents = [
     },
 ] as const;
 
-const featureIcons = [
-    Users,
-    Wallet,
-    Smartphone,
-    BarChart3,
-    FileText,
-    Shield,
-];
+const featureIcons = [Users, Wallet, Smartphone, BarChart3, FileText, Shield];
 
 const stepAccents = [
     'from-chart-2 to-chart-3',
@@ -83,7 +70,10 @@ const stepAccents = [
     'from-chart-4 to-chart-5',
 ] as const;
 
-const planAccents: Record<string, { border: string; badge: string; glow: string }> = {
+const planAccents: Record<
+    string,
+    { border: string; badge: string; glow: string }
+> = {
     starter: {
         border: 'border-t-chart-4',
         badge: 'bg-chart-4/15 text-chart-4 border-chart-4/30',
@@ -235,7 +225,7 @@ export default function Welcome({
                             {auth.user ? (
                                 <Button
                                     asChild
-                                    className="bg-gradient-to-r from-chart-3 to-chart-2 text-white shadow-md shadow-chart-3/25 border-0 hover:opacity-95"
+                                    className="border-0 bg-gradient-to-r from-chart-3 to-chart-2 text-white shadow-md shadow-chart-3/25 hover:opacity-95"
                                 >
                                     <Link href={dashboard()}>
                                         Dashboard
@@ -253,7 +243,7 @@ export default function Welcome({
                                     </Button>
                                     <Button
                                         asChild
-                                        className="bg-gradient-to-r from-chart-2 to-chart-3 text-white shadow-md shadow-chart-2/30 hover:opacity-95 border-0"
+                                        className="border-0 bg-gradient-to-r from-chart-2 to-chart-3 text-white shadow-md shadow-chart-2/30 hover:opacity-95"
                                     >
                                         <Link href={register()}>
                                             Get started
@@ -272,11 +262,11 @@ export default function Welcome({
                 <main>
                     <section className="welcome-hero-bg relative overflow-hidden border-b border-chart-2/15">
                         <div
-                            className="pointer-events-none absolute -left-20 top-20 size-72 rounded-full bg-chart-2/30 blur-3xl"
+                            className="pointer-events-none absolute top-20 -left-20 size-72 rounded-full bg-chart-2/30 blur-3xl"
                             aria-hidden
                         />
                         <div
-                            className="pointer-events-none absolute -right-16 top-10 size-80 rounded-full bg-chart-3/25 blur-3xl"
+                            className="pointer-events-none absolute top-10 -right-16 size-80 rounded-full bg-chart-3/25 blur-3xl"
                             aria-hidden
                         />
                         <div
@@ -298,7 +288,7 @@ export default function Welcome({
                                         {content.hero_headline_highlight}
                                     </span>
                                 </h1>
-                                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
+                                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-muted-foreground">
                                     {content.hero_description}
                                 </p>
 
@@ -307,7 +297,7 @@ export default function Welcome({
                                         <Button
                                             size="lg"
                                             asChild
-                                            className="bg-gradient-to-r from-chart-2 to-chart-3 text-white shadow-lg shadow-chart-2/35 hover:opacity-95 border-0"
+                                            className="border-0 bg-gradient-to-r from-chart-2 to-chart-3 text-white shadow-lg shadow-chart-2/35 hover:opacity-95"
                                         >
                                             <Link href={register()}>
                                                 {content.hero_primary_cta}
@@ -352,7 +342,7 @@ export default function Welcome({
                                                 <CreditCard className="size-5" />
                                             </span>
                                             <div>
-                                                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                                                <p className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
                                                     Your subscription
                                                 </p>
                                                 <CardTitle className="mt-1 text-xl">
@@ -360,7 +350,7 @@ export default function Welcome({
                                                 </CardTitle>
                                                 <Badge
                                                     variant="outline"
-                                                    className="mt-2 capitalize border-chart-2/40 bg-chart-2/10 text-chart-2"
+                                                    className="mt-2 border-chart-2/40 bg-chart-2/10 text-chart-2 capitalize"
                                                 >
                                                     {statusLabel(
                                                         subscription.status,
@@ -376,7 +366,7 @@ export default function Welcome({
                                     </div>
                                     <CardContent className="grid gap-6 px-6 py-6 sm:grid-cols-2 lg:grid-cols-4">
                                         <div>
-                                            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                                            <p className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
                                                 Billing
                                             </p>
                                             <p className="mt-1 font-semibold">
@@ -395,7 +385,7 @@ export default function Welcome({
                                         </div>
                                         {subscription.trial_ends_at && (
                                             <div>
-                                                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                                                <p className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
                                                     Trial ends
                                                 </p>
                                                 <p className="mt-1 font-semibold">
@@ -407,7 +397,7 @@ export default function Welcome({
                                         )}
                                         {subscription.current_period_end && (
                                             <div>
-                                                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                                                <p className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
                                                     Period ends
                                                 </p>
                                                 <p className="mt-1 font-semibold">
@@ -418,7 +408,7 @@ export default function Welcome({
                                             </div>
                                         )}
                                         <div>
-                                            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                                            <p className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
                                                 Workspace usage
                                             </p>
                                             <p className="mt-1 font-semibold">
@@ -455,11 +445,11 @@ export default function Welcome({
                                 <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
                                     Loan repayment calculator
                                 </h2>
-                                <p className="mt-4 text-muted-foreground text-pretty">
-                                    Estimate interest and installment amounts for
-                                    flat or reducing balance loans — the same
-                                    logic used when your organization disburses
-                                    loans on this platform.
+                                <p className="mt-4 text-pretty text-muted-foreground">
+                                    Estimate interest and installment amounts
+                                    for flat or reducing balance loans — the
+                                    same logic used when your organization
+                                    disburses loans on this platform.
                                 </p>
                             </div>
                             <LoanCalculatorWidget
@@ -480,7 +470,7 @@ export default function Welcome({
                             <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
                                 Everything you need to run lending operations
                             </h2>
-                            <p className="mt-4 text-muted-foreground text-pretty">
+                            <p className="mt-4 text-pretty text-muted-foreground">
                                 Replace spreadsheets and fragmented tools with a
                                 single system designed for disbursement,
                                 collections, and oversight.
@@ -491,33 +481,33 @@ export default function Welcome({
                                 const accent = featureAccents[index];
 
                                 return (
-                                <Card
-                                    key={feature.title}
-                                    className={cn(
-                                        'border-border/80 bg-card/80 shadow-sm transition-all hover:bg-card hover:shadow-md',
-                                        accent.card,
-                                    )}
-                                >
-                                    <CardHeader className="space-y-4">
-                                        <span
-                                            className={cn(
-                                                'flex size-10 items-center justify-center rounded-xl ring-1',
-                                                accent.icon,
-                                            )}
-                                        >
-                                            <feature.icon className="size-5" />
-                                        </span>
-                                        <CardTitle className="text-lg">
-                                            {feature.title}
-                                        </CardTitle>
-                                    </CardHeader>
-                                    <CardContent className="-mt-2 pb-6">
-                                        <p className="text-sm leading-relaxed text-muted-foreground">
-                                            {feature.description}
-                                        </p>
-                                    </CardContent>
-                                </Card>
-                            );
+                                    <Card
+                                        key={feature.title}
+                                        className={cn(
+                                            'border-border/80 bg-card/80 shadow-sm transition-all hover:bg-card hover:shadow-md',
+                                            accent.card,
+                                        )}
+                                    >
+                                        <CardHeader className="space-y-4">
+                                            <span
+                                                className={cn(
+                                                    'flex size-10 items-center justify-center rounded-xl ring-1',
+                                                    accent.icon,
+                                                )}
+                                            >
+                                                <feature.icon className="size-5" />
+                                            </span>
+                                            <CardTitle className="text-lg">
+                                                {feature.title}
+                                            </CardTitle>
+                                        </CardHeader>
+                                        <CardContent className="-mt-2 pb-6">
+                                            <p className="text-sm leading-relaxed text-muted-foreground">
+                                                {feature.description}
+                                            </p>
+                                        </CardContent>
+                                    </Card>
+                                );
                             })}
                         </div>
                     </section>
@@ -536,8 +526,8 @@ export default function Welcome({
                                         Plans that scale with your portfolio
                                     </h2>
                                     <p className="mt-4 text-muted-foreground">
-                                        Start on a free trial, then upgrade as your
-                                        team and loan book grow.
+                                        Start on a free trial, then upgrade as
+                                        your team and loan book grow.
                                     </p>
                                 </div>
                                 <div className="mt-14 grid gap-8 lg:grid-cols-3 lg:items-stretch">
@@ -584,7 +574,7 @@ export default function Welcome({
                                                         {plan.name}
                                                     </CardTitle>
                                                     {plan.description && (
-                                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                                        <p className="text-sm leading-relaxed text-muted-foreground">
                                                             {plan.description}
                                                         </p>
                                                     )}
@@ -599,7 +589,9 @@ export default function Welcome({
                                                         </p>
                                                         <p className="mt-1 text-sm text-muted-foreground capitalize">
                                                             per{' '}
-                                                            {plan.billing_interval}{' '}
+                                                            {
+                                                                plan.billing_interval
+                                                            }{' '}
                                                             · {plan.trial_days}
                                                             -day trial
                                                         </p>
@@ -646,7 +638,7 @@ export default function Welcome({
                                                             className={cn(
                                                                 'w-full',
                                                                 isPopular &&
-                                                                    'bg-gradient-to-r from-chart-2 to-chart-3 text-white shadow-md shadow-chart-2/30 border-0 hover:opacity-95',
+                                                                    'border-0 bg-gradient-to-r from-chart-2 to-chart-3 text-white shadow-md shadow-chart-2/30 hover:opacity-95',
                                                             )}
                                                             variant={
                                                                 isPopular
@@ -685,8 +677,9 @@ export default function Welcome({
                                 Go live in four straightforward steps
                             </h2>
                             <p className="mt-4 text-muted-foreground">
-                                From registration to your first loan — most teams
-                                are operational within a single working day.
+                                From registration to your first loan — most
+                                teams are operational within a single working
+                                day.
                             </p>
                         </div>
 

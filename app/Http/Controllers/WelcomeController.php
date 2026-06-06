@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Organization;
 use App\Models\SubscriptionPlan;
-use App\Support\LoanCalculatorCatalog;
 use App\Services\PlatformSettingsService;
 use App\Services\SubscriptionService;
+use App\Support\LoanCalculatorCatalog;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;

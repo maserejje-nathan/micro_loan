@@ -178,11 +178,13 @@ export default function LoansShow({
 }) {
     const page = usePage();
     const errors = page.props.errors as Record<string, string | undefined>;
-    const flash = page.props.flash as {
-        success?: string;
-        error?: string;
-        warning?: string;
-    } | undefined;
+    const flash = page.props.flash as
+        | {
+              success?: string;
+              error?: string;
+              warning?: string;
+          }
+        | undefined;
 
     return (
         <>
@@ -226,8 +228,8 @@ export default function LoansShow({
                                 <span className="text-muted-foreground">
                                     {loan.customer.phone}
                                 </span>
-                                {loan.customer.payment_reminder_channels.length >
-                                    0 && (
+                                {loan.customer.payment_reminder_channels
+                                    .length > 0 && (
                                     <span className="text-muted-foreground">
                                         Reminders:{' '}
                                         {loan.customer.payment_reminder_channels
@@ -265,7 +267,7 @@ export default function LoansShow({
                                 </Link>
                             )}
                         </div>
-                        <div className="flex flex-wrap gap-2 shrink-0">
+                        <div className="flex shrink-0 flex-wrap gap-2">
                             {canRecordRepayment && (
                                 <Button asChild>
                                     <Link
@@ -300,10 +302,7 @@ export default function LoansShow({
                     />
                     <StatCard
                         title="Outstanding"
-                        value={formatMoney(
-                            loan.outstanding_balance,
-                            currency,
-                        )}
+                        value={formatMoney(loan.outstanding_balance, currency)}
                         description="Remaining balance"
                         icon={Banknote}
                         accentClassName="bg-amber-500/10 text-amber-600 dark:text-amber-400"
@@ -423,7 +422,8 @@ export default function LoansShow({
                                     Pending
                                 </p>
                                 <p className="text-2xl font-semibold">
-                                    {scheduleSummary.total - scheduleSummary.paid}
+                                    {scheduleSummary.total -
+                                        scheduleSummary.paid}
                                 </p>
                             </div>
                         </CardContent>
@@ -457,9 +457,7 @@ export default function LoansShow({
                                 />
                                 <DetailItem
                                     label="Status"
-                                    value={formatEnumLabel(
-                                        disbursement.status,
-                                    )}
+                                    value={formatEnumLabel(disbursement.status)}
                                 />
                                 <DetailItem
                                     label="Disbursed at"
@@ -473,9 +471,7 @@ export default function LoansShow({
                                 />
                                 <DetailItem
                                     label="Mobile money reference"
-                                    value={
-                                        disbursement.mobile_money_reference
-                                    }
+                                    value={disbursement.mobile_money_reference}
                                 />
                             </dl>
                         </CardContent>
@@ -490,9 +486,8 @@ export default function LoansShow({
                             </CardTitle>
                             <CardDescription>
                                 Release {formatMoney(loan.principal, currency)}{' '}
-                                to {loan.customer.name}. Use mobile money to
-                                pay out via{' '}
-                                {mobileMoney.driver_label}.
+                                to {loan.customer.name}. Use mobile money to pay
+                                out via {mobileMoney.driver_label}.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="pt-6">

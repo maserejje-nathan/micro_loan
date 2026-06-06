@@ -1,9 +1,14 @@
 import { Form, Head } from '@inertiajs/react';
 import { Building2 } from 'lucide-react';
-import { FormActions } from '@/components/form-actions';
 import { FormField } from '@/components/form-field';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { store } from '@/routes/onboarding/organization';
@@ -20,9 +25,9 @@ export default function OrganizationOnboarding() {
                     <h1 className="text-2xl font-semibold tracking-tight">
                         Set up your lending company
                     </h1>
-                    <p className="mt-2 text-sm text-muted-foreground text-pretty">
-                        Create your organization workspace. You will be the owner
-                        with full access to manage loans and settings.
+                    <p className="mt-2 text-sm text-pretty text-muted-foreground">
+                        Create your organization workspace. You will be the
+                        owner with full access to manage loans and settings.
                     </p>
                 </div>
 

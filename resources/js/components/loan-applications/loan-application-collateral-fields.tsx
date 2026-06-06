@@ -56,7 +56,9 @@ export function LoanApplicationCollateralFields({
     }
 
     function removeRow(index: number): void {
-        setRows((current) => current.filter((_, rowIndex) => rowIndex !== index));
+        setRows((current) =>
+            current.filter((_, rowIndex) => rowIndex !== index),
+        );
     }
 
     function updateRow(
@@ -75,7 +77,7 @@ export function LoanApplicationCollateralFields({
         <section className="space-y-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         Collateral
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">
@@ -83,7 +85,12 @@ export function LoanApplicationCollateralFields({
                         more items.
                     </p>
                 </div>
-                <Button type="button" variant="outline" size="sm" onClick={addRow}>
+                <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={addRow}
+                >
                     <Plus className="mr-2 size-4" />
                     Add collateral
                 </Button>
@@ -128,7 +135,9 @@ export function LoanApplicationCollateralFields({
                                         name={`collaterals[${index}][type]`}
                                         value={row.type}
                                         required
-                                        aria-invalid={!!fieldError(errors, index, 'type')}
+                                        aria-invalid={
+                                            !!fieldError(errors, index, 'type')
+                                        }
                                         onChange={(event) =>
                                             updateRow(
                                                 index,
@@ -200,7 +209,11 @@ export function LoanApplicationCollateralFields({
                                     required
                                     placeholder="Toyota Premio 2015, silver"
                                     aria-invalid={
-                                        !!fieldError(errors, index, 'description')
+                                        !!fieldError(
+                                            errors,
+                                            index,
+                                            'description',
+                                        )
                                     }
                                     onChange={(event) =>
                                         updateRow(
@@ -224,7 +237,11 @@ export function LoanApplicationCollateralFields({
                                     value={row.identifier}
                                     placeholder="UBH 123A"
                                     aria-invalid={
-                                        !!fieldError(errors, index, 'identifier')
+                                        !!fieldError(
+                                            errors,
+                                            index,
+                                            'identifier',
+                                        )
                                     }
                                     className="h-10"
                                     onChange={(event) =>

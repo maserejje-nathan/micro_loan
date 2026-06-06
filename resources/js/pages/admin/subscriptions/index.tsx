@@ -7,7 +7,7 @@ import {
     Search,
     TrendingUp,
 } from 'lucide-react';
-import type { FormEvent} from 'react';
+import type { FormEvent } from 'react';
 import { useState } from 'react';
 import { BillingStatusBadge } from '@/components/admin/billing-status-badge';
 import { SubscriptionPeriod } from '@/components/admin/subscription-period';
@@ -346,10 +346,7 @@ export default function AdminSubscriptionsIndex({
                                                         )}
                                                         className="font-medium hover:underline"
                                                     >
-                                                        {
-                                                            sub.organization
-                                                                .name
-                                                        }
+                                                        {sub.organization.name}
                                                     </Link>
                                                     <p className="font-mono text-xs text-muted-foreground">
                                                         {sub.organization.slug}

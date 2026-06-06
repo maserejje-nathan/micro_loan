@@ -20,10 +20,13 @@ export default function AcceptInvitation({
             <Head title="Accept invitation" />
             <div className="w-full space-y-6 p-8">
                 <div>
-                    <h1 className="text-2xl font-semibold">Join {invitation.organization_name}</h1>
-                    <p className="text-muted-foreground mt-2 text-sm">
-                        You have been invited as <strong>{invitation.role_name}</strong>.
-                        Sign in as <strong>{invitation.email}</strong> to accept. Expires{' '}
+                    <h1 className="text-2xl font-semibold">
+                        Join {invitation.organization_name}
+                    </h1>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                        You have been invited as{' '}
+                        <strong>{invitation.role_name}</strong>. Sign in as{' '}
+                        <strong>{invitation.email}</strong> to accept. Expires{' '}
                         {invitation.expires_at}.
                     </p>
                 </div>

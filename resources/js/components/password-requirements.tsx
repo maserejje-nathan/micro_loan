@@ -9,7 +9,7 @@ export function PasswordRequirements({ rules }: PasswordRequirementsProps) {
     const minLength = rules?.includes('minlength') ? 8 : 8;
 
     return (
-        <p className="text-xs text-muted-foreground leading-relaxed">
+        <p className="text-xs leading-relaxed text-muted-foreground">
             Use at least {minLength} characters. Mix letters and numbers for a
             stronger password.
         </p>

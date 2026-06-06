@@ -13,12 +13,8 @@ import { NativeSelect } from '@/components/ui/native-select';
 import { Separator } from '@/components/ui/separator';
 import { formatEnumLabel } from '@/lib/format-label';
 import { formatMoney } from '@/lib/format-money';
-import {
-    calculateLoanEstimate
-    
-    
-} from '@/lib/loan-calculator';
-import type {InterestType, RepaymentFrequency} from '@/lib/loan-calculator';
+import { calculateLoanEstimate } from '@/lib/loan-calculator';
+import type { InterestType, RepaymentFrequency } from '@/lib/loan-calculator';
 import { cn } from '@/lib/utils';
 
 export type LoanCalculatorProduct = {
@@ -81,8 +77,13 @@ export function LoanCalculatorWidget({
     title = 'Loan calculator',
     description = 'Estimate interest and repayments before you apply. Figures are indicative only.',
 }: LoanCalculatorWidgetProps) {
-    const { currency, products, interestTypes, repaymentFrequencies, defaults } =
-        config;
+    const {
+        currency,
+        products,
+        interestTypes,
+        repaymentFrequencies,
+        defaults,
+    } = config;
 
     const [productId, setProductId] = useState<string>(
         products[0] ? String(products[0].id) : '',
@@ -326,7 +327,10 @@ export function LoanCalculatorWidget({
                                     className="h-10"
                                 />
                             </FormField>
-                            <FormField id="calc_fee" label={`Processing fee (${currency})`}>
+                            <FormField
+                                id="calc_fee"
+                                label={`Processing fee (${currency})`}
+                            >
                                 <Input
                                     id="calc_fee"
                                     type="number"
@@ -343,7 +347,10 @@ export function LoanCalculatorWidget({
                                     className="h-10"
                                 />
                             </FormField>
-                            <FormField id="calc_interest_type" label="Interest type">
+                            <FormField
+                                id="calc_interest_type"
+                                label="Interest type"
+                            >
                                 <NativeSelect
                                     id="calc_interest_type"
                                     value={interestType}
@@ -384,9 +391,11 @@ export function LoanCalculatorWidget({
 
                     {selectedProduct && (
                         <p className="text-xs text-muted-foreground">
-                            {formatEnumLabel(selectedProduct.interest_type)} interest
-                            at {selectedProduct.interest_rate}% ·{' '}
-                            {formatEnumLabel(selectedProduct.repayment_frequency)}{' '}
+                            {formatEnumLabel(selectedProduct.interest_type)}{' '}
+                            interest at {selectedProduct.interest_rate}% ·{' '}
+                            {formatEnumLabel(
+                                selectedProduct.repayment_frequency,
+                            )}{' '}
                             repayments
                             {selectedProduct.processing_fee > 0 &&
                                 ` · ${formatMoney(selectedProduct.processing_fee, currency)} processing fee`}
@@ -395,7 +404,7 @@ export function LoanCalculatorWidget({
                 </div>
 
                 <div className="flex flex-col justify-center rounded-xl border border-border bg-muted p-4 sm:p-5">
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         Estimated breakdown
                     </p>
                     <dl className="mt-4 space-y-3">
@@ -427,8 +436,11 @@ export function LoanCalculatorWidget({
                         <Separator />
                         <div className="flex items-center justify-between gap-4">
                             <dt className="font-medium">Total repayable</dt>
-                            <dd className="text-lg font-semibold tabular-nums text-primary">
-                                {formatMoney(estimate.total_repayable, currency)}
+                            <dd className="text-lg font-semibold text-primary tabular-nums">
+                                {formatMoney(
+                                    estimate.total_repayable,
+                                    currency,
+                                )}
                             </dd>
                         </div>
                         <div className="flex items-center justify-between gap-4 text-sm">
@@ -449,7 +461,8 @@ export function LoanCalculatorWidget({
                         </div>
                     </dl>
                     <p className="mt-4 text-xs text-muted-foreground">
-                        Actual loan terms may differ after approval and disbursement.
+                        Actual loan terms may differ after approval and
+                        disbursement.
                     </p>
                 </div>
             </CardContent>

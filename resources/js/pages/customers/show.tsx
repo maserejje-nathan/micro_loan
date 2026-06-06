@@ -72,10 +72,12 @@ function KycSection({
 }) {
     return (
         <div className="space-y-3">
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                 {title}
             </p>
-            <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{children}</dl>
+            <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {children}
+            </dl>
         </div>
     );
 }
@@ -149,7 +151,8 @@ export default function CustomersShow({
                             <div className="space-y-2">
                                 <div className="flex flex-wrap items-center gap-2">
                                     <h1 className="text-2xl font-semibold tracking-tight">
-                                        {customer.first_name} {customer.last_name}
+                                        {customer.first_name}{' '}
+                                        {customer.last_name}
                                     </h1>
                                     {customer.status && (
                                         <EntityStatusBadge
@@ -224,7 +227,10 @@ export default function CustomersShow({
                                     Outstanding
                                 </p>
                                 <p className="text-2xl font-semibold">
-                                    {formatMoney(loanStats.total_outstanding, currency)}
+                                    {formatMoney(
+                                        loanStats.total_outstanding,
+                                        currency,
+                                    )}
                                 </p>
                             </div>
                         </CardContent>
@@ -360,7 +366,8 @@ export default function CustomersShow({
                             <div>
                                 <CardTitle>KYC profile</CardTitle>
                                 <CardDescription>
-                                    Identity, contact, employment, and next of kin
+                                    Identity, contact, employment, and next of
+                                    kin
                                 </CardDescription>
                             </div>
                         </div>
@@ -386,41 +393,54 @@ export default function CustomersShow({
                                 <KycSection title="Personal & identity">
                                     <DetailItem
                                         label="Date of birth"
-                                        value={customer.date_of_birth ?? undefined}
+                                        value={
+                                            customer.date_of_birth ?? undefined
+                                        }
                                     />
                                     <DetailItem
                                         label="Gender"
                                         value={
                                             customer.gender
-                                                ? formatEnumLabel(customer.gender)
+                                                ? formatEnumLabel(
+                                                      customer.gender,
+                                                  )
                                                 : undefined
                                         }
                                     />
                                     <DetailItem
                                         label="Nationality"
-                                        value={customer.nationality ?? undefined}
+                                        value={
+                                            customer.nationality ?? undefined
+                                        }
                                     />
                                     <DetailItem
                                         label="ID type"
                                         value={
                                             customer.id_type
-                                                ? formatEnumLabel(customer.id_type)
+                                                ? formatEnumLabel(
+                                                      customer.id_type,
+                                                  )
                                                 : undefined
                                         }
                                     />
                                     <DetailItem
                                         label="ID number"
-                                        value={customer.national_id ?? undefined}
+                                        value={
+                                            customer.national_id ?? undefined
+                                        }
                                     />
                                     <DetailItem
                                         label="ID expiry"
-                                        value={customer.id_expiry_date ?? undefined}
+                                        value={
+                                            customer.id_expiry_date ?? undefined
+                                        }
                                     />
                                 </KycSection>
 
-                                {(customer.id_front_url || customer.id_back_url) && (
+                                {(customer.id_front_url ||
+                                    customer.id_back_url) && (
                                     <div className="space-y-3">
-                                        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                        <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                             ID document images
                                         </p>
                                         <div className="grid gap-4 sm:grid-cols-2">
@@ -432,7 +452,9 @@ export default function CustomersShow({
                                                     className="block overflow-hidden rounded-xl border border-border bg-muted"
                                                 >
                                                     <img
-                                                        src={customer.id_front_url}
+                                                        src={
+                                                            customer.id_front_url
+                                                        }
                                                         alt="ID front"
                                                         className="aspect-[3/2] w-full object-contain"
                                                     />
@@ -449,7 +471,9 @@ export default function CustomersShow({
                                                     className="block overflow-hidden rounded-xl border border-border bg-muted"
                                                 >
                                                     <img
-                                                        src={customer.id_back_url}
+                                                        src={
+                                                            customer.id_back_url
+                                                        }
                                                         alt="ID back"
                                                         className="aspect-[3/2] w-full object-contain"
                                                     />
@@ -487,11 +511,16 @@ export default function CustomersShow({
                                         />
                                         <DetailItem
                                             label="Occupation"
-                                            value={customer.occupation ?? undefined}
+                                            value={
+                                                customer.occupation ?? undefined
+                                            }
                                         />
                                         <DetailItem
                                             label="Employer"
-                                            value={customer.employer_name ?? undefined}
+                                            value={
+                                                customer.employer_name ??
+                                                undefined
+                                            }
                                         />
                                         <DetailItem
                                             label="Monthly income"
@@ -560,35 +589,41 @@ export default function CustomersShow({
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
-                                        {loanApplications.data.map((application) => (
-                                            <TableRow key={application.id}>
-                                                <TableCell>
-                                                    <Link
-                                                        href={`/loan-applications/${application.id}`}
-                                                        className="font-medium hover:underline"
-                                                    >
+                                        {loanApplications.data.map(
+                                            (application) => (
+                                                <TableRow key={application.id}>
+                                                    <TableCell>
+                                                        <Link
+                                                            href={`/loan-applications/${application.id}`}
+                                                            className="font-medium hover:underline"
+                                                        >
+                                                            {
+                                                                application.reference_number
+                                                            }
+                                                        </Link>
+                                                    </TableCell>
+                                                    <TableCell className="text-muted-foreground">
                                                         {
-                                                            application.reference_number
+                                                            application.product_name
                                                         }
-                                                    </Link>
-                                                </TableCell>
-                                                <TableCell className="text-muted-foreground">
-                                                    {application.product_name}
-                                                </TableCell>
-                                                <TableCell className="text-right font-medium">
-                                                    {formatMoney(
-                                                        application.requested_amount,
-                                                        currency,
-                                                    )}
-                                                </TableCell>
-                                                <TableCell>
-                                                    <EntityStatusBadge
-                                                        status={application.status}
-                                                        type="loan_application"
-                                                    />
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
+                                                    </TableCell>
+                                                    <TableCell className="text-right font-medium">
+                                                        {formatMoney(
+                                                            application.requested_amount,
+                                                            currency,
+                                                        )}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <EntityStatusBadge
+                                                            status={
+                                                                application.status
+                                                            }
+                                                            type="loan_application"
+                                                        />
+                                                    </TableCell>
+                                                </TableRow>
+                                            ),
+                                        )}
                                     </TableBody>
                                 </Table>
                             )}

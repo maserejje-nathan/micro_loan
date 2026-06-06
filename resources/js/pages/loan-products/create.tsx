@@ -22,7 +22,11 @@ export default function LoanProductsCreate({
                 cardTitle="Product configuration"
                 cardDescription="Fields marked with * are required."
             >
-                <Form {...store.form()} disableWhileProcessing className="space-y-6">
+                <Form
+                    {...store.form()}
+                    disableWhileProcessing
+                    className="space-y-6"
+                >
                     {({ processing, errors }) => (
                         <>
                             <LoanProductFormFields

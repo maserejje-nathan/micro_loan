@@ -59,7 +59,10 @@ export default function AuthCardLayout({
                 </Card>
 
                 <p className="text-center text-xs text-muted-foreground">
-                    <Link href={home()} className="underline-offset-4 hover:underline">
+                    <Link
+                        href={home()}
+                        className="underline-offset-4 hover:underline"
+                    >
                         ← Back to home
                     </Link>
                 </p>

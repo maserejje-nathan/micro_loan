@@ -3,9 +3,9 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminInvoiceController;
 use App\Http\Controllers\Admin\AdminOrganizationController;
+use App\Http\Controllers\Admin\AdminPlatformSettingsController;
 use App\Http\Controllers\Admin\AdminSubscriptionController;
 use App\Http\Controllers\Admin\AdminSubscriptionPlanController;
-use App\Http\Controllers\Admin\AdminPlatformSettingsController;
 use App\Http\Controllers\Admin\AdminSystemController;
 use Illuminate\Support\Facades\Route;
 

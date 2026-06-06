@@ -32,9 +32,15 @@ export function SmsTestCard({
                 <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
                         <MessageSquare className="size-5 text-primary" />
-                        <CardTitle className="text-base">Send test SMS</CardTitle>
+                        <CardTitle className="text-base">
+                            Send test SMS
+                        </CardTitle>
                     </div>
-                    <Badge variant={smsDriver.sends_real_sms ? 'default' : 'secondary'}>
+                    <Badge
+                        variant={
+                            smsDriver.sends_real_sms ? 'default' : 'secondary'
+                        }
+                    >
                         {smsDriver.label}
                     </Badge>
                 </div>
@@ -45,7 +51,12 @@ export function SmsTestCard({
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <Form action={testUrl} method="post" preserveScroll className="space-y-4">
+                <Form
+                    action={testUrl}
+                    method="post"
+                    preserveScroll
+                    className="space-y-4"
+                >
                     {({ processing, errors }) => (
                         <>
                             <FormField

@@ -24,7 +24,9 @@ export default function Login({ status, canResetPassword }: Props) {
             <Head title="Log in" />
 
             <div className="flex flex-col gap-6">
-                {status && <AuthStatusAlert message={status} variant="success" />}
+                {status && (
+                    <AuthStatusAlert message={status} variant="success" />
+                )}
 
                 <Form
                     {...store.form()}
@@ -112,7 +114,7 @@ export default function Login({ status, canResetPassword }: Props) {
 
                             <div className="relative">
                                 <Separator />
-                                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-2 text-xs text-muted-foreground">
+                                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-2 text-xs text-muted-foreground">
                                     New here?
                                 </span>
                             </div>

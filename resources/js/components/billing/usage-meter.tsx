@@ -19,8 +19,9 @@ export function UsageMeter({ label, used, limit }: UsageMeterProps) {
                 <span className="font-medium">{label}</span>
                 <span
                     className={cn(
-                        'tabular-nums text-muted-foreground',
-                        atLimit && 'font-medium text-amber-600 dark:text-amber-400',
+                        'text-muted-foreground tabular-nums',
+                        atLimit &&
+                            'font-medium text-amber-600 dark:text-amber-400',
                     )}
                 >
                     {used}
@@ -38,7 +39,9 @@ export function UsageMeter({ label, used, limit }: UsageMeterProps) {
                     />
                 </div>
             ) : (
-                <p className="text-xs text-muted-foreground">Unlimited on this plan</p>
+                <p className="text-xs text-muted-foreground">
+                    Unlimited on this plan
+                </p>
             )}
         </div>
     );

@@ -115,7 +115,9 @@ export default function CustomersIndex({
                                                     className="flex items-center gap-3 font-medium hover:underline"
                                                 >
                                                     <CustomerAvatar
-                                                        name={customer.full_name}
+                                                        name={
+                                                            customer.full_name
+                                                        }
                                                         photoUrl={
                                                             customer.photo_url
                                                         }

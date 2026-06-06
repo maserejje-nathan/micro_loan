@@ -13,10 +13,9 @@ import { NativeSelect } from '@/components/ui/native-select';
 import { formatMoney } from '@/lib/format-money';
 import {
     MOBILE_MONEY_CHANNEL,
-    mobileMoneyChannelLabel
-    
+    mobileMoneyChannelLabel,
 } from '@/lib/mobile-money-channel-label';
-import type {MobileMoneySummary} from '@/lib/mobile-money-channel-label';
+import type { MobileMoneySummary } from '@/lib/mobile-money-channel-label';
 import { cn } from '@/lib/utils';
 import { show as loanShow } from '@/routes/loans';
 
@@ -57,9 +56,7 @@ export function RepaymentFormFields({
     defaultChannel,
     values,
 }: RepaymentFormFieldsProps) {
-    const initialLoanId = values?.loan_id
-        ? String(values.loan_id)
-        : '';
+    const initialLoanId = values?.loan_id ? String(values.loan_id) : '';
     const [loanId, setLoanId] = useState(initialLoanId);
     const initialChannel =
         values?.channel ??
@@ -81,11 +78,12 @@ export function RepaymentFormFields({
         <div className="space-y-8">
             <section className="space-y-4">
                 <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         Loan & amount
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">
-                        Only active loans with an outstanding balance are listed.
+                        Only active loans with an outstanding balance are
+                        listed.
                     </p>
                 </div>
                 <div className="grid gap-4 lg:grid-cols-2">
@@ -101,15 +99,17 @@ export function RepaymentFormFields({
                             value={loanId}
                             required
                             aria-invalid={!!errors.loan_id}
-                            onChange={(event) =>
-                                setLoanId(event.target.value)
-                            }
+                            onChange={(event) => setLoanId(event.target.value)}
                         >
                             <option value="">Select loan</option>
                             {loans.map((loan) => (
                                 <option key={loan.id} value={loan.id}>
-                                    {loan.reference_number} — {loan.customer_name} (
-                                    {formatMoney(loan.outstanding_balance, currency)}{' '}
+                                    {loan.reference_number} —{' '}
+                                    {loan.customer_name} (
+                                    {formatMoney(
+                                        loan.outstanding_balance,
+                                        currency,
+                                    )}{' '}
                                     outstanding)
                                 </option>
                             ))}
@@ -188,7 +188,7 @@ export function RepaymentFormFields({
 
             <section className="space-y-4">
                 <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         Payment method
                     </p>
                     {isMobileMoney && (
@@ -221,9 +221,7 @@ export function RepaymentFormFields({
                             value={channel}
                             required
                             aria-invalid={!!errors.channel}
-                            onChange={(event) =>
-                                setChannel(event.target.value)
-                            }
+                            onChange={(event) => setChannel(event.target.value)}
                         >
                             {paymentChannels.map((paymentChannel) => (
                                 <option

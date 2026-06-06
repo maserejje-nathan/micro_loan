@@ -2,6 +2,8 @@
 
 namespace App\Enums;
 
+use Carbon\Carbon;
+
 enum BillingInterval: string
 {
     case Monthly = 'monthly';
@@ -15,7 +17,7 @@ enum BillingInterval: string
         };
     }
 
-    public function periodEndFrom(\Carbon\Carbon $start): \Carbon\Carbon
+    public function periodEndFrom(Carbon $start): Carbon
     {
         return match ($this) {
             self::Monthly => $start->copy()->addMonth(),

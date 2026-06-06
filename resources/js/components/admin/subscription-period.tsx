@@ -70,7 +70,10 @@ export function SubscriptionPeriod({
 
     if (currentPeriodEnd) {
         const relative = relativeLabel(currentPeriodEnd);
-        const isPast = new Date(currentPeriodEnd).getTime() < Date.now();
+        const isPast =
+            relative !== null &&
+            relative !== 'Today' &&
+            !relative.startsWith('In ');
 
         return (
             <div className={cn('text-sm', className)}>

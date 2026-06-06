@@ -12,6 +12,7 @@ use App\Models\LoanProduct;
 use App\Models\LoanSchedule;
 use App\Models\SmsNotification;
 use App\Models\User;
+use App\Services\PaymentReminderService;
 use Tests\Support\ActsAsOrganization;
 
 uses(ActsAsOrganization::class);
@@ -27,7 +28,7 @@ test('overdue job sends reminder on customer selected sms channel', function () 
 
     $schedule = createOverdueSchedule($organization, $customer);
 
-    (new ProcessOverdueInstallmentsJob($organization->id))->handle(app(\App\Services\PaymentReminderService::class));
+    (new ProcessOverdueInstallmentsJob($organization->id))->handle(app(PaymentReminderService::class));
 
     expect($schedule->fresh()->status)->toBe(ScheduleInstallmentStatus::Overdue)
         ->and(SmsNotification::query()->where('type', 'overdue_reminder')->where('status', SmsStatus::Sent)->exists())->toBeTrue();
@@ -45,7 +46,7 @@ test('overdue job sends email when customer selected email channel', function ()
 
     $schedule = createOverdueSchedule($organization, $customer);
 
-    (new ProcessOverdueInstallmentsJob($organization->id))->handle(app(\App\Services\PaymentReminderService::class));
+    (new ProcessOverdueInstallmentsJob($organization->id))->handle(app(PaymentReminderService::class));
 
     expect(SmsNotification::query()->where('type', 'overdue_reminder')->exists())->toBeFalse()
         ->and($schedule->fresh()->overdue_notified_at)->not->toBeNull();
@@ -94,9 +95,6 @@ test('manual reminder fails when email channel selected but no email on file', f
         ->assertSessionHas('error');
 });
 
-/**
- * @return LoanSchedule
- */
 function createOverdueSchedule($organization, Customer $customer): LoanSchedule
 {
     $product = LoanProduct::factory()->create(['organization_id' => $organization->id]);

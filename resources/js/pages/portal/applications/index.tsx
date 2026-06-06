@@ -84,7 +84,6 @@ export default function PortalApplicationsIndex({
         rejected: number;
     };
 }) {
-
     const filters: { key: Filter; label: string; count: number }[] = [
         { key: 'all', label: 'All', count: stats.total },
         { key: 'draft', label: 'Drafts', count: stats.draft },
@@ -175,32 +174,32 @@ export default function PortalApplicationsIndex({
                                     Your applications
                                 </CardTitle>
                                 <CardDescription>
-                                    {paginatorTotal(applications)} of {stats.total}{' '}
-                                    shown
+                                    {paginatorTotal(applications)} of{' '}
+                                    {stats.total} shown
                                 </CardDescription>
                             </div>
                         </div>
                         <div className="w-full overflow-x-auto overscroll-x-contain">
                             <div className="flex w-max min-w-full gap-1 rounded-lg border border-border bg-muted p-1 sm:w-full sm:flex-wrap">
-                            {filters.map((item) => (
-                                <Link
-                                    key={item.key}
-                                    href={filterUrl(item.key)}
-                                    preserveScroll
-                                    preserveState
-                                    className={cn(
-                                        'inline-flex h-8 items-center rounded-md px-3 text-sm font-medium transition-colors',
-                                        filter === item.key
-                                            ? 'bg-background text-foreground shadow-sm'
-                                            : 'text-muted-foreground hover:text-foreground',
-                                    )}
-                                >
-                                    {item.label}
-                                    <span className="ml-1.5 text-xs text-muted-foreground">
-                                        {item.count}
-                                    </span>
-                                </Link>
-                            ))}
+                                {filters.map((item) => (
+                                    <Link
+                                        key={item.key}
+                                        href={filterUrl(item.key)}
+                                        preserveScroll
+                                        preserveState
+                                        className={cn(
+                                            'inline-flex h-8 items-center rounded-md px-3 text-sm font-medium transition-colors',
+                                            filter === item.key
+                                                ? 'bg-background text-foreground shadow-sm'
+                                                : 'text-muted-foreground hover:text-foreground',
+                                        )}
+                                    >
+                                        {item.label}
+                                        <span className="ml-1.5 text-xs text-muted-foreground">
+                                            {item.count}
+                                        </span>
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                     </CardHeader>
@@ -257,7 +256,9 @@ export default function PortalApplicationsIndex({
                                                         }
                                                     </p>
                                                     <p className="text-sm text-muted-foreground">
-                                                        {application.product_name}
+                                                        {
+                                                            application.product_name
+                                                        }
                                                     </p>
                                                 </div>
                                                 <EntityStatusBadge
@@ -302,7 +303,9 @@ export default function PortalApplicationsIndex({
                                         <TableBody>
                                             {applications.data.map(
                                                 (application) => (
-                                                    <TableRow key={application.id}>
+                                                    <TableRow
+                                                        key={application.id}
+                                                    >
                                                         <TableCell>
                                                             <Link
                                                                 href={`/portal/applications/${application.id}`}
@@ -333,10 +336,12 @@ export default function PortalApplicationsIndex({
                                                             )}
                                                         </TableCell>
                                                         <TableCell className="text-right tabular-nums">
-                                                            {application.term_days}{' '}
+                                                            {
+                                                                application.term_days
+                                                            }{' '}
                                                             days
                                                         </TableCell>
-                                                        <TableCell className="text-right tabular-nums font-medium">
+                                                        <TableCell className="text-right font-medium tabular-nums">
                                                             {formatMoney(
                                                                 application.requested_amount,
                                                                 currency,

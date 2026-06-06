@@ -1,11 +1,8 @@
 import { Form, Head } from '@inertiajs/react';
 import { FormActions } from '@/components/form-actions';
 import { FormPageShell } from '@/components/form-page-shell';
-import {
-    LoanProductFormFields
-    
-} from '@/components/loan-products/loan-product-form-fields';
-import type {LoanProductFormValues} from '@/components/loan-products/loan-product-form-fields';
+import { LoanProductFormFields } from '@/components/loan-products/loan-product-form-fields';
+import type { LoanProductFormValues } from '@/components/loan-products/loan-product-form-fields';
 import { index, update } from '@/routes/loan-products';
 
 export default function LoanProductsEdit({

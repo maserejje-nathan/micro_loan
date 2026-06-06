@@ -14,13 +14,19 @@ export function mobileMoneyChannelLabel(
     paymentChannel: string,
     mobileMoney?: MobileMoneySummary,
 ): string {
-    if (paymentChannel === MOBILE_MONEY_CHANNEL && mobileMoney?.uses_yo_payments) {
+    if (
+        paymentChannel === MOBILE_MONEY_CHANNEL &&
+        mobileMoney?.uses_yo_payments
+    ) {
         return mobileMoney.can_disburse
             ? 'Mobile money (Yo! Payments)'
             : 'Mobile money (Yo! Payments — not configured)';
     }
 
-    if (paymentChannel === MOBILE_MONEY_CHANNEL && mobileMoney?.driver === 'stub') {
+    if (
+        paymentChannel === MOBILE_MONEY_CHANNEL &&
+        mobileMoney?.driver === 'stub'
+    ) {
         return 'Mobile money (simulated)';
     }
 

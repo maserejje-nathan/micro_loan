@@ -9,7 +9,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
@@ -45,10 +44,12 @@ export default function PortalSettingsPage({
                         <CardContent className="flex flex-col gap-4 p-6">
                             <div className="flex flex-wrap items-center justify-between gap-4">
                                 <div>
-                                    <p className="font-medium">Portal sign-in URL</p>
+                                    <p className="font-medium">
+                                        Portal sign-in URL
+                                    </p>
                                     <p className="text-sm text-muted-foreground">
-                                        Share this link with customers who have portal
-                                        access.
+                                        Share this link with customers who have
+                                        portal access.
                                     </p>
                                 </div>
                                 <Button variant="outline" size="sm" asChild>
@@ -69,8 +70,8 @@ export default function PortalSettingsPage({
                                             Self-registration URL
                                         </p>
                                         <p className="text-sm text-muted-foreground">
-                                            New customers can create an account at
-                                            this link.
+                                            New customers can create an account
+                                            at this link.
                                         </p>
                                     </div>
                                     <Button variant="outline" size="sm" asChild>
@@ -91,7 +92,9 @@ export default function PortalSettingsPage({
 
                 <Card>
                     <CardHeader className="border-b">
-                        <CardTitle className="text-base">Configuration</CardTitle>
+                        <CardTitle className="text-base">
+                            Configuration
+                        </CardTitle>
                         <CardDescription>
                             Portal for {organization.name}
                         </CardDescription>
@@ -133,8 +136,9 @@ export default function PortalSettingsPage({
                                                 Allow self-registration
                                             </Label>
                                             <p className="text-sm text-muted-foreground">
-                                                New customers can create their own
-                                                portal account and enter their details.
+                                                New customers can create their
+                                                own portal account and enter
+                                                their details.
                                             </p>
                                         </div>
                                         <select
@@ -185,7 +189,9 @@ export default function PortalSettingsPage({
                                             id="welcome_message"
                                             name="welcome_message"
                                             rows={3}
-                                            defaultValue={portal.welcome_message}
+                                            defaultValue={
+                                                portal.welcome_message
+                                            }
                                             placeholder="Optional message on the customer dashboard"
                                         />
                                         {errors.welcome_message && (

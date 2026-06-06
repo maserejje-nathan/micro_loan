@@ -8,7 +8,6 @@ use App\Enums\CustomerIdType;
 use App\Models\Customer;
 use App\Services\CustomerIdDocumentService;
 use App\Services\CustomerPhotoService;
-use App\Support\CustomerNotificationChannels;
 
 class CustomerFormData
 {

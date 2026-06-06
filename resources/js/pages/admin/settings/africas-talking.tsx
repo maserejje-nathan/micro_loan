@@ -76,77 +76,77 @@ export default function AdminAfricasTalkingSettings({
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
-                <Form
-                    {...updateAfricasTalking.form()}
-                    className="space-y-6"
-                >
-                    {({ processing, errors }) => (
-                        <>
-                            <div className="grid gap-4 sm:grid-cols-2">
-                                <FormField
-                                    id="username"
-                                    label="Username"
-                                    error={errors.username}
-                                >
-                                    <Input
-                                        id="username"
-                                        name="username"
-                                        defaultValue={settings.username}
-                                        className="h-10"
-                                    />
-                                </FormField>
-                                <FormField
-                                    id="api_key"
-                                    label="API key"
-                                    error={errors.api_key}
-                                    hint={
-                                        settings.has_api_key
-                                            ? 'Saved — leave blank to keep'
-                                            : undefined
-                                    }
-                                >
-                                    <Input
-                                        id="api_key"
-                                        name="api_key"
-                                        type="password"
-                                        autoComplete="new-password"
-                                        className="h-10"
-                                    />
-                                </FormField>
-                                <FormField
-                                    id="from"
-                                    label="Sender ID / From"
-                                    error={errors.from}
-                                >
-                                    <Input
-                                        id="from"
-                                        name="from"
-                                        defaultValue={settings.from}
-                                        className="h-10"
-                                    />
-                                </FormField>
-                                <FormField
-                                    id="endpoint"
-                                    label="Messaging endpoint"
-                                    error={errors.endpoint}
-                                >
-                                    <Input
-                                        id="endpoint"
-                                        name="endpoint"
-                                        defaultValue={settings.endpoint}
-                                        className="h-10"
-                                    />
-                                </FormField>
-                            </div>
+                        <Form
+                            {...updateAfricasTalking.form()}
+                            className="space-y-6"
+                        >
+                            {({ processing, errors }) => (
+                                <>
+                                    <div className="grid gap-4 sm:grid-cols-2">
+                                        <FormField
+                                            id="username"
+                                            label="Username"
+                                            error={errors.username}
+                                        >
+                                            <Input
+                                                id="username"
+                                                name="username"
+                                                defaultValue={settings.username}
+                                                className="h-10"
+                                            />
+                                        </FormField>
+                                        <FormField
+                                            id="api_key"
+                                            label="API key"
+                                            error={errors.api_key}
+                                            hint={
+                                                settings.has_api_key
+                                                    ? 'Saved — leave blank to keep'
+                                                    : undefined
+                                            }
+                                        >
+                                            <Input
+                                                id="api_key"
+                                                name="api_key"
+                                                type="password"
+                                                autoComplete="new-password"
+                                                className="h-10"
+                                            />
+                                        </FormField>
+                                        <FormField
+                                            id="from"
+                                            label="Sender ID / From"
+                                            error={errors.from}
+                                        >
+                                            <Input
+                                                id="from"
+                                                name="from"
+                                                defaultValue={settings.from}
+                                                className="h-10"
+                                            />
+                                        </FormField>
+                                        <FormField
+                                            id="endpoint"
+                                            label="Messaging endpoint"
+                                            error={errors.endpoint}
+                                        >
+                                            <Input
+                                                id="endpoint"
+                                                name="endpoint"
+                                                defaultValue={settings.endpoint}
+                                                className="h-10"
+                                            />
+                                        </FormField>
+                                    </div>
 
-                            <FormActions
-                                processing={processing}
-                                cancelHref={settingsIndex().url}
-                                submitLabel="Save Africa's Talking settings"
-                            />
-                        </>
-                    )}
-                </Form>
+                                    <FormActions
+                                        processing={processing}
+                                        cancelHref={settingsIndex().url}
+                                        submitLabel="Save Africa's Talking settings"
+                                    />
+                                </>
+                            )}
+                        </Form>
                     </CardContent>
                 </Card>
             </PlatformSettingsPage>

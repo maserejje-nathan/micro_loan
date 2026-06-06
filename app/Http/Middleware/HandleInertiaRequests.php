@@ -6,6 +6,7 @@ use App\Services\CustomerPhotoService;
 use App\Services\InAppNotificationService;
 use App\Services\PlatformLogoService;
 use App\Services\PlatformSettingsService;
+use App\Support\OrganizationContext;
 use App\Support\OrganizationPortalSettings;
 use App\Support\Tenancy;
 use Illuminate\Http\Request;
@@ -35,7 +36,8 @@ class HandleInertiaRequests extends Middleware
 
         if ($portalCustomer !== null && $request->routeIs('portal.*')) {
             $organization = $portalCustomer->organization
-                ?? \App\Support\OrganizationContext::get();
+                ?? OrganizationContext::get();
+
             return [
                 ...parent::share($request),
                 ...$this->branding(),
@@ -77,7 +79,7 @@ class HandleInertiaRequests extends Middleware
 
         $user = $request->user('web');
         $organization = $user?->currentOrganization
-            ?? \App\Support\OrganizationContext::get();
+            ?? OrganizationContext::get();
         $role = $user?->roleInOrganization($organization);
 
         return [

@@ -38,11 +38,7 @@ export function InvoiceRowActions({
                 {status !== 'paid' && status !== 'void' && (
                     <DropdownMenuItem
                         onClick={() => {
-                            if (
-                                window.confirm(
-                                    'Mark this invoice as paid?',
-                                )
-                            ) {
+                            if (window.confirm('Mark this invoice as paid?')) {
                                 router.post(paid.url(id));
                             }
                         }}

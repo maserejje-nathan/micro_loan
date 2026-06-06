@@ -29,7 +29,7 @@ export default function Register({ passwordRules }: Props) {
                     <>
                         <div className="grid gap-6">
                             <div className="space-y-4">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                     Your profile
                                 </p>
                                 <AuthFormField
@@ -75,7 +75,7 @@ export default function Register({ passwordRules }: Props) {
                             <Separator />
 
                             <div className="space-y-4">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                     Company workspace
                                 </p>
                                 <AuthFormField
@@ -100,7 +100,7 @@ export default function Register({ passwordRules }: Props) {
                             <Separator />
 
                             <div className="space-y-4">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                     Security
                                 </p>
                                 <AuthFormField
@@ -121,7 +121,9 @@ export default function Register({ passwordRules }: Props) {
                                         className="h-10"
                                     />
                                     {!errors.password && (
-                                        <PasswordRequirements rules={passwordRules} />
+                                        <PasswordRequirements
+                                            rules={passwordRules}
+                                        />
                                     )}
                                 </AuthFormField>
 

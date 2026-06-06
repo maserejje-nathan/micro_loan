@@ -101,8 +101,8 @@ export default function LoanProductsIndex({
                     <CardHeader className="border-b">
                         <CardTitle>All products</CardTitle>
                         <CardDescription>
-                            {total} loan {total === 1 ? 'product' : 'products'} ·
-                            amounts in {currency}
+                            {total} loan {total === 1 ? 'product' : 'products'}{' '}
+                            · amounts in {currency}
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="p-0">
@@ -205,7 +205,7 @@ export default function LoanProductsIndex({
                                                     )}
                                                 </p>
                                             </TableCell>
-                                            <TableCell className="hidden text-sm capitalize text-muted-foreground xl:table-cell">
+                                            <TableCell className="hidden text-sm text-muted-foreground capitalize xl:table-cell">
                                                 {formatEnumLabel(
                                                     product.repayment_frequency,
                                                 )}

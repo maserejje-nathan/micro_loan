@@ -1,7 +1,13 @@
 import { Form, Head } from '@inertiajs/react';
 import { FormField } from '@/components/form-field';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { NativeSelect } from '@/components/ui/native-select';
 import { Spinner } from '@/components/ui/spinner';
@@ -103,10 +109,7 @@ export default function TeamSettings({
                                             ))}
                                         </NativeSelect>
                                     </FormField>
-                                    <Button
-                                        type="submit"
-                                        disabled={processing}
-                                    >
+                                    <Button type="submit" disabled={processing}>
                                         {processing && <Spinner />}
                                         Send invitation
                                     </Button>

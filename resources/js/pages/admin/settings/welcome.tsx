@@ -75,13 +75,13 @@ export default function AdminWelcomeSettings({
                             />
 
                             <section className="space-y-4">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                     Banner slider
                                 </p>
                                 <p className="text-sm text-muted-foreground">
-                                    Images shown in the full-width carousel on the
-                                    public home page. Upload a banner or paste an
-                                    image URL / site path.
+                                    Images shown in the full-width carousel on
+                                    the public home page. Upload a banner or
+                                    paste an image URL / site path.
                                 </p>
                                 {(settings.banner_slides ?? []).map(
                                     (slide, index) => (
@@ -109,7 +109,7 @@ export default function AdminWelcomeSettings({
                             </section>
 
                             <section className="space-y-4">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                     Hero section
                                 </p>
                                 <div className="grid gap-4 lg:grid-cols-2">
@@ -193,7 +193,9 @@ export default function AdminWelcomeSettings({
                                         <Input
                                             id="hero_primary_cta"
                                             name="hero_primary_cta"
-                                            defaultValue={settings.hero_primary_cta}
+                                            defaultValue={
+                                                settings.hero_primary_cta
+                                            }
                                             className="h-10"
                                         />
                                     </FormField>
@@ -216,7 +218,7 @@ export default function AdminWelcomeSettings({
                             </section>
 
                             <section className="space-y-4">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                     Highlights
                                 </p>
                                 {settings.highlights.map((highlight, index) => (
@@ -237,7 +239,7 @@ export default function AdminWelcomeSettings({
                             </section>
 
                             <section className="space-y-4">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                     How it works (steps)
                                 </p>
                                 {settings.steps.map((step, index) => (
@@ -248,7 +250,9 @@ export default function AdminWelcomeSettings({
                                         <FormField
                                             id={`steps_${index}_title`}
                                             label={`Step ${index + 1} title`}
-                                            error={errors[`steps.${index}.title`]}
+                                            error={
+                                                errors[`steps.${index}.title`]
+                                            }
                                         >
                                             <Input
                                                 id={`steps_${index}_title`}
@@ -261,7 +265,9 @@ export default function AdminWelcomeSettings({
                                             id={`steps_${index}_description`}
                                             label="Description"
                                             error={
-                                                errors[`steps.${index}.description`]
+                                                errors[
+                                                    `steps.${index}.description`
+                                                ]
                                             }
                                             className="sm:col-span-2"
                                         >
@@ -277,7 +283,7 @@ export default function AdminWelcomeSettings({
                             </section>
 
                             <section className="space-y-4">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                     Platform features
                                 </p>
                                 {settings.features.map((feature, index) => (
@@ -288,7 +294,11 @@ export default function AdminWelcomeSettings({
                                         <FormField
                                             id={`features_${index}_title`}
                                             label={`Feature ${index + 1} title`}
-                                            error={errors[`features.${index}.title`]}
+                                            error={
+                                                errors[
+                                                    `features.${index}.title`
+                                                ]
+                                            }
                                         >
                                             <Input
                                                 id={`features_${index}_title`}
@@ -311,7 +321,9 @@ export default function AdminWelcomeSettings({
                                                 id={`features_${index}_description`}
                                                 name={`features[${index}][description]`}
                                                 rows={2}
-                                                defaultValue={feature.description}
+                                                defaultValue={
+                                                    feature.description
+                                                }
                                             />
                                         </FormField>
                                     </div>
@@ -319,7 +331,7 @@ export default function AdminWelcomeSettings({
                             </section>
 
                             <section className="space-y-4">
-                                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                     CTA & footer
                                 </p>
                                 <FormField
@@ -370,7 +382,9 @@ export default function AdminWelcomeSettings({
                                     <Input
                                         id="popular_plan_slug"
                                         name="popular_plan_slug"
-                                        defaultValue={settings.popular_plan_slug}
+                                        defaultValue={
+                                            settings.popular_plan_slug
+                                        }
                                         className="h-10"
                                     />
                                 </FormField>

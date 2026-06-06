@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use App\Contracts\MobileMoneyGateway;
 use App\Contracts\SmsGateway;
+use App\Models\SubscriptionPlan;
 use App\Services\MobileMoney\StubMobileMoneyGateway;
 use App\Services\MobileMoney\YoPaymentsGateway;
-use App\Models\SubscriptionPlan;
 use App\Services\OrganizationSetupService;
 use App\Services\PlatformSettingsService;
 use App\Services\Sms\AfricasTalkingSmsGateway;

@@ -41,7 +41,12 @@ export default function PortalApplicationCreate({
             <Head title="New application" />
             <PortalPage>
                 <div>
-                    <Button variant="ghost" size="sm" asChild className="-ml-2 mb-2">
+                    <Button
+                        variant="ghost"
+                        size="sm"
+                        asChild
+                        className="mb-2 -ml-2"
+                    >
                         <Link href="/portal/applications">
                             <ArrowLeft className="mr-2 size-4" />
                             Applications
@@ -62,11 +67,14 @@ export default function PortalApplicationCreate({
                         <div className="text-sm">
                             <p className="font-medium">How it works</p>
                             <ol className="mt-2 list-decimal space-y-1 pl-4 text-muted-foreground">
-                                <li>Choose a loan product and enter your request.</li>
+                                <li>
+                                    Choose a loan product and enter your
+                                    request.
+                                </li>
                                 <li>Save the application as a draft.</li>
                                 <li>
-                                    Open the application and submit it for review
-                                    when you are ready.
+                                    Open the application and submit it for
+                                    review when you are ready.
                                 </li>
                             </ol>
                         </div>
@@ -76,8 +84,8 @@ export default function PortalApplicationCreate({
                 {products.length === 0 ? (
                     <Card>
                         <CardContent className="p-6 text-sm text-muted-foreground">
-                            No loan products are available for online applications
-                            right now. Please contact your lender.
+                            No loan products are available for online
+                            applications right now. Please contact your lender.
                         </CardContent>
                     </Card>
                 ) : (
@@ -91,7 +99,8 @@ export default function PortalApplicationCreate({
                                             Application details
                                         </CardTitle>
                                         <CardDescription>
-                                            All fields marked with * are required
+                                            All fields marked with * are
+                                            required
                                         </CardDescription>
                                     </div>
                                 </div>
@@ -107,7 +116,9 @@ export default function PortalApplicationCreate({
                                             <PortalApplicationFormFields
                                                 errors={errors}
                                                 products={products}
-                                                collateralTypes={collateralTypes}
+                                                collateralTypes={
+                                                    collateralTypes
+                                                }
                                                 currency={currency}
                                             />
                                             <div className="flex flex-wrap gap-3 border-t pt-6">
@@ -157,8 +168,15 @@ export default function PortalApplicationCreate({
                                             {product.code}
                                         </p>
                                         <p className="mt-1 text-muted-foreground">
-                                            {formatMoney(product.min_amount, currency)}{' '}
-                                            – {formatMoney(product.max_amount, currency)}
+                                            {formatMoney(
+                                                product.min_amount,
+                                                currency,
+                                            )}{' '}
+                                            –{' '}
+                                            {formatMoney(
+                                                product.max_amount,
+                                                currency,
+                                            )}
                                         </p>
                                         <p className="text-muted-foreground">
                                             {product.term_min_days}–

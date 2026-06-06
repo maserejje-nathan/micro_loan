@@ -1,4 +1,4 @@
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import {
     Bell,
     CheckCheck,
@@ -20,7 +20,11 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { index as notificationsIndex, read, readAll } from '@/routes/notifications';
+import {
+    index as notificationsIndex,
+    read,
+    readAll,
+} from '@/routes/notifications';
 import type { Paginated } from '@/types/pagination';
 import { paginatorTotal } from '@/types/pagination';
 
@@ -71,7 +75,11 @@ export default function NotificationsIndex({
                         <Button
                             variant="outline"
                             onClick={() =>
-                                router.post(readAll.url(), {}, { preserveScroll: true })
+                                router.post(
+                                    readAll.url(),
+                                    {},
+                                    { preserveScroll: true },
+                                )
                             }
                         >
                             <CheckCheck className="mr-2 size-4" />
@@ -154,9 +162,7 @@ export default function NotificationsIndex({
                                                                     'font-semibold',
                                                             )}
                                                         >
-                                                            {
-                                                                notification.title
-                                                            }
+                                                            {notification.title}
                                                         </p>
                                                         <time className="shrink-0 text-xs text-muted-foreground">
                                                             {formatDateTime(
@@ -191,7 +197,5 @@ export default function NotificationsIndex({
 }
 
 NotificationsIndex.layout = {
-    breadcrumbs: [
-        { title: 'Notifications', href: notificationsIndex().url },
-    ],
+    breadcrumbs: [{ title: 'Notifications', href: notificationsIndex().url }],
 };

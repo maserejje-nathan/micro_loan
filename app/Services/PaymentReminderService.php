@@ -6,6 +6,7 @@ use App\Enums\NotificationChannel;
 use App\Enums\ScheduleInstallmentStatus;
 use App\Models\LoanSchedule;
 use App\Models\Organization;
+use App\Models\SmsNotification;
 use App\Support\CustomerNotificationChannels;
 use App\Support\OrganizationContext;
 
@@ -108,7 +109,7 @@ class PaymentReminderService
     }
 
     /**
-     * @param  array{sms: ?\App\Models\SmsNotification, email: bool, skipped: list<string>}  $result
+     * @param  array{sms: ?SmsNotification, email: bool, skipped: list<string>}  $result
      * @return list<string>
      */
     protected function describeChannelsSent(array $result): array

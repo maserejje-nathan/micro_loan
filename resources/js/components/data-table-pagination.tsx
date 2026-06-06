@@ -76,11 +76,7 @@ export function DataTablePagination<T>({
                             size="sm"
                             asChild
                         >
-                            <Link
-                                href={link.url}
-                                preserveScroll
-                                preserveState
-                            >
+                            <Link href={link.url} preserveScroll preserveState>
                                 {pageLabel(link.label)}
                             </Link>
                         </Button>

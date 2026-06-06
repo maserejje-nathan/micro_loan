@@ -4,10 +4,9 @@ import {
     formatStatusLabel,
     loanApplicationStatusTone,
     loanStatusTone,
-    scheduleInstallmentStatusTone
-    
+    scheduleInstallmentStatusTone,
 } from '@/lib/status-badge';
-import type {BadgeTone} from '@/lib/status-badge';
+import type { BadgeTone } from '@/lib/status-badge';
 import { cn } from '@/lib/utils';
 
 type EntityStatusBadgeProps = {
@@ -16,7 +15,10 @@ type EntityStatusBadgeProps = {
     className?: string;
 };
 
-function toneForType(type: EntityStatusBadgeProps['type'], status: string): BadgeTone {
+function toneForType(
+    type: EntityStatusBadgeProps['type'],
+    status: string,
+): BadgeTone {
     switch (type) {
         case 'customer':
             return customerStatusTone(status);
@@ -29,14 +31,15 @@ function toneForType(type: EntityStatusBadgeProps['type'], status: string): Badg
     }
 }
 
-export function EntityStatusBadge({ status, type, className }: EntityStatusBadgeProps) {
+export function EntityStatusBadge({
+    status,
+    type,
+    className,
+}: EntityStatusBadgeProps) {
     const variant = toneForType(type, status);
 
     return (
-        <Badge
-            variant={variant}
-            className={cn('capitalize', className)}
-        >
+        <Badge variant={variant} className={cn('capitalize', className)}>
             {formatStatusLabel(status)}
         </Badge>
     );

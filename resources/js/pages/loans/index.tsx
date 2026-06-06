@@ -1,10 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import {
-    Banknote,
-    Clock,
-    TrendingUp,
-    Wallet,
-} from 'lucide-react';
+import { Banknote, Clock, TrendingUp, Wallet } from 'lucide-react';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
@@ -145,13 +140,13 @@ export default function LoansIndex({
                                         <TableHead className="hidden md:table-cell">
                                             Product
                                         </TableHead>
-                                        <TableHead className="hidden lg:table-cell text-right">
+                                        <TableHead className="hidden text-right lg:table-cell">
                                             Term
                                         </TableHead>
                                         <TableHead className="text-right">
                                             Principal
                                         </TableHead>
-                                        <TableHead className="hidden sm:table-cell text-right">
+                                        <TableHead className="hidden text-right sm:table-cell">
                                             Outstanding
                                         </TableHead>
                                         <TableHead className="hidden xl:table-cell">
@@ -222,8 +217,7 @@ export default function LoansIndex({
                                                         currency,
                                                     )}
                                                 </span>
-                                                {loan.outstanding_balance >
-                                                    0 &&
+                                                {loan.outstanding_balance > 0 &&
                                                     loan.outstanding_balance <
                                                         loan.total_repayable && (
                                                         <p className="text-xs text-muted-foreground">

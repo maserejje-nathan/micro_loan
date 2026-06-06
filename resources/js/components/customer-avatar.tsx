@@ -78,7 +78,9 @@ export function CustomerAvatarPlaceholder({
                 className,
             )}
         >
-            <User className={cn('text-muted-foreground/50', iconSizeClass[size])} />
+            <User
+                className={cn('text-muted-foreground/50', iconSizeClass[size])}
+            />
         </div>
     );
 }

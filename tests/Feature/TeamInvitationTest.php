@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\OrganizationInvitation;
-use App\Models\Role;
 use App\Models\User;
 use App\Notifications\TeamInvitationNotification;
 use Illuminate\Support\Facades\Notification;

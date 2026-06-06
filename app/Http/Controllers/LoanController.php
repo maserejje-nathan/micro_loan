@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Enums\LoanStatus;
 use App\Enums\PaymentChannel;
+use App\Enums\ScheduleInstallmentStatus;
 use App\Http\Requests\DisburseLoanRequest;
 use App\Models\Loan;
-use App\Enums\ScheduleInstallmentStatus;
 use App\Models\LoanSchedule;
 use App\Services\LoanDisbursementService;
 use App\Services\PaymentReminderService;
@@ -15,9 +15,9 @@ use App\Support\MobileMoneyConfig;
 use App\Support\OrganizationContext;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use InvalidArgumentException;
 use Inertia\Inertia;
 use Inertia\Response;
+use InvalidArgumentException;
 
 class LoanController extends Controller
 {

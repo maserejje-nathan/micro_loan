@@ -42,7 +42,7 @@ function FormSection({
     return (
         <section className="space-y-4">
             <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                     {title}
                 </p>
                 {description && (
@@ -191,7 +191,9 @@ export function LoanProductFormFields({
                         <NativeSelect
                             id="interest_type"
                             name="interest_type"
-                            defaultValue={product?.interest_type ?? interestTypes[0]}
+                            defaultValue={
+                                product?.interest_type ?? interestTypes[0]
+                            }
                             required
                             aria-invalid={!!errors.interest_type}
                         >
@@ -307,11 +309,17 @@ export function LoanProductFormFields({
                     title="Availability"
                     description="Inactive products cannot be used for new applications."
                 >
-                    <FormField id="is_active" label="Status" error={errors.is_active}>
+                    <FormField
+                        id="is_active"
+                        label="Status"
+                        error={errors.is_active}
+                    >
                         <NativeSelect
                             id="is_active"
                             name="is_active"
-                            defaultValue={product?.is_active === false ? '0' : '1'}
+                            defaultValue={
+                                product?.is_active === false ? '0' : '1'
+                            }
                         >
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>

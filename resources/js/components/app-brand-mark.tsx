@@ -30,7 +30,11 @@ export function AppBrandMark({
 
     return (
         <AppLogoIcon
-            className={cn('fill-current text-white dark:text-black', iconClassName, className)}
+            className={cn(
+                'fill-current text-white dark:text-black',
+                iconClassName,
+                className,
+            )}
         />
     );
 }

@@ -1,11 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import {
-    ClipboardList,
-    LayoutGrid,
-    Plus,
-    User,
-    Wallet,
-} from 'lucide-react';
+import { ClipboardList, LayoutGrid, Plus, User, Wallet } from 'lucide-react';
 import { NavMain } from '@/components/nav-main';
 import PortalLogo from '@/components/portal/portal-logo';
 import { PortalNavUser } from '@/components/portal/portal-nav-user';

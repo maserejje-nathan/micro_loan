@@ -65,7 +65,7 @@ function FormSection({
     return (
         <section className="space-y-4">
             <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                     {title}
                 </p>
                 {description && (
@@ -128,7 +128,7 @@ export function CustomerFormFields({
         <div className="space-y-8">
             {mode === 'edit' && customer?.reference_number && (
                 <div className="rounded-lg border border-border bg-muted px-4 py-3">
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         Customer reference
                     </p>
                     <p className="mt-1 font-mono text-sm font-medium">
@@ -196,11 +196,7 @@ export function CustomerFormFields({
                             className="h-10"
                         />
                     </FormField>
-                    <FormField
-                        id="gender"
-                        label="Gender"
-                        error={errors.gender}
-                    >
+                    <FormField id="gender" label="Gender" error={errors.gender}>
                         <EnumSelect
                             id="gender"
                             name="gender"
@@ -327,9 +323,7 @@ export function CustomerFormFields({
                 </div>
                 <PaymentReminderChannelsField
                     channels={notificationChannels}
-                    selected={
-                        customer?.payment_reminder_channels ?? ['sms']
-                    }
+                    selected={customer?.payment_reminder_channels ?? ['sms']}
                     errors={errors}
                 />
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -487,7 +481,9 @@ export function CustomerFormFields({
                         <Input
                             id="next_of_kin_relationship"
                             name="next_of_kin_relationship"
-                            defaultValue={customer?.next_of_kin_relationship ?? ''}
+                            defaultValue={
+                                customer?.next_of_kin_relationship ?? ''
+                            }
                             placeholder="Spouse, parent, sibling"
                             aria-invalid={!!errors.next_of_kin_relationship}
                             className="h-10"

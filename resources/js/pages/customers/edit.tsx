@@ -1,12 +1,9 @@
 import { Form, Head } from '@inertiajs/react';
-import {
-    CustomerFormFields
-    
-} from '@/components/customers/customer-form-fields';
-import type {CustomerFormValues} from '@/components/customers/customer-form-fields';
+import { CustomerFormFields } from '@/components/customers/customer-form-fields';
+import type { CustomerFormValues } from '@/components/customers/customer-form-fields';
 import { FormActions } from '@/components/form-actions';
 import { FormPageShell } from '@/components/form-page-shell';
-import { index, show, update } from '@/routes/customers';
+import { show, update } from '@/routes/customers';
 
 type StatusOption = {
     value: string;

@@ -39,7 +39,7 @@ export function SettingsLinkCard({
                 {status && <IntegrationStatusBadge status={status} />}
             </div>
             <div className="mt-4 flex flex-1 flex-col gap-1">
-                <p className="font-medium leading-snug">{title}</p>
+                <p className="leading-snug font-medium">{title}</p>
                 <p className="text-sm text-muted-foreground">{description}</p>
             </div>
             {meta && (

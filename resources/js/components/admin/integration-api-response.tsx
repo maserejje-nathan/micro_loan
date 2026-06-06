@@ -5,7 +5,13 @@ import { cn } from '@/lib/utils';
 type AdminFlash = {
     success?: string;
     error?: string;
-    integration_response?: Record<string, unknown> | unknown[] | string | number | boolean | null;
+    integration_response?:
+        | Record<string, unknown>
+        | unknown[]
+        | string
+        | number
+        | boolean
+        | null;
 };
 
 export function IntegrationApiResponse({
@@ -48,7 +54,7 @@ export function IntegrationApiResponse({
                 </div>
             )}
             <div>
-                <p className="mb-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <p className="mb-1.5 text-xs font-medium tracking-wide text-muted-foreground uppercase">
                     {label}
                 </p>
                 <pre className="max-h-64 overflow-auto rounded-md border bg-background p-3 font-mono text-xs leading-relaxed">

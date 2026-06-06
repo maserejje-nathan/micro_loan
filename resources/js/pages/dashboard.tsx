@@ -10,11 +10,8 @@ import {
     Wallet,
 } from 'lucide-react';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
-import {
-    LoanCalculatorWidget
-    
-} from '@/components/loan-calculator/loan-calculator-widget';
-import type {LoanCalculatorConfig} from '@/components/loan-calculator/loan-calculator-widget';
+import { LoanCalculatorWidget } from '@/components/loan-calculator/loan-calculator-widget';
+import type { LoanCalculatorConfig } from '@/components/loan-calculator/loan-calculator-widget';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import {
@@ -72,8 +69,7 @@ export default function Dashboard({
     };
     const [copiedCode, copyLenderCode] = useClipboard();
     const lenderCode = auth?.organization?.slug;
-    const showLenderCode =
-        lenderCode && tenancy?.subdomain_enabled !== true;
+    const showLenderCode = lenderCode && tenancy?.subdomain_enabled !== true;
 
     return (
         <>
@@ -122,8 +118,6 @@ export default function Dashboard({
                         </div>
                     )}
                 </div>
-
-               
 
                 <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
                     <StatCard

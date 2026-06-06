@@ -6,6 +6,7 @@ use App\Contracts\SmsGateway;
 use App\Enums\SmsStatus;
 use App\Models\Organization;
 use App\Models\SmsNotification;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
@@ -357,7 +358,7 @@ class IntegrationHealthService
     /**
      * @return array{http_status: int, body: array<string, mixed>|string|null}
      */
-    protected function httpResponsePayload(\Illuminate\Http\Client\Response $response): array
+    protected function httpResponsePayload(Response $response): array
     {
         $json = $response->json();
 

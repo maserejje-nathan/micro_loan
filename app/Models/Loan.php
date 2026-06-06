@@ -6,6 +6,7 @@ use App\Enums\InterestType;
 use App\Enums\LoanStatus;
 use App\Enums\RepaymentFrequency;
 use App\Models\Concerns\BelongsToOrganization;
+use Database\Factories\LoanFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Loan extends Model
 {
-    /** @use HasFactory<\Database\Factories\LoanFactory> */
+    /** @use HasFactory<LoanFactory> */
     use BelongsToOrganization, HasFactory;
 
     /**

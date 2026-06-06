@@ -146,7 +146,7 @@ export default function PortalLoanShow({
                     <CardContent className="flex flex-col gap-5 p-4 sm:gap-6 sm:p-6 lg:flex-row lg:items-start lg:justify-between">
                         <div className="min-w-0 space-y-3">
                             <div className="flex flex-wrap items-center gap-2">
-                                <h1 className="text-balance text-xl font-semibold tracking-tight sm:text-2xl">
+                                <h1 className="text-xl font-semibold tracking-tight text-balance sm:text-2xl">
                                     {loan.reference_number}
                                 </h1>
                                 <EntityStatusBadge
@@ -167,7 +167,8 @@ export default function PortalLoanShow({
                                 </span>
                                 {loan.disbursed_at && (
                                     <span>
-                                        Disbursed {formatDate(loan.disbursed_at)}
+                                        Disbursed{' '}
+                                        {formatDate(loan.disbursed_at)}
                                     </span>
                                 )}
                             </div>
@@ -221,7 +222,9 @@ export default function PortalLoanShow({
                 {loan.repayment_progress > 0 && loan.status === 'active' && (
                     <div className="space-y-2 rounded-xl border bg-card p-4">
                         <div className="flex justify-between text-sm">
-                            <span className="font-medium">Repayment progress</span>
+                            <span className="font-medium">
+                                Repayment progress
+                            </span>
                             <span className="text-muted-foreground">
                                 {loan.repayment_progress}% complete
                             </span>
@@ -244,7 +247,9 @@ export default function PortalLoanShow({
                 <div className="grid gap-6 lg:grid-cols-2">
                     <Card>
                         <CardHeader className="border-b">
-                            <CardTitle className="text-base">Loan terms</CardTitle>
+                            <CardTitle className="text-base">
+                                Loan terms
+                            </CardTitle>
                             <CardDescription>
                                 Product and schedule configuration
                             </CardDescription>
@@ -296,7 +301,9 @@ export default function PortalLoanShow({
                         </CardHeader>
                         <CardContent className="flex flex-wrap gap-6 pt-6">
                             <div>
-                                <p className="text-sm text-muted-foreground">Paid</p>
+                                <p className="text-sm text-muted-foreground">
+                                    Paid
+                                </p>
                                 <p className="text-2xl font-semibold">
                                     {scheduleSummary.paid}
                                 </p>
@@ -320,7 +327,8 @@ export default function PortalLoanShow({
                                     Remaining
                                 </p>
                                 <p className="text-2xl font-semibold">
-                                    {scheduleSummary.total - scheduleSummary.paid}
+                                    {scheduleSummary.total -
+                                        scheduleSummary.paid}
                                 </p>
                             </div>
                             {nextDue && (
@@ -427,7 +435,9 @@ export default function PortalLoanShow({
                                 </CardTitle>
                                 <CardDescription>
                                     {paginatorTotal(repayments)} payment
-                                    {paginatorTotal(repayments) === 1 ? '' : 's'}{' '}
+                                    {paginatorTotal(repayments) === 1
+                                        ? ''
+                                        : 's'}{' '}
                                     recorded
                                 </CardDescription>
                             </div>
@@ -467,7 +477,7 @@ export default function PortalLoanShow({
                                                     channel={row.channel}
                                                 />
                                             </TableCell>
-                                            <TableCell className="text-right tabular-nums font-medium">
+                                            <TableCell className="text-right font-medium tabular-nums">
                                                 {formatMoney(
                                                     row.amount,
                                                     currency,

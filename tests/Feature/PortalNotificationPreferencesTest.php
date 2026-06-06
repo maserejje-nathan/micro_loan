@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Customer;
+use App\Models\User;
 use App\Services\CustomerPortalService;
 use App\Support\OrganizationPortalSettings;
 use Tests\Support\ActsAsOrganization;
@@ -8,7 +9,7 @@ use Tests\Support\ActsAsOrganization;
 uses(ActsAsOrganization::class);
 
 beforeEach(function () {
-    $this->user = \App\Models\User::factory()->create();
+    $this->user = User::factory()->create();
     $this->organization = $this->setupOrganization($this->user);
 
     OrganizationPortalSettings::merge($this->organization, [

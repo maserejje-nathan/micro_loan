@@ -34,8 +34,14 @@ export function WelcomeBannerSlider({
         [count],
     );
 
-    const goNext = useCallback(() => goTo(activeIndex + 1), [activeIndex, goTo]);
-    const goPrev = useCallback(() => goTo(activeIndex - 1), [activeIndex, goTo]);
+    const goNext = useCallback(
+        () => goTo(activeIndex + 1),
+        [activeIndex, goTo],
+    );
+    const goPrev = useCallback(
+        () => goTo(activeIndex - 1),
+        [activeIndex, goTo],
+    );
 
     useEffect(() => {
         if (count <= 1) {
@@ -63,32 +69,32 @@ export function WelcomeBannerSlider({
             aria-label="Welcome highlights"
         >
             <div className="relative w-full overflow-hidden">
-                <div className="relative aspect-[21/7] w-full min-h-[180px] sm:min-h-[220px] md:min-h-[280px] lg:min-h-[320px]">
-                        {slides.map((slide, index) => (
-                            <div
-                                key={`${slide.image_url}-${index}`}
-                                className={cn(
-                                    'absolute inset-0 transition-opacity duration-700 ease-in-out',
-                                    index === activeIndex
-                                        ? 'opacity-100'
-                                        : 'pointer-events-none opacity-0',
-                                )}
-                                aria-hidden={index !== activeIndex}
-                            >
-                                <img
-                                    src={slide.image_url}
-                                    alt={slide.alt}
-                                    className="size-full object-cover"
-                                    loading={index === 0 ? 'eager' : 'lazy'}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
-                                {slide.caption && (
-                                    <p className="absolute bottom-4 left-4 right-4 max-w-xl text-sm font-medium text-foreground sm:bottom-6 sm:left-8 sm:text-base md:text-lg">
-                                        {slide.caption}
-                                    </p>
-                                )}
-                            </div>
-                        ))}
+                <div className="relative aspect-[21/7] min-h-[180px] w-full sm:min-h-[220px] md:min-h-[280px] lg:min-h-[320px]">
+                    {slides.map((slide, index) => (
+                        <div
+                            key={`${slide.image_url}-${index}`}
+                            className={cn(
+                                'absolute inset-0 transition-opacity duration-700 ease-in-out',
+                                index === activeIndex
+                                    ? 'opacity-100'
+                                    : 'pointer-events-none opacity-0',
+                            )}
+                            aria-hidden={index !== activeIndex}
+                        >
+                            <img
+                                src={slide.image_url}
+                                alt={slide.alt}
+                                className="size-full object-cover"
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
+                            {slide.caption && (
+                                <p className="absolute right-4 bottom-4 left-4 max-w-xl text-sm font-medium text-foreground sm:bottom-6 sm:left-8 sm:text-base md:text-lg">
+                                    {slide.caption}
+                                </p>
+                            )}
+                        </div>
+                    ))}
 
                     {count > 1 && (
                         <>
@@ -96,7 +102,7 @@ export function WelcomeBannerSlider({
                                 type="button"
                                 variant="secondary"
                                 size="icon"
-                                className="absolute left-4 top-1/2 z-10 size-9 -translate-y-1/2 rounded-full bg-background/80 shadow-md backdrop-blur-sm hover:bg-background sm:left-6"
+                                className="absolute top-1/2 left-4 z-10 size-9 -translate-y-1/2 rounded-full bg-background/80 shadow-md backdrop-blur-sm hover:bg-background sm:left-6"
                                 onClick={goPrev}
                                 aria-label="Previous slide"
                             >
@@ -106,7 +112,7 @@ export function WelcomeBannerSlider({
                                 type="button"
                                 variant="secondary"
                                 size="icon"
-                                className="absolute right-4 top-1/2 z-10 size-9 -translate-y-1/2 rounded-full bg-background/80 shadow-md backdrop-blur-sm hover:bg-background sm:right-6"
+                                className="absolute top-1/2 right-4 z-10 size-9 -translate-y-1/2 rounded-full bg-background/80 shadow-md backdrop-blur-sm hover:bg-background sm:right-6"
                                 onClick={goNext}
                                 aria-label="Next slide"
                             >

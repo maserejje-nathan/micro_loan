@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\Portal\PortalAuthController;
-use App\Http\Controllers\Portal\PortalRegistrationController;
 use App\Http\Controllers\Portal\PortalDashboardController;
 use App\Http\Controllers\Portal\PortalLoanApplicationController;
 use App\Http\Controllers\Portal\PortalLoanController;
 use App\Http\Controllers\Portal\PortalProfileController;
+use App\Http\Controllers\Portal\PortalRegistrationController;
 use App\Http\Middleware\EnsureOrganizationPortalEnabled;
 use App\Http\Middleware\RedirectIfPortalCustomer;
 use App\Http\Middleware\SetPortalOrganization;

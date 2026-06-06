@@ -8,11 +8,8 @@ import {
     Wallet,
 } from 'lucide-react';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
-import {
-    LoanApplicationCollateralList
-    
-} from '@/components/loan-applications/loan-application-collateral-list';
-import type {CollateralItem} from '@/components/loan-applications/loan-application-collateral-list';
+import { LoanApplicationCollateralList } from '@/components/loan-applications/loan-application-collateral-list';
+import type { CollateralItem } from '@/components/loan-applications/loan-application-collateral-list';
 import { PortalPage } from '@/components/portal/portal-page';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
@@ -123,7 +120,10 @@ function ApplicationProgress({ status }: { status: string }) {
                 const isCurrent = index === current;
 
                 return (
-                    <div key={step.key} className="flex flex-col items-center gap-2">
+                    <div
+                        key={step.key}
+                        className="flex flex-col items-center gap-2"
+                    >
                         <div
                             className={cn(
                                 'flex size-8 items-center justify-center rounded-full border-2 text-xs font-medium',
@@ -145,7 +145,8 @@ function ApplicationProgress({ status }: { status: string }) {
                                     'border-emerald-600 bg-emerald-600 text-white',
                             )}
                         >
-                            {isComplete || (isDecision && status === 'approved') ? (
+                            {isComplete ||
+                            (isDecision && status === 'approved') ? (
                                 <CheckCircle2 className="size-4" />
                             ) : (
                                 index + 1
@@ -197,7 +198,7 @@ export default function PortalApplicationShow({
                     <CardContent className="flex flex-col gap-5 p-4 sm:gap-6 sm:p-6 lg:flex-row lg:items-start lg:justify-between">
                         <div className="min-w-0 space-y-3">
                             <div className="flex flex-wrap items-center gap-2">
-                                <h1 className="text-balance text-xl font-semibold tracking-tight sm:text-2xl">
+                                <h1 className="text-xl font-semibold tracking-tight text-balance sm:text-2xl">
                                     {application.reference_number}
                                 </h1>
                                 <EntityStatusBadge
@@ -223,7 +224,10 @@ export default function PortalApplicationShow({
                                     method="post"
                                 >
                                     {({ processing }) => (
-                                        <Button type="submit" disabled={processing}>
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
                                             <Send className="mr-2 size-4" />
                                             Submit for review
                                         </Button>
@@ -289,16 +293,17 @@ export default function PortalApplicationShow({
                     />
                 </div>
 
-                {(!amountInRange || !termInRange) && application.status === 'draft' && (
-                    <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-950 dark:text-amber-100">
-                        Your request is outside this product&apos;s allowed range
-                        (amount{' '}
-                        {formatMoney(product.min_amount, currency)}–
-                        {formatMoney(product.max_amount, currency)}, term{' '}
-                        {product.term_min_days}–{product.term_max_days} days).
-                        Your lender may adjust it during review.
-                    </div>
-                )}
+                {(!amountInRange || !termInRange) &&
+                    application.status === 'draft' && (
+                        <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-950 dark:text-amber-100">
+                            Your request is outside this product&apos;s allowed
+                            range (amount{' '}
+                            {formatMoney(product.min_amount, currency)}–
+                            {formatMoney(product.max_amount, currency)}, term{' '}
+                            {product.term_min_days}–{product.term_max_days}{' '}
+                            days). Your lender may adjust it during review.
+                        </div>
+                    )}
 
                 <div className="grid gap-6 lg:grid-cols-2">
                     <Card>
@@ -349,7 +354,9 @@ export default function PortalApplicationShow({
                             {application.reviewed_at ? (
                                 <DetailItem
                                     label="Reviewed at"
-                                    value={formatDateTime(application.reviewed_at)}
+                                    value={formatDateTime(
+                                        application.reviewed_at,
+                                    )}
                                 />
                             ) : (
                                 <p className="text-sm text-muted-foreground">
@@ -387,8 +394,15 @@ export default function PortalApplicationShow({
                     </CardContent>
                 </Card>
 
-                <Button variant="ghost" size="sm" asChild className="-ml-2 w-fit">
-                    <Link href="/portal/applications">← Back to applications</Link>
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    asChild
+                    className="-ml-2 w-fit"
+                >
+                    <Link href="/portal/applications">
+                        ← Back to applications
+                    </Link>
                 </Button>
             </PortalPage>
         </>

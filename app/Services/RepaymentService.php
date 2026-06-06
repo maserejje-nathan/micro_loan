@@ -8,7 +8,6 @@ use App\Enums\MobileMoneyStatus;
 use App\Enums\PaymentChannel;
 use App\Enums\ScheduleInstallmentStatus;
 use App\Models\Loan;
-use App\Models\LoanSchedule;
 use App\Models\MobileMoneyTransaction;
 use App\Models\Repayment;
 use App\Models\User;

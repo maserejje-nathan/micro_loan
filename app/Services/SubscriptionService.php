@@ -2,15 +2,13 @@
 
 namespace App\Services;
 
-use App\Enums\InvoiceStatus;
 use App\Enums\SubscriptionStatus;
-use App\Models\Invoice;
+use App\Models\Loan;
 use App\Models\Organization;
 use App\Models\Subscription;
 use App\Models\SubscriptionPlan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use InvalidArgumentException;
 
 class SubscriptionService
 {
@@ -126,7 +124,7 @@ class SubscriptionService
         return [
             'users' => $organization->users()->count(),
             'customers' => $organization->customers()->withoutGlobalScopes()->where('organization_id', $organization->id)->count(),
-            'active_loans' => \App\Models\Loan::query()
+            'active_loans' => Loan::query()
                 ->withoutGlobalScopes()
                 ->where('organization_id', $organization->id)
                 ->where('status', 'active')

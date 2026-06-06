@@ -9,15 +9,8 @@ import {
     User,
     Users,
 } from 'lucide-react';
-import {
-    useCallback,
-    useEffect,
-    useMemo,
-    useState
-    
-    
-} from 'react';
-import type {ComponentType, MouseEvent} from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import type { ComponentType, MouseEvent } from 'react';
 import { CustomerIdDocumentFields } from '@/components/customers/customer-id-document-fields';
 import { FormField } from '@/components/form-field';
 import PasswordInput from '@/components/password-input';
@@ -197,7 +190,10 @@ function validateProfileStep(form: HTMLFormElement): boolean {
     return true;
 }
 
-function hasIdFile(form: HTMLFormElement, name: 'id_front' | 'id_back'): boolean {
+function hasIdFile(
+    form: HTMLFormElement,
+    name: 'id_front' | 'id_back',
+): boolean {
     const field = form.elements.namedItem(name);
 
     return (
@@ -216,7 +212,10 @@ function buildReviewItems(
     const value = (name: string) => {
         const field = form.elements.namedItem(name);
 
-        if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
+        if (
+            field instanceof HTMLInputElement ||
+            field instanceof HTMLTextAreaElement
+        ) {
             return field.value.trim();
         }
 
@@ -276,7 +275,10 @@ function buildReviewItems(
     if (value('occupation') || value('employment_status')) {
         items.push({
             label: 'Employment',
-            value: [value('occupation'), labelFor('employment_status', employmentStatuses)]
+            value: [
+                value('occupation'),
+                labelFor('employment_status', employmentStatuses),
+            ]
                 .filter(Boolean)
                 .join(' · '),
         });
@@ -323,36 +325,32 @@ export function PortalRegistrationForm({
     processing,
 }: PortalRegistrationFormProps) {
     const [step, setStep] = useState(0);
-    const [reviewItems, setReviewItems] = useState<{ label: string; value: string }[]>(
-        [],
-    );
 
     const steps = useMemo(() => BASE_STEPS, []);
-    const isLastStep = step === steps.length - 1;
 
-    useEffect(() => {
-        if (Object.keys(errors).length === 0) {
-            return;
+    const activeStep = useMemo(() => {
+        if (Object.keys(errors).length > 0) {
+            return findStepForErrors(errors, steps);
         }
 
-        setStep(findStepForErrors(errors, steps));
-    }, [errors, steps]);
+        return step;
+    }, [errors, steps, step]);
 
-    useEffect(() => {
-        if (steps[step]?.id !== 'review') {
-            return;
+    const reviewItems = useMemo(() => {
+        if (steps[activeStep]?.id !== 'review') {
+            return [];
         }
 
         const form = getPortalRegisterForm();
 
         if (!form) {
-            return;
+            return [];
         }
 
-        setReviewItems(
-            buildReviewItems(form, idTypes, employmentStatuses, currency),
-        );
-    }, [step, steps, idTypes, employmentStatuses, currency]);
+        return buildReviewItems(form, idTypes, employmentStatuses, currency);
+    }, [activeStep, steps, idTypes, employmentStatuses, currency]);
+
+    const isLastStep = activeStep === steps.length - 1;
 
     const goNext = useCallback(() => {
         const form = getPortalRegisterForm();
@@ -362,34 +360,19 @@ export function PortalRegistrationForm({
         }
 
         if (
-            steps[step].id === 'account' &&
+            steps[activeStep].id === 'account' &&
             !validateAccountStep(form, requiresOrganizationSlug)
         ) {
             return;
         }
 
-        if (steps[step].id === 'profile' && !validateProfileStep(form)) {
+        if (steps[activeStep].id === 'profile' && !validateProfileStep(form)) {
             return;
         }
 
-        const next = Math.min(step + 1, steps.length - 1);
-
-        if (steps[next]?.id === 'review') {
-            setReviewItems(
-                buildReviewItems(form, idTypes, employmentStatuses, currency),
-            );
-        }
-
-        setStep(next);
+        setStep(Math.min(activeStep + 1, steps.length - 1));
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, [
-        step,
-        steps,
-        requiresOrganizationSlug,
-        idTypes,
-        employmentStatuses,
-        currency,
-    ]);
+    }, [activeStep, steps, requiresOrganizationSlug]);
 
     const goBack = () => {
         setStep((s) => Math.max(s - 1, 0));
@@ -432,8 +415,8 @@ export function PortalRegistrationForm({
                 <ol className="flex min-w-[18rem] items-center gap-0.5 sm:min-w-0 sm:gap-2">
                     {steps.map((s, index) => {
                         const Icon = s.icon;
-                        const isComplete = index < step;
-                        const isCurrent = index === step;
+                        const isComplete = index < activeStep;
+                        const isCurrent = index === activeStep;
 
                         return (
                             <li
@@ -467,7 +450,7 @@ export function PortalRegistrationForm({
                                     </div>
                                     <span
                                         className={cn(
-                                            'max-w-full truncate text-[10px] font-medium leading-tight sm:text-xs',
+                                            'max-w-full truncate text-[10px] leading-tight font-medium sm:text-xs',
                                             isCurrent
                                                 ? 'text-foreground'
                                                 : 'text-muted-foreground',
@@ -480,7 +463,7 @@ export function PortalRegistrationForm({
                                     <div
                                         className={cn(
                                             'h-0.5 min-w-2 flex-1 shrink rounded-full',
-                                            index < step
+                                            index < activeStep
                                                 ? 'bg-primary'
                                                 : 'bg-muted',
                                         )}
@@ -492,19 +475,19 @@ export function PortalRegistrationForm({
                     })}
                 </ol>
                 <p className="mt-4 text-center text-sm text-muted-foreground">
-                    Step {step + 1} of {steps.length}:{' '}
+                    Step {activeStep + 1} of {steps.length}:{' '}
                     <span className="font-medium text-foreground">
-                        {steps[step].title}
+                        {steps[activeStep].title}
                     </span>
                 </p>
             </nav>
 
             <div className="rounded-lg border border-border bg-muted px-4 py-3">
-                <p className="text-sm font-medium">{steps[step].title}</p>
+                <p className="text-sm font-medium">{steps[activeStep].title}</p>
                 <p className="text-sm text-muted-foreground">
-                    {steps[step].description}
+                    {steps[activeStep].description}
                 </p>
-                {steps[step].optional && (
+                {steps[activeStep].optional && (
                     <Badge variant="secondary" className="mt-2 text-xs">
                         Optional — you can skip and complete later
                     </Badge>
@@ -512,7 +495,10 @@ export function PortalRegistrationForm({
             </div>
 
             <div className="space-y-6">
-                <div className={cn(step !== 0 && 'hidden')} aria-hidden={step !== 0}>
+                <div
+                    className={cn(activeStep !== 0 && 'hidden')}
+                    aria-hidden={activeStep !== 0}
+                >
                     <div className="space-y-4">
                         {requiresOrganizationSlug && (
                             <FormField
@@ -537,7 +523,9 @@ export function PortalRegistrationForm({
                         {organizationName && !requiresOrganizationSlug && (
                             <p className="rounded-md border border-primary/20 bg-secondary px-3 py-2 text-sm">
                                 Registering with{' '}
-                                <span className="font-medium">{organizationName}</span>
+                                <span className="font-medium">
+                                    {organizationName}
+                                </span>
                             </p>
                         )}
 
@@ -641,10 +629,14 @@ export function PortalRegistrationForm({
                     </div>
                 </div>
 
-                <div className={cn(step !== 1 && 'hidden')} aria-hidden={step !== 1}>
+                <div
+                    className={cn(activeStep !== 1 && 'hidden')}
+                    aria-hidden={activeStep !== 1}
+                >
                     <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
                         <Shield className="size-4 shrink-0 text-primary" />
-                        Helps your lender verify your identity for loan applications.
+                        Helps your lender verify your identity for loan
+                        applications.
                     </div>
                     <div className="grid gap-4 sm:grid-cols-2">
                         <FormField
@@ -658,7 +650,11 @@ export function PortalRegistrationForm({
                                 className="h-10"
                             />
                         </FormField>
-                        <FormField id="id_type" label="ID type" error={errors.id_type}>
+                        <FormField
+                            id="id_type"
+                            label="ID type"
+                            error={errors.id_type}
+                        >
                             <NativeSelect
                                 id="id_type"
                                 name="id_type"
@@ -680,7 +676,11 @@ export function PortalRegistrationForm({
                                 className="h-10"
                             />
                         </FormField>
-                        <FormField id="gender" label="Gender" error={errors.gender}>
+                        <FormField
+                            id="gender"
+                            label="Gender"
+                            error={errors.gender}
+                        >
                             <NativeSelect
                                 id="gender"
                                 name="gender"
@@ -733,7 +733,11 @@ export function PortalRegistrationForm({
                                 placeholder="Plot number, street, parish"
                             />
                         </FormField>
-                        <FormField id="city" label="City / town" error={errors.city}>
+                        <FormField
+                            id="city"
+                            label="City / town"
+                            error={errors.city}
+                        >
                             <Input
                                 id="city"
                                 name="city"
@@ -741,7 +745,11 @@ export function PortalRegistrationForm({
                                 className="h-10"
                             />
                         </FormField>
-                        <FormField id="district" label="District" error={errors.district}>
+                        <FormField
+                            id="district"
+                            label="District"
+                            error={errors.district}
+                        >
                             <Input
                                 id="district"
                                 name="district"
@@ -751,7 +759,10 @@ export function PortalRegistrationForm({
                     </div>
                 </div>
 
-                <div className={cn(step !== 2 && 'hidden')} aria-hidden={step !== 2}>
+                <div
+                    className={cn(activeStep !== 2 && 'hidden')}
+                    aria-hidden={activeStep !== 2}
+                >
                     <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
                         <Briefcase className="size-4 shrink-0 text-primary" />
                         Used to assess affordability when you apply for a loan.
@@ -861,7 +872,10 @@ export function PortalRegistrationForm({
                     </div>
                 </div>
 
-                <div className={cn(step !== 3 && 'hidden')} aria-hidden={step !== 3}>
+                <div
+                    className={cn(activeStep !== 3 && 'hidden')}
+                    aria-hidden={activeStep !== 3}
+                >
                     <ReviewPanel
                         items={reviewItems}
                         organizationName={organizationName}
@@ -876,10 +890,10 @@ export function PortalRegistrationForm({
                     variant="outline"
                     className={cn(
                         'w-full sm:w-auto',
-                        step === 0 && 'hidden sm:invisible',
+                        activeStep === 0 && 'hidden sm:invisible',
                     )}
                     onClick={goBack}
-                    disabled={processing || step === 0}
+                    disabled={processing || activeStep === 0}
                 >
                     <ChevronLeft className="mr-1 size-4" />
                     Back
@@ -922,19 +936,21 @@ function ReviewPanel({
     return (
         <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
-                Check your details before submitting. You can update your profile
-                anytime after signing in.
+                Check your details before submitting. You can update your
+                profile anytime after signing in.
             </p>
 
             {organizationName && (
                 <p className="rounded-md border bg-muted px-3 py-2 text-sm">
-                    Lender: <span className="font-medium">{organizationName}</span>
+                    Lender:{' '}
+                    <span className="font-medium">{organizationName}</span>
                 </p>
             )}
 
             {items.length === 0 ? (
                 <p className="text-sm text-muted-foreground italic">
-                    Go back to complete previous steps, then return here to review.
+                    Go back to complete previous steps, then return here to
+                    review.
                 </p>
             ) : (
                 <dl className="grid gap-2 sm:grid-cols-2">

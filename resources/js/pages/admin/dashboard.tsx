@@ -8,11 +8,8 @@ import {
     Users,
 } from 'lucide-react';
 import { EmptyState } from '@/components/empty-state';
-import {
-    LoanCalculatorWidget
-    
-} from '@/components/loan-calculator/loan-calculator-widget';
-import type {LoanCalculatorConfig} from '@/components/loan-calculator/loan-calculator-widget';
+import { LoanCalculatorWidget } from '@/components/loan-calculator/loan-calculator-widget';
+import type { LoanCalculatorConfig } from '@/components/loan-calculator/loan-calculator-widget';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import {
@@ -33,7 +30,10 @@ import {
 import { formatMoney } from '@/lib/format-money';
 import { dashboard } from '@/routes/admin';
 import { index as invoicesIndex } from '@/routes/admin/invoices';
-import { index as organizationsIndex, show as organizationShow } from '@/routes/admin/organizations';
+import {
+    index as organizationsIndex,
+    show as organizationShow,
+} from '@/routes/admin/organizations';
 import { index as plansIndex } from '@/routes/admin/plans';
 import { index as subscriptionsIndex } from '@/routes/admin/subscriptions';
 
@@ -83,8 +83,6 @@ export default function AdminDashboard({
                         System-wide metrics and recent tenant activity
                     </p>
                 </div>
-
-             
 
                 <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                     <StatCard
@@ -173,7 +171,7 @@ export default function AdminDashboard({
                                         <TableHead className="text-right">
                                             Users
                                         </TableHead>
-                                        <TableHead className="hidden md:table-cell text-right">
+                                        <TableHead className="hidden text-right md:table-cell">
                                             Created
                                         </TableHead>
                                         <TableHead className="text-right">

@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Services\OrganizationSetupService;
 use App\Services\TeamInvitationService;
 use App\Support\OrganizationContext;
+use App\Support\Tenancy;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -46,7 +47,7 @@ class TeamInvitationController extends Controller
                 ])
                 : [],
             'tenantUrl' => $organization?->subdomain
-                ? \App\Support\Tenancy::organizationUrl($organization)
+                ? Tenancy::organizationUrl($organization)
                 : null,
         ]);
     }

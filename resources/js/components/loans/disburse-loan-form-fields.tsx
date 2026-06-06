@@ -4,10 +4,9 @@ import { Input } from '@/components/ui/input';
 import { NativeSelect } from '@/components/ui/native-select';
 import {
     MOBILE_MONEY_CHANNEL,
-    mobileMoneyChannelLabel
-    
+    mobileMoneyChannelLabel,
 } from '@/lib/mobile-money-channel-label';
-import type {MobileMoneySummary} from '@/lib/mobile-money-channel-label';
+import type { MobileMoneySummary } from '@/lib/mobile-money-channel-label';
 import { cn } from '@/lib/utils';
 
 export type { MobileMoneySummary };
@@ -124,10 +123,7 @@ export function DisburseLoanFormFields({
                         onChange={(event) => setChannel(event.target.value)}
                     >
                         {paymentChannels.map((paymentChannel) => (
-                            <option
-                                key={paymentChannel}
-                                value={paymentChannel}
-                            >
+                            <option key={paymentChannel} value={paymentChannel}>
                                 {mobileMoneyChannelLabel(
                                     paymentChannel,
                                     mobileMoney,
@@ -179,8 +175,8 @@ export function DisburseLoanFormFields({
             </div>
             {mmBlocked && (
                 <p className="text-sm text-destructive" role="alert">
-                    Yo! Payments is not configured. Choose another channel or add
-                    API credentials under Platform settings.
+                    Yo! Payments is not configured. Choose another channel or
+                    add API credentials under Platform settings.
                 </p>
             )}
         </div>

@@ -1,10 +1,7 @@
 import { useMemo, useState } from 'react';
 import { FormField } from '@/components/form-field';
-import {
-    LoanApplicationCollateralFields
-    
-} from '@/components/loan-applications/loan-application-collateral-fields';
-import type {CollateralTypeOption} from '@/components/loan-applications/loan-application-collateral-fields';
+import { LoanApplicationCollateralFields } from '@/components/loan-applications/loan-application-collateral-fields';
+import type { CollateralTypeOption } from '@/components/loan-applications/loan-application-collateral-fields';
 import { Input } from '@/components/ui/input';
 import { NativeSelect } from '@/components/ui/native-select';
 import { Textarea } from '@/components/ui/textarea';
@@ -63,7 +60,7 @@ export function LoanApplicationFormFields({
         <div className="space-y-8">
             <section className="space-y-4">
                 <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         Borrower & product
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">
@@ -121,8 +118,9 @@ export function LoanApplicationFormFields({
                 </div>
                 {selectedProduct && (
                     <p className="text-sm text-muted-foreground">
-                        Amount: {formatMoney(selectedProduct.min_amount, currency)}{' '}
-                        – {formatMoney(selectedProduct.max_amount, currency)} ·
+                        Amount:{' '}
+                        {formatMoney(selectedProduct.min_amount, currency)} –{' '}
+                        {formatMoney(selectedProduct.max_amount, currency)} ·
                         Term: {selectedProduct.term_min_days}–
                         {selectedProduct.term_max_days} days
                     </p>
@@ -131,7 +129,7 @@ export function LoanApplicationFormFields({
 
             <section className="space-y-4">
                 <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         Loan request
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">

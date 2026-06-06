@@ -156,16 +156,23 @@ export default function AdminSmtpSettings({
                                             <NativeSelect
                                                 id="encryption"
                                                 name="encryption"
-                                                defaultValue={settings.encryption}
+                                                defaultValue={
+                                                    settings.encryption
+                                                }
                                             >
-                                                {encryptionOptions.map((option) => (
-                                                    <option
-                                                        key={option.value || 'none'}
-                                                        value={option.value}
-                                                    >
-                                                        {option.label}
-                                                    </option>
-                                                ))}
+                                                {encryptionOptions.map(
+                                                    (option) => (
+                                                        <option
+                                                            key={
+                                                                option.value ||
+                                                                'none'
+                                                            }
+                                                            value={option.value}
+                                                        >
+                                                            {option.label}
+                                                        </option>
+                                                    ),
+                                                )}
                                             </NativeSelect>
                                         </FormField>
                                         <FormField
@@ -207,7 +214,9 @@ export default function AdminSmtpSettings({
                                                 id="from_address"
                                                 name="from_address"
                                                 type="email"
-                                                defaultValue={settings.from_address}
+                                                defaultValue={
+                                                    settings.from_address
+                                                }
                                                 className="h-10"
                                             />
                                         </FormField>
@@ -219,7 +228,9 @@ export default function AdminSmtpSettings({
                                             <Input
                                                 id="from_name"
                                                 name="from_name"
-                                                defaultValue={settings.from_name}
+                                                defaultValue={
+                                                    settings.from_name
+                                                }
                                                 className="h-10"
                                             />
                                         </FormField>

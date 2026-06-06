@@ -7,7 +7,7 @@ import {
     Plus,
     Search,
 } from 'lucide-react';
-import type { FormEvent} from 'react';
+import type { FormEvent } from 'react';
 import { useState } from 'react';
 import { BillingStatusBadge } from '@/components/admin/billing-status-badge';
 import { InvoiceRowActions } from '@/components/admin/invoice-row-actions';
@@ -31,7 +31,6 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { formatEnumLabel } from '@/lib/format-label';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
 import { create, index as invoicesIndex } from '@/routes/admin/invoices';
@@ -187,8 +186,7 @@ export default function AdminInvoicesIndex({
                         <div>
                             <CardTitle>Billing invoices</CardTitle>
                             <CardDescription>
-                                {total}{' '}
-                                {total === 1 ? 'invoice' : 'invoices'}
+                                {total} {total === 1 ? 'invoice' : 'invoices'}
                                 {hasFilters ? ' matching filters' : ''}
                             </CardDescription>
                         </div>
@@ -327,9 +325,7 @@ export default function AdminInvoicesIndex({
                                             <TableRow key={invoice.id}>
                                                 <TableCell>
                                                     <p className="font-mono text-sm font-medium">
-                                                        {
-                                                            invoice.invoice_number
-                                                        }
+                                                        {invoice.invoice_number}
                                                     </p>
                                                     <p className="text-xs text-muted-foreground">
                                                         {formatDateTime(

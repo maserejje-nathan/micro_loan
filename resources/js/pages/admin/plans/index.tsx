@@ -1,6 +1,6 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { Package, Plus, Search, TrendingUp, Users } from 'lucide-react';
-import type { FormEvent} from 'react';
+import type { FormEvent } from 'react';
 import { useState } from 'react';
 import { PlanRowActions } from '@/components/admin/plan-row-actions';
 import { DataTablePagination } from '@/components/data-table-pagination';
@@ -276,7 +276,7 @@ export default function AdminPlansIndex({
                                             <TableHead className="text-right">
                                                 Price
                                             </TableHead>
-                                            <TableHead className="hidden md:table-cell text-right">
+                                            <TableHead className="hidden text-right md:table-cell">
                                                 Trial
                                             </TableHead>
                                             <TableHead className="text-right">
@@ -300,7 +300,7 @@ export default function AdminPlansIndex({
                                                     <p className="font-mono text-xs text-muted-foreground">
                                                         {plan.slug}
                                                     </p>
-                                                    <p className="mt-0.5 text-xs capitalize text-muted-foreground md:hidden">
+                                                    <p className="mt-0.5 text-xs text-muted-foreground capitalize md:hidden">
                                                         {formatEnumLabel(
                                                             plan.billing_interval,
                                                         )}
@@ -321,7 +321,7 @@ export default function AdminPlansIndex({
                                                             plan.currency,
                                                         )}
                                                     </p>
-                                                    <p className="text-xs capitalize text-muted-foreground">
+                                                    <p className="text-xs text-muted-foreground capitalize">
                                                         {formatEnumLabel(
                                                             plan.billing_interval,
                                                         )}
@@ -332,7 +332,9 @@ export default function AdminPlansIndex({
                                                 </TableCell>
                                                 <TableCell className="text-right text-sm">
                                                     <p className="tabular-nums">
-                                                        {plan.subscriptions_count}
+                                                        {
+                                                            plan.subscriptions_count
+                                                        }
                                                     </p>
                                                     {plan.active_subscriptions_count >
                                                         0 && (

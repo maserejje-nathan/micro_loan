@@ -7,7 +7,13 @@ import { EmptyState } from '@/components/empty-state';
 import Heading from '@/components/heading';
 import { StatCard } from '@/components/stat-card';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
 import {
     Table,
     TableBody,
@@ -163,7 +169,8 @@ export default function BillingSettings({
                                             {' '}
                                             /{' '}
                                             {formatEnumLabel(
-                                                subscription.plan.billing_interval,
+                                                subscription.plan
+                                                    .billing_interval,
                                             ).toLowerCase()}
                                         </span>
                                     </p>
@@ -224,9 +231,7 @@ export default function BillingSettings({
                                     <UsageMeter
                                         label="Customers"
                                         used={usage.customers}
-                                        limit={
-                                            subscription.plan.max_customers
-                                        }
+                                        limit={subscription.plan.max_customers}
                                     />
                                     <UsageMeter
                                         label="Active loans"
@@ -246,7 +251,9 @@ export default function BillingSettings({
                         <CardTitle className="text-base">Invoices</CardTitle>
                         <CardDescription>
                             {paginatorTotal(invoices)}{' '}
-                            {paginatorTotal(invoices) === 1 ? 'invoice' : 'invoices'}{' '}
+                            {paginatorTotal(invoices) === 1
+                                ? 'invoice'
+                                : 'invoices'}{' '}
                             on record
                         </CardDescription>
                     </CardHeader>

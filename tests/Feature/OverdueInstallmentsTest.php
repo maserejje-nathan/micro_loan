@@ -1,10 +1,10 @@
 <?php
 
+use App\Enums\LoanApplicationStatus;
 use App\Enums\LoanStatus;
 use App\Enums\ScheduleInstallmentStatus;
 use App\Enums\SmsStatus;
 use App\Jobs\ProcessOverdueInstallmentsJob;
-use App\Enums\LoanApplicationStatus;
 use App\Models\Customer;
 use App\Models\Loan;
 use App\Models\LoanApplication;
@@ -12,6 +12,7 @@ use App\Models\LoanProduct;
 use App\Models\LoanSchedule;
 use App\Models\SmsNotification;
 use App\Models\User;
+use App\Services\PaymentReminderService;
 use Illuminate\Support\Facades\Bus;
 use Tests\Support\ActsAsOrganization;
 
@@ -75,7 +76,7 @@ test('overdue job marks installments and sends reminder sms', function () {
         'status' => ScheduleInstallmentStatus::Pending,
     ]);
 
-    (new ProcessOverdueInstallmentsJob($organization->id))->handle(app(\App\Services\PaymentReminderService::class));
+    (new ProcessOverdueInstallmentsJob($organization->id))->handle(app(PaymentReminderService::class));
 
     expect($schedule->fresh()->status)->toBe(ScheduleInstallmentStatus::Overdue);
     expect($schedule->fresh()->overdue_notified_at)->not->toBeNull();

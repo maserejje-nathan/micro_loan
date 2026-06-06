@@ -65,7 +65,9 @@ export function MonthlyTrendCard({
             </CardHeader>
             <CardContent className="flex flex-1 flex-col gap-4 pt-5">
                 {entries.length === 0 ? (
-                    <p className="text-sm text-muted-foreground">{emptyMessage}</p>
+                    <p className="text-sm text-muted-foreground">
+                        {emptyMessage}
+                    </p>
                 ) : (
                     <ul className="space-y-3">
                         {entries.map(([month, value]) => {

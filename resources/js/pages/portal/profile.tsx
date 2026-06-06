@@ -154,7 +154,9 @@ export default function PortalProfile({
                                             <Input
                                                 id="first_name"
                                                 name="first_name"
-                                                defaultValue={customer.first_name}
+                                                defaultValue={
+                                                    customer.first_name
+                                                }
                                                 required
                                             />
                                             {errors.first_name && (
@@ -170,7 +172,9 @@ export default function PortalProfile({
                                             <Input
                                                 id="last_name"
                                                 name="last_name"
-                                                defaultValue={customer.last_name}
+                                                defaultValue={
+                                                    customer.last_name
+                                                }
                                                 required
                                             />
                                         </div>
@@ -183,8 +187,8 @@ export default function PortalProfile({
                                                 className="bg-muted"
                                             />
                                             <p className="text-xs text-muted-foreground">
-                                                Contact your lender to update your
-                                                phone number.
+                                                Contact your lender to update
+                                                your phone number.
                                             </p>
                                         </div>
                                         <div className="grid gap-2 sm:col-span-2">
@@ -193,7 +197,9 @@ export default function PortalProfile({
                                                 id="email"
                                                 name="email"
                                                 type="email"
-                                                defaultValue={customer.email ?? ''}
+                                                defaultValue={
+                                                    customer.email ?? ''
+                                                }
                                             />
                                         </div>
                                     </div>
@@ -219,11 +225,15 @@ export default function PortalProfile({
                                                 />
                                             </div>
                                             <div className="grid gap-2">
-                                                <Label htmlFor="city">City</Label>
+                                                <Label htmlFor="city">
+                                                    City
+                                                </Label>
                                                 <Input
                                                     id="city"
                                                     name="city"
-                                                    defaultValue={customer.city ?? ''}
+                                                    defaultValue={
+                                                        customer.city ?? ''
+                                                    }
                                                 />
                                             </div>
                                             <div className="grid gap-2">
@@ -257,7 +267,8 @@ export default function PortalProfile({
                                                     id="occupation"
                                                     name="occupation"
                                                     defaultValue={
-                                                        customer.occupation ?? ''
+                                                        customer.occupation ??
+                                                        ''
                                                     }
                                                 />
                                             </div>
@@ -269,7 +280,8 @@ export default function PortalProfile({
                                                     id="employer_name"
                                                     name="employer_name"
                                                     defaultValue={
-                                                        customer.employer_name ?? ''
+                                                        customer.employer_name ??
+                                                        ''
                                                     }
                                                 />
                                             </div>
@@ -283,7 +295,8 @@ export default function PortalProfile({
                                                     type="number"
                                                     min={0}
                                                     defaultValue={
-                                                        customer.monthly_income ?? ''
+                                                        customer.monthly_income ??
+                                                        ''
                                                     }
                                                 />
                                             </div>

@@ -1,5 +1,11 @@
 import { Head, Link } from '@inertiajs/react';
-import { ArrowRight, Banknote, CheckCircle2, TrendingUp, Wallet } from 'lucide-react';
+import {
+    ArrowRight,
+    Banknote,
+    CheckCircle2,
+    TrendingUp,
+    Wallet,
+} from 'lucide-react';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
@@ -96,7 +102,6 @@ export default function PortalLoansIndex({
         total_repaid: number;
     };
 }) {
-
     const filters: { key: Filter; label: string; count: number }[] = [
         { key: 'all', label: 'All', count: stats.total },
         { key: 'active', label: 'Active', count: stats.active },
@@ -162,25 +167,25 @@ export default function PortalLoansIndex({
                         </div>
                         <div className="w-full overflow-x-auto overscroll-x-contain">
                             <div className="flex w-max min-w-full gap-1 rounded-lg border border-border bg-muted p-1 sm:w-full sm:flex-wrap">
-                            {filters.map((item) => (
-                                <Link
-                                    key={item.key}
-                                    href={filterUrl(item.key)}
-                                    preserveScroll
-                                    preserveState
-                                    className={cn(
-                                        'inline-flex h-8 items-center rounded-md px-3 text-sm font-medium transition-colors',
-                                        filter === item.key
-                                            ? 'bg-background text-foreground shadow-sm'
-                                            : 'text-muted-foreground hover:text-foreground',
-                                    )}
-                                >
-                                    {item.label}
-                                    <span className="ml-1.5 text-xs text-muted-foreground">
-                                        {item.count}
-                                    </span>
-                                </Link>
-                            ))}
+                                {filters.map((item) => (
+                                    <Link
+                                        key={item.key}
+                                        href={filterUrl(item.key)}
+                                        preserveScroll
+                                        preserveState
+                                        className={cn(
+                                            'inline-flex h-8 items-center rounded-md px-3 text-sm font-medium transition-colors',
+                                            filter === item.key
+                                                ? 'bg-background text-foreground shadow-sm'
+                                                : 'text-muted-foreground hover:text-foreground',
+                                        )}
+                                    >
+                                        {item.label}
+                                        <span className="ml-1.5 text-xs text-muted-foreground">
+                                            {item.count}
+                                        </span>
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                     </CardHeader>
@@ -313,7 +318,7 @@ export default function PortalLoansIndex({
                                                             loan.disbursed_at,
                                                         )}
                                                     </TableCell>
-                                                    <TableCell className="text-right tabular-nums font-medium">
+                                                    <TableCell className="text-right font-medium tabular-nums">
                                                         {formatMoney(
                                                             loan.outstanding_balance,
                                                             currency,

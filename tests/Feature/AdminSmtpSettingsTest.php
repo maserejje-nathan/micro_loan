@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Services\PlatformSettingsService;
+
 beforeEach(function () {
     $this->admin = User::factory()->create(['is_super_admin' => true]);
     $this->actingAs($this->admin);

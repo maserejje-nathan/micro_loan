@@ -13,11 +13,8 @@ import {
 import type { ComponentType } from 'react';
 import { EmptyState } from '@/components/empty-state';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
-import {
-    LoanCalculatorWidget
-    
-} from '@/components/loan-calculator/loan-calculator-widget';
-import type {LoanCalculatorConfig} from '@/components/loan-calculator/loan-calculator-widget';
+import { LoanCalculatorWidget } from '@/components/loan-calculator/loan-calculator-widget';
+import type { LoanCalculatorConfig } from '@/components/loan-calculator/loan-calculator-widget';
 import { PortalPage } from '@/components/portal/portal-page';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
@@ -126,9 +123,7 @@ export default function PortalDashboard({
     const customerName = auth?.customer?.name?.split(' ')[0] ?? 'there';
     const organizationName = auth?.organization?.name;
     const lenderCode = auth?.organization?.slug;
-    const showLenderCode =
-        lenderCode &&
-        tenancy?.subdomain_enabled !== true;
+    const showLenderCode = lenderCode && tenancy?.subdomain_enabled !== true;
 
     const greeting = getGreeting();
 
@@ -136,13 +131,16 @@ export default function PortalDashboard({
         <>
             <Head title="Overview" />
             <PortalPage>
-                <Card variant="secondary" className="overflow-hidden border-primary/20">
+                <Card
+                    variant="secondary"
+                    className="overflow-hidden border-primary/20"
+                >
                     <CardContent className="flex flex-col gap-5 p-4 sm:gap-6 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
                         <div className="min-w-0 space-y-2">
                             <p className="text-sm font-medium text-primary">
                                 {greeting}, {customerName}
                             </p>
-                            <h1 className="text-balance text-xl font-semibold tracking-tight sm:text-2xl">
+                            <h1 className="text-xl font-semibold tracking-tight text-balance sm:text-2xl">
                                 {organizationName
                                     ? `Welcome to ${organizationName}`
                                     : 'Your account overview'}
@@ -164,7 +162,9 @@ export default function PortalDashboard({
                                         variant="outline"
                                         size="sm"
                                         className="h-8"
-                                        onClick={() => copyLenderCode(lenderCode)}
+                                        onClick={() =>
+                                            copyLenderCode(lenderCode)
+                                        }
                                     >
                                         {copiedCode === lenderCode ? (
                                             <>
@@ -179,8 +179,8 @@ export default function PortalDashboard({
                                         )}
                                     </Button>
                                     <span className="w-full text-xs text-muted-foreground">
-                                        Use this code when signing in on the main
-                                        portal URL.
+                                        Use this code when signing in on the
+                                        main portal URL.
                                     </span>
                                 </div>
                             )}
@@ -327,7 +327,7 @@ export default function PortalDashboard({
                                                 <TableCell className="hidden text-muted-foreground sm:table-cell">
                                                     {loan.product_name}
                                                 </TableCell>
-                                                <TableCell className="text-right tabular-nums font-medium">
+                                                <TableCell className="text-right font-medium tabular-nums">
                                                     {formatMoney(
                                                         loan.outstanding_balance,
                                                         currency,
@@ -361,7 +361,9 @@ export default function PortalDashboard({
                                 </div>
                             </div>
                             <Button variant="outline" size="sm" asChild>
-                                <Link href="/portal/applications">View all</Link>
+                                <Link href="/portal/applications">
+                                    View all
+                                </Link>
                             </Button>
                         </CardHeader>
                         <CardContent className="p-0">
@@ -401,38 +403,46 @@ export default function PortalDashboard({
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
-                                        {recentApplications.map((application) => (
-                                            <TableRow key={application.id}>
-                                                <TableCell>
-                                                    <Link
-                                                        href={`/portal/applications/${application.id}`}
-                                                        className="font-medium hover:underline"
-                                                    >
+                                        {recentApplications.map(
+                                            (application) => (
+                                                <TableRow key={application.id}>
+                                                    <TableCell>
+                                                        <Link
+                                                            href={`/portal/applications/${application.id}`}
+                                                            className="font-medium hover:underline"
+                                                        >
+                                                            {
+                                                                application.reference_number
+                                                            }
+                                                        </Link>
+                                                        <p className="text-xs text-muted-foreground sm:hidden">
+                                                            {
+                                                                application.product_name
+                                                            }
+                                                        </p>
+                                                    </TableCell>
+                                                    <TableCell className="hidden text-muted-foreground sm:table-cell">
                                                         {
-                                                            application.reference_number
+                                                            application.product_name
                                                         }
-                                                    </Link>
-                                                    <p className="text-xs text-muted-foreground sm:hidden">
-                                                        {application.product_name}
-                                                    </p>
-                                                </TableCell>
-                                                <TableCell className="hidden text-muted-foreground sm:table-cell">
-                                                    {application.product_name}
-                                                </TableCell>
-                                                <TableCell className="text-right tabular-nums font-medium">
-                                                    {formatMoney(
-                                                        application.requested_amount,
-                                                        currency,
-                                                    )}
-                                                </TableCell>
-                                                <TableCell>
-                                                    <EntityStatusBadge
-                                                        status={application.status}
-                                                        type="loan_application"
-                                                    />
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
+                                                    </TableCell>
+                                                    <TableCell className="text-right font-medium tabular-nums">
+                                                        {formatMoney(
+                                                            application.requested_amount,
+                                                            currency,
+                                                        )}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <EntityStatusBadge
+                                                            status={
+                                                                application.status
+                                                            }
+                                                            type="loan_application"
+                                                        />
+                                                    </TableCell>
+                                                </TableRow>
+                                            ),
+                                        )}
                                     </TableBody>
                                 </Table>
                             )}
@@ -441,11 +451,7 @@ export default function PortalDashboard({
                 </div>
 
                 {stats.draft_applications > 0 && (
-                    <Card
-                        className={cn(
-                            'border-amber-500/30 bg-amber-500/5',
-                        )}
-                    >
+                    <Card className={cn('border-amber-500/30 bg-amber-500/5')}>
                         <CardContent className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <p className="font-medium">

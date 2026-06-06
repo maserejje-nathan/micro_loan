@@ -8,6 +8,7 @@ use App\Enums\CustomerIdType;
 use App\Enums\CustomerStatus;
 use App\Models\Concerns\BelongsToOrganization;
 use App\Support\CustomerNotificationChannels;
+use Database\Factories\CustomerFactory;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model implements AuthenticatableContract
 {
-    /** @use HasFactory<\Database\Factories\CustomerFactory> */
+    /** @use HasFactory<CustomerFactory> */
     use Authenticatable, BelongsToOrganization, HasFactory;
 
     /**

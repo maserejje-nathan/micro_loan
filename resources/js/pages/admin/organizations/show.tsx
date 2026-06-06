@@ -1,11 +1,5 @@
 import { Form, Head, Link } from '@inertiajs/react';
-import {
-    ArrowLeft,
-    HandCoins,
-    Mail,
-    Users,
-    Wallet,
-} from 'lucide-react';
+import { ArrowLeft, HandCoins, Mail, Users, Wallet } from 'lucide-react';
 import { BillingStatusBadge } from '@/components/admin/billing-status-badge';
 import { SubscriptionPeriod } from '@/components/admin/subscription-period';
 import { DataTablePagination } from '@/components/data-table-pagination';
@@ -93,7 +87,12 @@ export default function AdminOrganizationShow({
         <>
             <Head title={organization.name} />
             <div className="flex w-full flex-col gap-6 p-4 pb-10">
-                <Button variant="ghost" size="sm" asChild className="-ml-2 w-fit">
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    asChild
+                    className="-ml-2 w-fit"
+                >
                     <Link href={organizationsIndex().url}>
                         <ArrowLeft className="size-4" />
                         Organizations
@@ -145,7 +144,7 @@ export default function AdminOrganizationShow({
                                 <p className="font-medium">
                                     {subscription.plan_name}
                                 </p>
-                                <p className="tabular-nums text-muted-foreground">
+                                <p className="text-muted-foreground tabular-nums">
                                     {formatMoney(
                                         subscription.plan_price,
                                         organization.currency,

@@ -108,8 +108,8 @@ export default function AdminSystemIndex({
                             System health
                         </h1>
                         <p className="text-sm text-muted-foreground">
-                            Runtime diagnostics, platform scale, and cross-tenant
-                            audit activity
+                            Runtime diagnostics, platform scale, and
+                            cross-tenant audit activity
                         </p>
                     </div>
                     <div className="flex flex-wrap gap-2">

@@ -26,7 +26,10 @@ export function auditCategoryLabel(category: string): string {
         case 'loan_product':
             return 'Products';
         default:
-            return category.charAt(0).toUpperCase() + category.slice(1).replace(/_/g, ' ');
+            return (
+                category.charAt(0).toUpperCase() +
+                category.slice(1).replace(/_/g, ' ')
+            );
     }
 }
 

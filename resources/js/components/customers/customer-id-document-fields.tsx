@@ -65,7 +65,7 @@ function IdDocumentSlot({
                     type="file"
                     accept="image/jpeg,image/png,image/webp"
                     required={required && mode === 'create' && !imageUrl}
-                            className="h-10 max-w-full cursor-pointer file:cursor-pointer"
+                    className="h-10 max-w-full cursor-pointer file:cursor-pointer"
                     aria-invalid={!!error}
                     onChange={(event) => {
                         const file = event.target.files?.[0];
@@ -131,12 +131,12 @@ export function CustomerIdDocumentFields({
     return (
         <section className="space-y-4">
             <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                     ID document images
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                    Clear photos of the front and back of your government-issued ID.
-                    JPEG, PNG, or WebP up to 5 MB each.
+                    Clear photos of the front and back of your government-issued
+                    ID. JPEG, PNG, or WebP up to 5 MB each.
                 </p>
             </div>
 

@@ -95,10 +95,7 @@ export default function ReportsIndex({
                     />
                     <StatCard
                         title="Total disbursed"
-                        value={formatMoney(
-                            portfolio.total_disbursed,
-                            currency,
-                        )}
+                        value={formatMoney(portfolio.total_disbursed, currency)}
                         description="Lifetime principal funded"
                         icon={ArrowUpRight}
                         accentClassName="bg-sky-500/10 text-sky-600 dark:text-sky-400"
@@ -191,8 +188,8 @@ export default function ReportsIndex({
                                 <div>
                                     <CardTitle>PDF loan statements</CardTitle>
                                     <CardDescription>
-                                        Download statements for active and closed
-                                        loans
+                                        Download statements for active and
+                                        closed loans
                                     </CardDescription>
                                 </div>
                             </div>
@@ -242,7 +239,9 @@ export default function ReportsIndex({
                                                     asChild
                                                 >
                                                     <a
-                                                        href={loan.statement_url}
+                                                        href={
+                                                            loan.statement_url
+                                                        }
                                                         target="_blank"
                                                         rel="noreferrer"
                                                     >

@@ -42,7 +42,7 @@ export default function AdminSettingsIndex({
 }) {
     const integrations = [
         {
-            label: 'SMS (Africa\'s Talking)',
+            label: "SMS (Africa's Talking)",
             status: africasTalkingStatus,
             detail: notificationDriver,
         },
@@ -118,9 +118,7 @@ export default function AdminSettingsIndex({
                                 <SettingsLinkCard
                                     key={item.href}
                                     title={item.title}
-                                    description={
-                                        item.description ?? ''
-                                    }
+                                    description={item.description ?? ''}
                                     href={item.href}
                                     icon={item.icon}
                                     meta={metaByHref[item.href]}
@@ -130,8 +128,8 @@ export default function AdminSettingsIndex({
                                             : item.href.includes('/smtp')
                                               ? smtpStatus
                                               : item.href.includes(
-                                                    'yo-payments',
-                                                )
+                                                      'yo-payments',
+                                                  )
                                                 ? yoStatus
                                                 : undefined
                                     }
@@ -146,7 +144,5 @@ export default function AdminSettingsIndex({
 }
 
 AdminSettingsIndex.layout = {
-    breadcrumbs: [
-        { title: 'Settings', href: settingsIndex().url },
-    ],
+    breadcrumbs: [{ title: 'Settings', href: settingsIndex().url }],
 };

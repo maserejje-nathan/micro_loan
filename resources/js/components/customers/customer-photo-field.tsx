@@ -33,7 +33,7 @@ export function CustomerPhotoField({
     return (
         <section className="space-y-4">
             <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                     Customer photo
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
@@ -61,7 +61,10 @@ export function CustomerPhotoField({
 
                 <div className="min-w-0 flex-1 space-y-3">
                     <div className="grid gap-2">
-                        <Label htmlFor="photo" className="flex items-center gap-2">
+                        <Label
+                            htmlFor="photo"
+                            className="flex items-center gap-2"
+                        >
                             <Camera className="size-4" />
                             {mode === 'edit' && photoUrl
                                 ? 'Upload new photo'
