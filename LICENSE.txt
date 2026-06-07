@@ -1,0 +1,17 @@
+LendFlow — Microfinance Loan Management Platform
+Copyright (c) 2026. All rights reserved.
+
+This software is sold exclusively on Envato Market (CodeCanyon). Your use of
+this software is governed by the Envato Market license you purchased:
+
+  Regular License  — single end product for which end users are not charged
+  Extended License — single end product for which end users may be charged
+
+You may not redistribute, resell, sublicense, or share the source code except
+as expressly permitted by your Envato license.
+
+For full license terms visit:
+https://codecanyon.net/licenses/standard
+
+Third-party open-source components included in this product are listed in
+THIRD-PARTY-NOTICES.md and remain subject to their respective licenses.

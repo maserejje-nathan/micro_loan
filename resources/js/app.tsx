@@ -10,7 +10,7 @@ import PortalAuthLayout from '@/layouts/portal-auth-layout';
 import PortalLayout from '@/layouts/portal-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'LendFlow';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),

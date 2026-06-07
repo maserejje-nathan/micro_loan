@@ -43,6 +43,7 @@ type Health = {
     app_debug: boolean;
     php_version: string;
     laravel_version: string;
+    app_version: string;
 };
 
 type AuditLogRow = {
@@ -118,6 +119,9 @@ export default function AdminSystemIndex({
                         </code>
                         <code className="rounded-md border bg-muted px-2 py-1 text-xs">
                             Laravel {health.laravel_version}
+                        </code>
+                        <code className="rounded-md border bg-muted px-2 py-1 text-xs">
+                            LendFlow {health.app_version}
                         </code>
                     </div>
                 </div>

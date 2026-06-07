@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LendFlow Documentation</title>
+    <style>
+        :root { color-scheme: light; --bg: #f8fafc; --card: #fff; --text: #0f172a; --muted: #64748b; --accent: #0f766e; --border: #e2e8f0; }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        header { background: linear-gradient(135deg, #0f766e, #134e4a); color: #fff; padding: 2.5rem 1.5rem; }
+        header h1 { margin: 0 0 .5rem; font-size: 2rem; }
+        header p { margin: 0; opacity: .9; max-width: 48rem; }
+        main { max-width: 52rem; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+        section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.25rem; }
+        h2 { margin-top: 0; color: var(--accent); font-size: 1.25rem; }
+        h3 { font-size: 1rem; margin-bottom: .5rem; }
+        code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+        pre { background: #0f172a; color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+        th, td { border: 1px solid var(--border); padding: .6rem .75rem; text-align: left; }
+        th { background: #f1f5f9; }
+        ul { padding-left: 1.25rem; }
+        .muted { color: var(--muted); }
+        nav { margin-bottom: 1.5rem; }
+        nav a { color: var(--accent); margin-right: 1rem; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>LendFlow Documentation</h1>
+        <p>Version 1.0.0 — Installation, configuration, and operations guide for the microfinance loan management platform.</p>
+    </header>
+    <main>
+        <nav>
+            <a href="#requirements">Requirements</a>
+            <a href="#install">Installation</a>
+            <a href="#demo">Demo logins</a>
+            <a href="#cron">Cron &amp; queue</a>
+            <a href="#integrations">Integrations</a>
+            <a href="#production">Production</a>
+        </nav>
+
+        <section id="requirements">
+            <h2>Server requirements</h2>
+            <ul>
+                <li>PHP 8.3+ with extensions: bcmath, ctype, curl, dom, fileinfo, json, mbstring, openssl, pdo, tokenizer, xml</li>
+                <li>MySQL 8+ or MariaDB 10.6+ (recommended for production)</li>
+                <li>Composer 2.x and Node.js 20+</li>
+                <li>Apache or Nginx with <code>public/</code> as the document root</li>
+            </ul>
+        </section>
+
+        <section id="install">
+            <h2>Installation</h2>
+            <h3>1. Upload files</h3>
+            <p>Upload the package to your server. Point the web root to the <code>public</code> directory.</p>
+
+            <h3>2. Environment file</h3>
+            <pre>cp .env.example .env</pre>
+            <p>Edit <code>.env</code> with your database credentials, <code>APP_URL</code>, and mail settings.</p>
+
+            <h3>3. Install dependencies &amp; build</h3>
+            <pre>composer install --no-dev --optimize-autoloader
+php artisan key:generate
+php artisan migrate --force
+php artisan db:seed --force
+php artisan storage:link
+npm install
+npm run build</pre>
+            <p class="muted">Or run <code>composer setup</code> on a machine with both PHP and Node installed.</p>
+
+            <h3>4. File permissions</h3>
+            <p>Ensure <code>storage/</code> and <code>bootstrap/cache/</code> are writable by the web server user.</p>
+        </section>
+
+        <section id="demo">
+            <h2>Demo credentials</h2>
+            <p>When <code>SEED_DEMO_DATA=true</code> (default), seeding creates a sample lending company.</p>
+            <table>
+                <thead>
+                    <tr><th>Role</th><th>URL</th><th>Login</th><th>Password</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Super admin</td><td>/admin</td><td>superadmin@example.com</td><td>password</td></tr>
+                    <tr><td>Lender owner</td><td>/login</td><td>owner@demo.lendflow.test</td><td>password</td></tr>
+                    <tr><td>Borrower portal</td><td>/portal/login</td><td>256700000100</td><td>portal-demo</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Change every default password before production.</strong></p>
+        </section>
+
+        <section id="cron">
+            <h2>Cron &amp; queue worker</h2>
+            <p>LendFlow uses a database queue and a daily scheduler for overdue loan processing.</p>
+            <h3>Cron (required)</h3>
+            <pre>* * * * * cd /path/to/lendflow && php artisan schedule:run >> /dev/null 2>&1</pre>
+            <h3>Queue worker (required)</h3>
+            <pre>php artisan queue:work --tries=3</pre>
+            <p class="muted">Use Supervisor or systemd to keep the queue worker running in production.</p>
+        </section>
+
+        <section id="integrations">
+            <h2>Integrations</h2>
+            <h3>Email</h3>
+            <p>Configure <code>MAIL_*</code> variables. Super-admin SMTP settings are available at <strong>Admin → Settings → SMTP</strong>.</p>
+            <h3>SMS</h3>
+            <p>Set <code>SMS_DRIVER=log</code> for testing or <code>africas_talking</code> with API credentials for live SMS.</p>
+            <h3>Mobile money</h3>
+            <p>Set <code>MOBILE_MONEY_DRIVER=stub</code> for demo disbursements, or <code>yo</code> with Yo! Payments credentials.</p>
+            <h3>Borrower portal</h3>
+            <p>Enable under <strong>Settings → Client portal</strong> for each lending organization.</p>
+        </section>
+
+        <section id="production">
+            <h2>Production checklist</h2>
+            <ul>
+                <li><code>APP_ENV=production</code> and <code>APP_DEBUG=false</code></li>
+                <li>Strong unique passwords for super admin and all demo accounts</li>
+                <li>HTTPS enabled; <code>SESSION_SECURE_COOKIE=true</code></li>
+                <li>MySQL/MariaDB with regular backups</li>
+                <li>Queue worker and cron configured</li>
+                <li><code>SEED_DEMO_DATA=false</code> after initial setup if you do not want demo data re-created</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Support</h2>
+            <p>When requesting support, include your LendFlow version from <strong>Admin → System</strong> and the steps to reproduce the issue.</p>
+        </section>
+    </main>
+</body>
+</html>

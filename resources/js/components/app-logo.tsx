@@ -13,7 +13,7 @@ export default function AppLogo({ showName = true, className }: AppLogoProps) {
         logoUrl?: string | null;
     }>().props;
 
-    const appName = name ?? 'Laravel';
+    const appName = name ?? 'LendFlow';
 
     return (
         <div className={cn('flex items-center gap-2', className)}>

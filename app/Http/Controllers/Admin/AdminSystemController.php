@@ -31,6 +31,7 @@ class AdminSystemController extends Controller
                 'app_debug' => config('app.debug'),
                 'php_version' => PHP_VERSION,
                 'laravel_version' => app()->version(),
+                'app_version' => config('app.version'),
             ],
             'platformStats' => [
                 'organizations' => Organization::query()->count(),
