@@ -27,6 +27,12 @@ type Props = {
         requested_amount?: number | string;
         term_days?: number | string;
         purpose?: string;
+        collaterals?: {
+            type?: string;
+            description?: string;
+            estimated_value?: number | string;
+            identifier?: string;
+        }[];
     };
 };
 
@@ -172,6 +178,12 @@ export function PortalApplicationFormFields({
                 errors={errors}
                 collateralTypes={collateralTypes}
                 currency={currency}
+                initialCollaterals={values?.collaterals?.map((collateral) => ({
+                    type: String(collateral.type ?? ''),
+                    description: String(collateral.description ?? ''),
+                    estimated_value: String(collateral.estimated_value ?? ''),
+                    identifier: String(collateral.identifier ?? ''),
+                }))}
             />
         </div>
     );

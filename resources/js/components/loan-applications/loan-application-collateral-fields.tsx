@@ -22,6 +22,7 @@ type LoanApplicationCollateralFieldsProps = {
     errors: Record<string, string | undefined>;
     collateralTypes: CollateralTypeOption[];
     currency?: string;
+    initialCollaterals?: CollateralRow[];
 };
 
 function emptyRow(): CollateralRow {
@@ -44,12 +45,23 @@ function fieldError(
     );
 }
 
+function initialRows(initialCollaterals?: CollateralRow[]): CollateralRow[] {
+    if (initialCollaterals && initialCollaterals.length > 0) {
+        return initialCollaterals;
+    }
+
+    return [emptyRow()];
+}
+
 export function LoanApplicationCollateralFields({
     errors,
     collateralTypes,
     currency = 'UGX',
+    initialCollaterals,
 }: LoanApplicationCollateralFieldsProps) {
-    const [rows, setRows] = useState<CollateralRow[]>([]);
+    const [rows, setRows] = useState<CollateralRow[]>(() =>
+        initialRows(initialCollaterals),
+    );
 
     function addRow(): void {
         setRows((current) => [...current, emptyRow()]);
@@ -81,8 +93,8 @@ export function LoanApplicationCollateralFields({
                         Collateral
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">
-                        Optional security offered against this loan. Add one or
-                        more items.
+                        Security pledged for this loan. Describe each item
+                        offered as collateral — add more if needed.
                     </p>
                 </div>
                 <Button
@@ -96,13 +108,8 @@ export function LoanApplicationCollateralFields({
                 </Button>
             </div>
 
-            {rows.length === 0 ? (
-                <p className="rounded-lg border border-dashed px-4 py-6 text-center text-sm text-muted-foreground">
-                    No collateral added yet.
-                </p>
-            ) : (
-                <div className="space-y-4">
-                    {rows.map((row, index) => (
+            <div className="space-y-4">
+                {rows.map((row, index) => (
                         <div
                             key={index}
                             className="space-y-4 rounded-lg border bg-muted/30 p-4"
@@ -254,9 +261,8 @@ export function LoanApplicationCollateralFields({
                                 />
                             </FormField>
                         </div>
-                    ))}
-                </div>
-            )}
+                ))}
+            </div>
         </section>
     );
 }

@@ -28,10 +28,19 @@ export default function LoanApplicationsCreate({
     customers,
     products,
     collateralTypes,
+    formDefaults,
 }: {
     customers: CustomerOption[];
     products: ProductOption[];
     collateralTypes: CollateralTypeOption[];
+    formDefaults?: {
+        collaterals?: {
+            type?: string;
+            description?: string;
+            estimated_value?: number | string;
+            identifier?: string;
+        }[];
+    };
 }) {
     const { auth } = usePage<{
         auth: { organization?: { currency: string } };
@@ -62,6 +71,7 @@ export default function LoanApplicationsCreate({
                                 products={products}
                                 collateralTypes={collateralTypes}
                                 currency={currency}
+                                values={formDefaults}
                             />
                             <FormActions
                                 processing={processing}

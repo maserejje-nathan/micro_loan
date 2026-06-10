@@ -31,10 +31,19 @@ export default function PortalApplicationCreate({
     products,
     collateralTypes,
     currency,
+    formDefaults,
 }: {
     products: Product[];
     collateralTypes: CollateralTypeOption[];
     currency: string;
+    formDefaults?: {
+        collaterals?: {
+            type?: string;
+            description?: string;
+            estimated_value?: number | string;
+            identifier?: string;
+        }[];
+    };
 }) {
     return (
         <>
@@ -120,6 +129,7 @@ export default function PortalApplicationCreate({
                                                     collateralTypes
                                                 }
                                                 currency={currency}
+                                                values={formDefaults}
                                             />
                                             <div className="flex flex-wrap gap-3 border-t pt-6">
                                                 <Button

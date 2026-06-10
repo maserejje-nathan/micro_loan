@@ -83,6 +83,9 @@ class LoanApplicationController extends Controller
                     'term_min_days',
                     'term_max_days',
                 ]),
+            'formDefaults' => [
+                'collaterals' => old('collaterals', []),
+            ],
         ]);
     }
 

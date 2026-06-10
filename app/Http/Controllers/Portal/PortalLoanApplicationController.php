@@ -156,6 +156,9 @@ class PortalLoanApplicationController extends Controller
                     'term_max_days',
                 ]),
             'currency' => OrganizationContext::get()?->currency ?? 'UGX',
+            'formDefaults' => [
+                'collaterals' => old('collaterals', []),
+            ],
         ]);
     }
 
