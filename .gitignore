@@ -27,3 +27,8 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/mobile/node_modules
+/mobile/.expo
+/mobile/dist
+/mobile/.env
+/mobile/.env*.local

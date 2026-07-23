@@ -13,6 +13,10 @@ class EnsureUserHasOrganization
         $user = $request->user();
 
         if ($user === null || $user->current_organization_id === null) {
+            if ($request->expectsJson()) {
+                abort(403, 'Organization workspace required.');
+            }
+
             return redirect()->route('onboarding.organization');
         }
 

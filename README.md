@@ -48,6 +48,25 @@ Point your web server document root to the `public/` directory.
 
 Change all passwords before going live. Set `SEED_DEMO_DATA=false` in `.env` to skip demo data on fresh seeds.
 
+## Mobile app (lender)
+
+A React Native (Expo) lender app lives in `mobile/`. It authenticates against the Sanctum API:
+
+- `POST /api/v1/login`
+- `GET /api/v1/me`
+- `GET /api/v1/dashboard`
+- `POST /api/v1/logout`
+
+```bash
+php artisan serve --host=0.0.0.0 --port=8000
+cd mobile
+cp .env.example .env
+npm install
+npm start
+```
+
+See `mobile/README.md` for simulator vs device API URL setup.
+
 ## Production checklist
 
 1. Set `APP_ENV=production` and `APP_DEBUG=false`
