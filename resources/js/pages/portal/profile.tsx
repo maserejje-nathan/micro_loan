@@ -11,6 +11,7 @@ import {
 import type { ComponentType } from 'react';
 import { CustomerAvatar } from '@/components/customer-avatar';
 import { PaymentReminderChannelsField } from '@/components/customers/payment-reminder-channels-field';
+import { FormField } from '@/components/form-field';
 import PasswordInput from '@/components/password-input';
 import { PortalPage } from '@/components/portal/portal-page';
 import { Button } from '@/components/ui/button';
@@ -22,8 +23,13 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
+import { Spinner } from '@/components/ui/spinner';
+import {
+    notificationPreferences,
+    password as updatePassword,
+    update,
+} from '@/routes/portal/profile';
 
 type CustomerProfile = {
     reference_number: string;
@@ -100,7 +106,7 @@ export default function PortalProfile({
                 </div>
 
                 {flash?.success && (
-                    <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-900 dark:text-emerald-100">
+                    <div className="rounded-none border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-900 dark:text-emerald-100">
                         {flash.success}
                     </div>
                 )}
@@ -140,17 +146,19 @@ export default function PortalProfile({
                     </CardHeader>
                     <CardContent className="p-6">
                         <Form
-                            action="/portal/profile"
-                            method="put"
+                            {...update.form()}
+                            disableWhileProcessing
                             className="space-y-8"
                         >
                             {({ processing, errors }) => (
                                 <>
                                     <div className="grid gap-5 sm:grid-cols-2">
-                                        <div className="grid gap-2">
-                                            <Label htmlFor="first_name">
-                                                First name
-                                            </Label>
+                                        <FormField
+                                            id="first_name"
+                                            label="First name"
+                                            error={errors.first_name}
+                                            required
+                                        >
                                             <Input
                                                 id="first_name"
                                                 name="first_name"
@@ -158,17 +166,18 @@ export default function PortalProfile({
                                                     customer.first_name
                                                 }
                                                 required
+                                                className="h-10"
+                                                aria-invalid={
+                                                    !!errors.first_name
+                                                }
                                             />
-                                            {errors.first_name && (
-                                                <p className="text-sm text-destructive">
-                                                    {errors.first_name}
-                                                </p>
-                                            )}
-                                        </div>
-                                        <div className="grid gap-2">
-                                            <Label htmlFor="last_name">
-                                                Last name
-                                            </Label>
+                                        </FormField>
+                                        <FormField
+                                            id="last_name"
+                                            label="Last name"
+                                            error={errors.last_name}
+                                            required
+                                        >
                                             <Input
                                                 id="last_name"
                                                 name="last_name"
@@ -176,23 +185,31 @@ export default function PortalProfile({
                                                     customer.last_name
                                                 }
                                                 required
+                                                className="h-10"
+                                                aria-invalid={
+                                                    !!errors.last_name
+                                                }
                                             />
-                                        </div>
-                                        <div className="grid gap-2 sm:col-span-2">
-                                            <Label htmlFor="phone">Phone</Label>
+                                        </FormField>
+                                        <FormField
+                                            id="phone"
+                                            label="Phone"
+                                            hint="Contact your lender to update your phone number."
+                                            className="sm:col-span-2"
+                                        >
                                             <Input
                                                 id="phone"
                                                 value={customer.phone}
                                                 disabled
-                                                className="bg-muted"
+                                                className="h-10 bg-muted"
                                             />
-                                            <p className="text-xs text-muted-foreground">
-                                                Contact your lender to update
-                                                your phone number.
-                                            </p>
-                                        </div>
-                                        <div className="grid gap-2 sm:col-span-2">
-                                            <Label htmlFor="email">Email</Label>
+                                        </FormField>
+                                        <FormField
+                                            id="email"
+                                            label="Email"
+                                            error={errors.email}
+                                            className="sm:col-span-2"
+                                        >
                                             <Input
                                                 id="email"
                                                 name="email"
@@ -200,8 +217,10 @@ export default function PortalProfile({
                                                 defaultValue={
                                                     customer.email ?? ''
                                                 }
+                                                className="h-10"
+                                                aria-invalid={!!errors.email}
                                             />
-                                        </div>
+                                        </FormField>
                                     </div>
 
                                     <Separator />
@@ -212,42 +231,56 @@ export default function PortalProfile({
                                             Address
                                         </p>
                                         <div className="grid gap-5 sm:grid-cols-2">
-                                            <div className="grid gap-2 sm:col-span-2">
-                                                <Label htmlFor="address">
-                                                    Street address
-                                                </Label>
+                                            <FormField
+                                                id="address"
+                                                label="Street address"
+                                                error={errors.address}
+                                                className="sm:col-span-2"
+                                            >
                                                 <Input
                                                     id="address"
                                                     name="address"
                                                     defaultValue={
                                                         customer.address ?? ''
                                                     }
+                                                    className="h-10"
+                                                    aria-invalid={
+                                                        !!errors.address
+                                                    }
                                                 />
-                                            </div>
-                                            <div className="grid gap-2">
-                                                <Label htmlFor="city">
-                                                    City
-                                                </Label>
+                                            </FormField>
+                                            <FormField
+                                                id="city"
+                                                label="City"
+                                                error={errors.city}
+                                            >
                                                 <Input
                                                     id="city"
                                                     name="city"
                                                     defaultValue={
                                                         customer.city ?? ''
                                                     }
+                                                    className="h-10"
+                                                    aria-invalid={!!errors.city}
                                                 />
-                                            </div>
-                                            <div className="grid gap-2">
-                                                <Label htmlFor="district">
-                                                    District
-                                                </Label>
+                                            </FormField>
+                                            <FormField
+                                                id="district"
+                                                label="District"
+                                                error={errors.district}
+                                            >
                                                 <Input
                                                     id="district"
                                                     name="district"
                                                     defaultValue={
                                                         customer.district ?? ''
                                                     }
+                                                    className="h-10"
+                                                    aria-invalid={
+                                                        !!errors.district
+                                                    }
                                                 />
-                                            </div>
+                                            </FormField>
                                         </div>
                                     </div>
 
@@ -259,10 +292,11 @@ export default function PortalProfile({
                                             Employment & income
                                         </p>
                                         <div className="grid gap-5 sm:grid-cols-2">
-                                            <div className="grid gap-2">
-                                                <Label htmlFor="occupation">
-                                                    Occupation
-                                                </Label>
+                                            <FormField
+                                                id="occupation"
+                                                label="Occupation"
+                                                error={errors.occupation}
+                                            >
                                                 <Input
                                                     id="occupation"
                                                     name="occupation"
@@ -270,12 +304,17 @@ export default function PortalProfile({
                                                         customer.occupation ??
                                                         ''
                                                     }
+                                                    className="h-10"
+                                                    aria-invalid={
+                                                        !!errors.occupation
+                                                    }
                                                 />
-                                            </div>
-                                            <div className="grid gap-2">
-                                                <Label htmlFor="employer_name">
-                                                    Employer
-                                                </Label>
+                                            </FormField>
+                                            <FormField
+                                                id="employer_name"
+                                                label="Employer"
+                                                error={errors.employer_name}
+                                            >
                                                 <Input
                                                     id="employer_name"
                                                     name="employer_name"
@@ -283,12 +322,18 @@ export default function PortalProfile({
                                                         customer.employer_name ??
                                                         ''
                                                     }
+                                                    className="h-10"
+                                                    aria-invalid={
+                                                        !!errors.employer_name
+                                                    }
                                                 />
-                                            </div>
-                                            <div className="grid gap-2 sm:col-span-2">
-                                                <Label htmlFor="monthly_income">
-                                                    Monthly income ({currency})
-                                                </Label>
+                                            </FormField>
+                                            <FormField
+                                                id="monthly_income"
+                                                label={`Monthly income (${currency})`}
+                                                error={errors.monthly_income}
+                                                className="sm:col-span-2"
+                                            >
                                                 <Input
                                                     id="monthly_income"
                                                     name="monthly_income"
@@ -298,8 +343,12 @@ export default function PortalProfile({
                                                         customer.monthly_income ??
                                                         ''
                                                     }
+                                                    className="h-10"
+                                                    aria-invalid={
+                                                        !!errors.monthly_income
+                                                    }
                                                 />
-                                            </div>
+                                            </FormField>
                                         </div>
                                     </div>
 
@@ -311,10 +360,11 @@ export default function PortalProfile({
                                             Next of kin
                                         </p>
                                         <div className="grid gap-5 sm:grid-cols-2">
-                                            <div className="grid gap-2">
-                                                <Label htmlFor="next_of_kin_name">
-                                                    Full name
-                                                </Label>
+                                            <FormField
+                                                id="next_of_kin_name"
+                                                label="Full name"
+                                                error={errors.next_of_kin_name}
+                                            >
                                                 <Input
                                                     id="next_of_kin_name"
                                                     name="next_of_kin_name"
@@ -322,12 +372,17 @@ export default function PortalProfile({
                                                         customer.next_of_kin_name ??
                                                         ''
                                                     }
+                                                    className="h-10"
+                                                    aria-invalid={
+                                                        !!errors.next_of_kin_name
+                                                    }
                                                 />
-                                            </div>
-                                            <div className="grid gap-2">
-                                                <Label htmlFor="next_of_kin_phone">
-                                                    Phone
-                                                </Label>
+                                            </FormField>
+                                            <FormField
+                                                id="next_of_kin_phone"
+                                                label="Phone"
+                                                error={errors.next_of_kin_phone}
+                                            >
                                                 <Input
                                                     id="next_of_kin_phone"
                                                     name="next_of_kin_phone"
@@ -335,12 +390,20 @@ export default function PortalProfile({
                                                         customer.next_of_kin_phone ??
                                                         ''
                                                     }
+                                                    className="h-10"
+                                                    aria-invalid={
+                                                        !!errors.next_of_kin_phone
+                                                    }
                                                 />
-                                            </div>
-                                            <div className="grid gap-2 sm:col-span-2">
-                                                <Label htmlFor="next_of_kin_relationship">
-                                                    Relationship
-                                                </Label>
+                                            </FormField>
+                                            <FormField
+                                                id="next_of_kin_relationship"
+                                                label="Relationship"
+                                                error={
+                                                    errors.next_of_kin_relationship
+                                                }
+                                                className="sm:col-span-2"
+                                            >
                                                 <Input
                                                     id="next_of_kin_relationship"
                                                     name="next_of_kin_relationship"
@@ -348,12 +411,17 @@ export default function PortalProfile({
                                                         customer.next_of_kin_relationship ??
                                                         ''
                                                     }
+                                                    className="h-10"
+                                                    aria-invalid={
+                                                        !!errors.next_of_kin_relationship
+                                                    }
                                                 />
-                                            </div>
+                                            </FormField>
                                         </div>
                                     </div>
 
                                     <Button type="submit" disabled={processing}>
+                                        {processing && <Spinner />}
                                         Save changes
                                     </Button>
                                 </>
@@ -372,9 +440,9 @@ export default function PortalProfile({
                     </CardHeader>
                     <CardContent className="p-6">
                         <Form
-                            action="/portal/profile/notification-preferences"
-                            method="put"
+                            {...notificationPreferences.form()}
                             preserveScroll
+                            disableWhileProcessing
                             className="space-y-4"
                         >
                             {({ processing, errors }) => (
@@ -392,6 +460,7 @@ export default function PortalProfile({
                                         variant="outline"
                                         disabled={processing}
                                     >
+                                        {processing && <Spinner />}
                                         Save reminder preferences
                                     </Button>
                                 </>
@@ -410,56 +479,68 @@ export default function PortalProfile({
                     </CardHeader>
                     <CardContent className="p-6">
                         <Form
-                            action="/portal/profile/password"
-                            method="put"
+                            {...updatePassword.form()}
                             resetOnSuccess
+                            disableWhileProcessing
                             className="max-w-md space-y-4"
                         >
                             {({ processing, errors }) => (
                                 <>
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="current_password">
-                                            Current password
-                                        </Label>
+                                    <FormField
+                                        id="current_password"
+                                        label="Current password"
+                                        error={errors.current_password}
+                                        required
+                                    >
                                         <PasswordInput
                                             id="current_password"
                                             name="current_password"
                                             required
                                             autoComplete="current-password"
+                                            className="h-10"
+                                            aria-invalid={
+                                                !!errors.current_password
+                                            }
                                         />
-                                        {errors.current_password && (
-                                            <p className="text-sm text-destructive">
-                                                {errors.current_password}
-                                            </p>
-                                        )}
-                                    </div>
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="password">
-                                            New password
-                                        </Label>
+                                    </FormField>
+                                    <FormField
+                                        id="password"
+                                        label="New password"
+                                        error={errors.password}
+                                        required
+                                    >
                                         <PasswordInput
                                             id="password"
                                             name="password"
                                             required
                                             autoComplete="new-password"
+                                            className="h-10"
+                                            aria-invalid={!!errors.password}
                                         />
-                                    </div>
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="password_confirmation">
-                                            Confirm new password
-                                        </Label>
+                                    </FormField>
+                                    <FormField
+                                        id="password_confirmation"
+                                        label="Confirm new password"
+                                        error={errors.password_confirmation}
+                                        required
+                                    >
                                         <PasswordInput
                                             id="password_confirmation"
                                             name="password_confirmation"
                                             required
                                             autoComplete="new-password"
+                                            className="h-10"
+                                            aria-invalid={
+                                                !!errors.password_confirmation
+                                            }
                                         />
-                                    </div>
+                                    </FormField>
                                     <Button
                                         type="submit"
                                         variant="outline"
                                         disabled={processing}
                                     >
+                                        {processing && <Spinner />}
                                         Update password
                                     </Button>
                                 </>

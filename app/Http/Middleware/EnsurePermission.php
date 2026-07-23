@@ -12,6 +12,10 @@ class EnsurePermission
     {
         $user = $request->user();
 
+        if ($user?->isSuperAdmin()) {
+            return $next($request);
+        }
+
         if ($user === null || ! $user->hasPermission($permission)) {
             abort(403, 'You do not have permission to perform this action.');
         }

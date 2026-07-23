@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'is_super_admin' => $this->isSuperAdmin(),
             'organization' => $this->when(
                 $this->relationLoaded('currentOrganization') && $this->currentOrganization !== null,
                 fn () => OrganizationResource::make($this->currentOrganization)->resolve(),

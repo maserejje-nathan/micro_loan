@@ -15,11 +15,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 
 class Customer extends Model implements AuthenticatableContract
 {
     /** @use HasFactory<CustomerFactory> */
-    use Authenticatable, BelongsToOrganization, HasFactory;
+    use Authenticatable, BelongsToOrganization, HasApiTokens, HasFactory;
 
     /**
      * @var list<string>

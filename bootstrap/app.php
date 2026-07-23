@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Middleware\EnsureActiveSubscription;
+use App\Http\Middleware\EnsureApiPortalCustomer;
+use App\Http\Middleware\EnsureApiStaffUser;
 use App\Http\Middleware\EnsurePermission;
 use App\Http\Middleware\EnsureSuperAdmin;
 use App\Http\Middleware\EnsureUserHasOrganization;
@@ -8,6 +10,7 @@ use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\ResolveOrganizationFromSubdomain;
 use App\Http\Middleware\SetCurrentOrganization;
+use App\Http\Middleware\SetOrganizationFromPortalCustomer;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -35,6 +38,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => EnsurePermission::class,
             'super_admin' => EnsureSuperAdmin::class,
             'subscription.active' => EnsureActiveSubscription::class,
+            'api.portal' => EnsureApiPortalCustomer::class,
+            'api.portal.org' => SetOrganizationFromPortalCustomer::class,
+            'api.staff' => EnsureApiStaffUser::class,
         ]);
 
         $middleware->web(prepend: [

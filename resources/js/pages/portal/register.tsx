@@ -4,6 +4,7 @@ import {
     PortalRegistrationForm,
 } from '@/components/portal/portal-registration-form';
 import { Button } from '@/components/ui/button';
+import { store } from '@/routes/portal/register';
 
 type SelectOption = { value: string; label: string };
 
@@ -49,11 +50,11 @@ export default function PortalRegister({
 
             <Form
                 id={PORTAL_REGISTER_FORM_ID}
-                action="/portal/register"
-                method="post"
+                {...store.form()}
                 encType="multipart/form-data"
                 forceFormData
                 noValidate
+                disableWhileProcessing
                 className="flex flex-col gap-6"
             >
                 {({ processing, errors }) => (

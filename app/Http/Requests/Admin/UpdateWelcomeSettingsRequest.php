@@ -30,6 +30,10 @@ class UpdateWelcomeSettingsRequest extends FormRequest
             'cta_title' => ['required', 'string', 'max:255'],
             'cta_description' => ['required', 'string', 'max:1000'],
             'footer_tagline' => ['required', 'string', 'max:1000'],
+            'mobile_app_title' => ['required', 'string', 'max:255'],
+            'mobile_app_description' => ['required', 'string', 'max:1000'],
+            'ios_app_url' => ['nullable', 'url', 'max:500'],
+            'android_app_url' => ['nullable', 'url', 'max:500'],
             'popular_plan_slug' => ['nullable', 'string', 'max:100'],
             'logo_url' => ['nullable', 'string', 'max:500'],
             'logo_path' => ['nullable', 'string', 'max:500'],
@@ -87,6 +91,12 @@ class UpdateWelcomeSettingsRequest extends FormRequest
             $this->merge([
                 'remove_logo' => filter_var($this->input('remove_logo'), FILTER_VALIDATE_BOOLEAN),
             ]);
+        }
+
+        foreach (['ios_app_url', 'android_app_url'] as $field) {
+            if ($this->has($field) && blank($this->input($field))) {
+                $this->merge([$field => null]);
+            }
         }
 
         $slides = $this->input('banner_slides', []);

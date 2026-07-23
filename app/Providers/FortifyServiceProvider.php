@@ -96,5 +96,15 @@ class FortifyServiceProvider extends ServiceProvider
 
             return Limit::perMinute(5)->by($throttleKey);
         });
+
+        RateLimiter::for('portal-api-login', function (Request $request) {
+            $throttleKey = Str::transliterate(
+                Str::lower((string) $request->input('phone')).'|'.
+                Str::lower((string) $request->input('organization_slug')).'|'.
+                $request->ip()
+            );
+
+            return Limit::perMinute(5)->by($throttleKey);
+        });
     }
 }

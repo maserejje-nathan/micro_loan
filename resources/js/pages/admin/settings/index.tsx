@@ -86,7 +86,7 @@ export default function AdminSettingsIndex({
                             {integrations.map((item) => (
                                 <div
                                     key={item.label}
-                                    className="rounded-lg border border-border bg-muted p-4"
+                                    className="rounded-none border border-border bg-muted p-4"
                                 >
                                     <div className="flex items-start justify-between gap-2">
                                         <p className="text-sm font-medium">

@@ -205,7 +205,7 @@ export default function AdminSystemIndex({
                                     : 'Disabled — expected for production'
                             }
                         />
-                        <div className="rounded-lg border border-border bg-muted p-4 text-sm">
+                        <div className="rounded-none border border-border bg-muted p-4 text-sm">
                             <p className="font-medium">Platform records</p>
                             <dl className="mt-3 space-y-2 text-muted-foreground">
                                 <div className="flex justify-between">
@@ -236,7 +236,7 @@ export default function AdminSystemIndex({
                     </CardHeader>
                     <CardContent className="pt-6">
                         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                            <div className="rounded-lg border border-border bg-muted px-3 py-2">
+                            <div className="rounded-none border border-border bg-muted px-3 py-2">
                                 <p className="text-xs text-muted-foreground">
                                     All events
                                 </p>
@@ -247,7 +247,7 @@ export default function AdminSystemIndex({
                             {CATEGORY_KEYS.map((key) => (
                                 <div
                                     key={key}
-                                    className="rounded-lg border border-border bg-muted px-3 py-2"
+                                    className="rounded-none border border-border bg-muted px-3 py-2"
                                 >
                                     <p className="text-xs text-muted-foreground">
                                         {auditCategoryLabel(key)}
@@ -276,7 +276,7 @@ export default function AdminSystemIndex({
                                 {commands.map((command) => (
                                     <li
                                         key={command.key}
-                                        className="flex items-center justify-between rounded-lg border border-border bg-muted px-3 py-2"
+                                        className="flex items-center justify-between rounded-none border border-border bg-muted px-3 py-2"
                                     >
                                         <span>{command.label}</span>
                                         <code className="text-xs text-muted-foreground">

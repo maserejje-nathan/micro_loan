@@ -16,6 +16,7 @@ class DashboardResource extends JsonResource
         $payload = $this->resource;
 
         return [
+            'type' => 'lender',
             'stats' => $payload['stats'],
             'recent_applications' => $payload['recent_applications'],
             'currency' => $payload['currency'],

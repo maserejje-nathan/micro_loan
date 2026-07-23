@@ -1,6 +1,8 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
 import { login } from '@/routes';
+import { accept } from '@/routes/invitations';
 
 type Invitation = {
     token: string;
@@ -18,9 +20,9 @@ export default function AcceptInvitation({
     return (
         <>
             <Head title="Accept invitation" />
-            <div className="w-full space-y-6 p-8">
+            <div className="w-full space-y-6">
                 <div>
-                    <h1 className="text-2xl font-semibold">
+                    <h1 className="text-2xl font-semibold tracking-tight">
                         Join {invitation.organization_name}
                     </h1>
                     <p className="mt-2 text-sm text-muted-foreground">
@@ -31,12 +33,26 @@ export default function AcceptInvitation({
                     </p>
                 </div>
                 <Form
-                    action={`/invitations/${invitation.token}/accept`}
-                    method="post"
+                    {...accept.form(invitation.token)}
+                    disableWhileProcessing
                 >
-                    <Button type="submit" className="w-full">
-                        Accept invitation
-                    </Button>
+                    {({ processing, errors }) => (
+                        <div className="space-y-3">
+                            {errors.token && (
+                                <p className="text-sm text-destructive">
+                                    {errors.token}
+                                </p>
+                            )}
+                            <Button
+                                type="submit"
+                                className="w-full"
+                                disabled={processing}
+                            >
+                                {processing && <Spinner />}
+                                Accept invitation
+                            </Button>
+                        </div>
+                    )}
                 </Form>
                 <p className="text-center text-sm text-muted-foreground">
                     <Link href={login()} className="underline">
@@ -47,3 +63,8 @@ export default function AcceptInvitation({
         </>
     );
 }
+
+AcceptInvitation.layout = {
+    title: 'Team invitation',
+    description: 'Accept your invitation to join a lending workspace.',
+};

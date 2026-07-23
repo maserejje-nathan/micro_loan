@@ -180,7 +180,7 @@ export default function PortalApplicationsIndex({
                             </div>
                         </div>
                         <div className="w-full overflow-x-auto overscroll-x-contain">
-                            <div className="flex w-max min-w-full gap-1 rounded-lg border border-border bg-muted p-1 sm:w-full sm:flex-wrap">
+                            <div className="flex w-max min-w-full gap-1 rounded-none border border-border bg-muted p-1 sm:w-full sm:flex-wrap">
                                 {filters.map((item) => (
                                     <Link
                                         key={item.key}
@@ -246,7 +246,7 @@ export default function PortalApplicationsIndex({
                                         <Link
                                             key={application.id}
                                             href={`/portal/applications/${application.id}`}
-                                            className="block rounded-xl border bg-card p-4 transition-colors hover:border-primary/30 hover:bg-muted"
+                                            className="block rounded-none border bg-card p-4 transition-colors hover:border-primary/30 hover:bg-muted"
                                         >
                                             <div className="flex items-start justify-between gap-3">
                                                 <div>

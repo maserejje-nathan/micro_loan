@@ -16,7 +16,10 @@ class UpdateSubscriptionPlanRequest extends FormRequest
             $this->merge([
                 'features' => $features === ''
                     ? []
-                    : array_values(array_filter(array_map('trim', explode(',', $features)))),
+                    : array_values(array_filter(array_map(
+                        'trim',
+                        preg_split('/[\n,]+/', $features) ?: [],
+                    ))),
             ]);
         }
 

@@ -115,7 +115,7 @@ export default function AdminNotificationSettings({
                                         <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                                             Automated message types
                                         </p>
-                                        <div className="space-y-3 rounded-lg border p-4">
+                                        <div className="space-y-3 rounded-none border p-4">
                                             {types.map((type) => (
                                                 <div
                                                     key={type.key}

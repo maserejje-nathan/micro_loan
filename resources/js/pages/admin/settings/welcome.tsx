@@ -38,6 +38,10 @@ type WelcomeSettings = {
     cta_title: string;
     cta_description: string;
     footer_tagline: string;
+    mobile_app_title: string;
+    mobile_app_description: string;
+    ios_app_url: string;
+    android_app_url: string;
     popular_plan_slug: string;
     banner_slides: BannerSlide[];
     steps: Step[];
@@ -328,6 +332,83 @@ export default function AdminWelcomeSettings({
                                         </FormField>
                                     </div>
                                 ))}
+                            </section>
+
+                            <section className="space-y-4">
+                                <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                                    Mobile app
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                    Shown on the public home page. Leave store
+                                    URLs blank until the apps are published —
+                                    badges will show as coming soon.
+                                </p>
+                                <FormField
+                                    id="mobile_app_title"
+                                    label="Section title"
+                                    error={errors.mobile_app_title}
+                                    required
+                                >
+                                    <Input
+                                        id="mobile_app_title"
+                                        name="mobile_app_title"
+                                        defaultValue={
+                                            settings.mobile_app_title
+                                        }
+                                        className="h-10"
+                                    />
+                                </FormField>
+                                <FormField
+                                    id="mobile_app_description"
+                                    label="Section description"
+                                    error={errors.mobile_app_description}
+                                    required
+                                >
+                                    <Textarea
+                                        id="mobile_app_description"
+                                        name="mobile_app_description"
+                                        rows={2}
+                                        defaultValue={
+                                            settings.mobile_app_description
+                                        }
+                                    />
+                                </FormField>
+                                <div className="grid gap-4 lg:grid-cols-2">
+                                    <FormField
+                                        id="ios_app_url"
+                                        label="App Store URL"
+                                        error={errors.ios_app_url}
+                                        hint="Full https link to the iOS listing"
+                                    >
+                                        <Input
+                                            id="ios_app_url"
+                                            name="ios_app_url"
+                                            type="url"
+                                            placeholder="https://apps.apple.com/..."
+                                            defaultValue={
+                                                settings.ios_app_url ?? ''
+                                            }
+                                            className="h-10"
+                                        />
+                                    </FormField>
+                                    <FormField
+                                        id="android_app_url"
+                                        label="Google Play URL"
+                                        error={errors.android_app_url}
+                                        hint="Full https link to the Android listing"
+                                    >
+                                        <Input
+                                            id="android_app_url"
+                                            name="android_app_url"
+                                            type="url"
+                                            placeholder="https://play.google.com/..."
+                                            defaultValue={
+                                                settings.android_app_url ?? ''
+                                            }
+                                            className="h-10"
+                                        />
+                                    </FormField>
+                                </div>
                             </section>
 
                             <section className="space-y-4">

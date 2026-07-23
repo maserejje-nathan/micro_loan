@@ -14,7 +14,9 @@ test('authenticated lender can fetch dashboard stats via api', function () {
 
     $this->getJson('/api/v1/dashboard')
         ->assertOk()
+        ->assertJsonPath('type', 'lender')
         ->assertJsonStructure([
+            'type',
             'stats' => [
                 'active_loans',
                 'pending_applications',

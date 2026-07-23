@@ -28,12 +28,12 @@ export function SettingsLinkCard({
         <Link
             href={href}
             className={cn(
-                'group flex flex-col rounded-xl border border-border bg-card p-4 shadow-sm transition-colors',
+                'group flex flex-col rounded-none border border-border bg-card p-4 shadow-sm transition-colors',
                 'hover:border-primary/40 hover:bg-muted',
             )}
         >
             <div className="flex items-start justify-between gap-3">
-                <div className="flex size-10 items-center justify-center rounded-lg bg-secondary text-primary transition-colors group-hover:bg-accent">
+                <div className="flex size-10 items-center justify-center rounded-none bg-secondary text-primary transition-colors group-hover:bg-accent">
                     <Icon className="size-5" />
                 </div>
                 {status && <IntegrationStatusBadge status={status} />}

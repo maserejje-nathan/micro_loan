@@ -126,6 +126,50 @@ test('super admin can manage subscription plans', function () {
     expect(SubscriptionPlan::query()->where('slug', 'growth')->exists())->toBeTrue();
 });
 
+test('super admin can edit a subscription plan', function () {
+    $admin = User::factory()->create(['is_super_admin' => true]);
+    $this->actingAs($admin);
+
+    $plan = SubscriptionPlan::query()->where('slug', 'starter')->firstOrFail();
+
+    $this->get(route('admin.plans.edit', $plan))
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('admin/plans/form')
+            ->where('plan.id', $plan->id)
+            ->where('plan.slug', 'starter')
+            ->has('billingIntervals', 2)
+        );
+
+    $this->put(route('admin.plans.update', $plan), [
+        'name' => 'Starter Plus',
+        'slug' => 'starter',
+        'description' => 'Updated starter plan',
+        'price' => 175000,
+        'currency' => 'UGX',
+        'billing_interval' => 'monthly',
+        'trial_days' => 21,
+        'max_users' => 5,
+        'max_customers' => null,
+        'max_active_loans' => 50,
+        'features' => "Team invitations\nPDF statements, SMS reminders",
+        'is_active' => true,
+        'sort_order' => 1,
+    ])->assertRedirect(route('admin.plans.index'));
+
+    $plan->refresh();
+
+    expect($plan->name)->toBe('Starter Plus')
+        ->and($plan->price)->toBe(175000)
+        ->and($plan->trial_days)->toBe(21)
+        ->and($plan->max_users)->toBe(5)
+        ->and($plan->features)->toBe([
+            'Team invitations',
+            'PDF statements',
+            'SMS reminders',
+        ]);
+});
+
 test('organization owner can view billing settings', function () {
     $user = User::factory()->create();
     $this->setupOrganization($user);

@@ -15,6 +15,7 @@ import {
 import { useState } from 'react';
 import LoanApplicationController from '@/actions/App/Http/Controllers/LoanApplicationController';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
+import { FormField } from '@/components/form-field';
 import { LoanApplicationCollateralList } from '@/components/loan-applications/loan-application-collateral-list';
 import type { CollateralItem } from '@/components/loan-applications/loan-application-collateral-list';
 import { DisburseLoanFormFields } from '@/components/loans/disburse-loan-form-fields';
@@ -114,7 +115,7 @@ function DetailItem({
     }
 
     return (
-        <div className="rounded-lg border border-border bg-muted px-3 py-2.5">
+        <div className="rounded-none border border-border bg-muted px-3 py-2.5">
             <dt className="text-xs text-muted-foreground">{label}</dt>
             <dd className="mt-0.5 text-sm font-medium">{value}</dd>
         </div>
@@ -411,7 +412,7 @@ export default function LoanApplicationsShow({
                                     href={customerShow.url(
                                         application.customer.id,
                                     )}
-                                    className="flex items-start gap-3 rounded-lg border p-4 transition-colors hover:bg-muted"
+                                    className="flex items-start gap-3 rounded-none border p-4 transition-colors hover:bg-muted"
                                 >
                                     <div className="flex size-10 items-center justify-center rounded-full bg-secondary">
                                         <User className="size-5 text-primary" />
@@ -498,7 +499,7 @@ export default function LoanApplicationsShow({
                                 )}
 
                                 {isRejected && application.rejection_reason && (
-                                    <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+                                    <div className="rounded-none border border-destructive/30 bg-destructive/5 p-4">
                                         <p className="flex items-center gap-2 text-sm font-medium text-destructive">
                                             <XCircle className="size-4" />
                                             Rejection reason
@@ -698,13 +699,18 @@ export default function LoanApplicationsShow({
                                 {...LoanApplicationController.approve.form(
                                     application.id,
                                 )}
+                                disableWhileProcessing
                                 className="space-y-6"
                             >
+                                {({ processing }) => (
+                                    <>
                                 <div className="grid gap-4 sm:grid-cols-2">
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="approved_amount">
-                                            Approved amount
-                                        </Label>
+                                    <FormField
+                                        id="approved_amount"
+                                        label="Approved amount"
+                                        error={errors.approved_amount}
+                                        hint={`${formatMoney(application.product.min_amount, currency)} – ${formatMoney(application.product.max_amount, currency)}`}
+                                    >
                                         <Input
                                             id="approved_amount"
                                             name="approved_amount"
@@ -724,27 +730,14 @@ export default function LoanApplicationsShow({
                                             }
                                             className="h-10"
                                         />
-                                        {errors.approved_amount && (
-                                            <p className="text-sm text-destructive">
-                                                {errors.approved_amount}
-                                            </p>
-                                        )}
-                                        <p className="text-xs text-muted-foreground">
-                                            {formatMoney(
-                                                application.product.min_amount,
-                                                currency,
-                                            )}{' '}
-                                            –{' '}
-                                            {formatMoney(
-                                                application.product.max_amount,
-                                                currency,
-                                            )}
-                                        </p>
-                                    </div>
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="term_days">
-                                            Term (days)
-                                        </Label>
+                                    </FormField>
+                                    <FormField
+                                        id="term_days"
+                                        label="Term (days)"
+                                        error={errors.term_days}
+                                        required
+                                        hint={`${application.product.term_min_days}–${application.product.term_max_days} days`}
+                                    >
                                         <Input
                                             id="term_days"
                                             name="term_days"
@@ -762,21 +755,11 @@ export default function LoanApplicationsShow({
                                             aria-invalid={!!errors.term_days}
                                             className="h-10"
                                         />
-                                        {errors.term_days && (
-                                            <p className="text-sm text-destructive">
-                                                {errors.term_days}
-                                            </p>
-                                        )}
-                                        <p className="text-xs text-muted-foreground">
-                                            {application.product.term_min_days}–
-                                            {application.product.term_max_days}{' '}
-                                            days
-                                        </p>
-                                    </div>
+                                    </FormField>
                                 </div>
 
                                 {canDisburse && (
-                                    <div className="space-y-3 rounded-lg border border-dashed border-border bg-muted p-4">
+                                    <div className="space-y-3 rounded-none border border-dashed border-border bg-muted p-4">
                                         <div className="flex items-start gap-3">
                                             <Checkbox
                                                 id="disburse_via_mobile_money"
@@ -824,11 +807,17 @@ export default function LoanApplicationsShow({
                                     </div>
                                 )}
 
-                                <Button type="submit" size="lg">
+                                <Button
+                                    type="submit"
+                                    size="lg"
+                                    disabled={processing}
+                                >
                                     {disburseNow
                                         ? 'Approve & disburse'
                                         : 'Approve application'}
                                 </Button>
+                                    </>
+                                )}
                             </Form>
 
                             <Separator />
@@ -837,12 +826,17 @@ export default function LoanApplicationsShow({
                                 {...LoanApplicationController.reject.form(
                                     application.id,
                                 )}
+                                disableWhileProcessing
                                 className="space-y-4"
                             >
-                                <div className="grid gap-2">
-                                    <Label htmlFor="reason">
-                                        Rejection reason
-                                    </Label>
+                                {({ processing }) => (
+                                    <>
+                                <FormField
+                                    id="reason"
+                                    label="Rejection reason"
+                                    error={errors.reason}
+                                    required
+                                >
                                     <Textarea
                                         id="reason"
                                         name="reason"
@@ -851,15 +845,16 @@ export default function LoanApplicationsShow({
                                         placeholder="Explain why this application cannot be approved…"
                                         aria-invalid={!!errors.reason}
                                     />
-                                    {errors.reason && (
-                                        <p className="text-sm text-destructive">
-                                            {errors.reason}
-                                        </p>
-                                    )}
-                                </div>
-                                <Button type="submit" variant="destructive">
+                                </FormField>
+                                <Button
+                                    type="submit"
+                                    variant="destructive"
+                                    disabled={processing}
+                                >
                                     Reject application
                                 </Button>
+                                    </>
+                                )}
                             </Form>
                         </CardContent>
                     </Card>

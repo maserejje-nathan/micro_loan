@@ -1,6 +1,8 @@
-import { apiRequest } from './client';
 import type { Dashboard } from '../types';
+import { apiRequest, unwrapData } from './client';
 
-export function fetchDashboard(): Promise<Dashboard> {
-  return apiRequest<Dashboard>('/api/v1/dashboard');
+export async function fetchDashboard(isAdmin = false): Promise<Dashboard> {
+  const path = isAdmin ? '/api/v1/admin/dashboard' : '/api/v1/dashboard';
+  const payload = await apiRequest<Dashboard | { data: Dashboard }>(path);
+  return unwrapData(payload);
 }

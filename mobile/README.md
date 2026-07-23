@@ -1,6 +1,6 @@
-# Avango Lender (React Native)
+# Avango Mobile (React Native / Expo)
 
-Mobile app for lending staff — sign in with the same email/password used on the web app.
+Mobile app for **lender staff**, **platform admins**, and **portal customers** — mirroring the web app.
 
 ## Prerequisites
 
@@ -40,14 +40,33 @@ Then press `i` (iOS), `a` (Android), or scan the QR code with Expo Go.
 
 ## Current features
 
-- Token login via `/api/v1/login` (Sanctum)
-- Session restore via SecureStore
-- Dashboard stats + recent applications
-- Sign out
+### Auth
+- Staff login via `/api/v1/login` (email + password)
+- Portal login via `/api/v1/portal/login` (lender code + phone + password)
+- Session restore via SecureStore (token + auth mode)
+- Role routing: super admin → Admin tabs, org staff → Lender tabs, portal → Portal tabs
 
-## Next endpoints (planned)
-
+### Lender (org staff)
+- Home dashboard (stats + recent applications)
 - Customers list/detail
-- Loan applications
-- Loans + repayments
-- Push notifications
+- Applications list/detail with Submit / Approve / Reject
+- Loans list/detail with Disburse (cash)
+- More: Products, Repayments (+ create), Reports, Audit logs, Profile/Sign out
+- Permission-gated menu items and actions
+
+### Admin (super admin)
+- Home dashboard (platform stats + recent orgs)
+- Organizations list/detail
+- Billing stack: Plans, Subscriptions (activate/renew/cancel), Invoices (mark paid)
+- System health
+- Account / sign out
+
+### Portal (customers)
+- Home dashboard
+- Loans list/detail
+- Applications list/detail/create + submit draft
+- Profile update + password change + sign out
+
+## Shared UI
+
+Reusable components in `src/components/`: Screen, Card, ListRow, StatGrid, EmptyState, PrimaryButton, ErrorBanner, SectionHeader, DetailField, PromptModal.

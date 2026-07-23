@@ -4,7 +4,7 @@ import { BillingStatusBadge } from '@/components/admin/billing-status-badge';
 import { UsageMeter } from '@/components/billing/usage-meter';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
-import Heading from '@/components/heading';
+import { SettingsPageHeader } from '@/components/settings/settings-section';
 import { StatCard } from '@/components/stat-card';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/table';
 import { formatEnumLabel } from '@/lib/format-label';
 import { formatMoney } from '@/lib/format-money';
+import { index as billingIndex } from '@/routes/settings/billing';
 import type { Paginated } from '@/types/pagination';
 import { paginatorTotal } from '@/types/pagination';
 
@@ -79,23 +80,23 @@ export default function BillingSettings({
     return (
         <>
             <Head title="Billing" />
-            <div className="space-y-6">
-                <Heading
-                    title="Billing"
-                    description="Your subscription, usage against plan limits, and invoices"
-                />
 
-                {!subscription && (
-                    <Card variant="destructive">
-                        <CardContent className="p-6">
-                            <EmptyState
-                                icon={Banknote}
-                                title="No active subscription"
-                                description="Contact your platform administrator to restore access or start a new plan."
-                            />
-                        </CardContent>
-                    </Card>
-                )}
+            <SettingsPageHeader
+                title="Billing"
+                description="Your subscription, usage against plan limits, and invoices."
+            />
+
+            {!subscription && (
+                <Card variant="destructive">
+                    <CardContent className="p-6">
+                        <EmptyState
+                            icon={Banknote}
+                            title="No active subscription"
+                            description="Contact your platform administrator to restore access or start a new plan."
+                        />
+                    </CardContent>
+                </Card>
+            )}
 
                 {subscription && (
                     <>
@@ -309,7 +310,10 @@ export default function BillingSettings({
                         <DataTablePagination paginator={invoices} />
                     </CardContent>
                 </Card>
-            </div>
         </>
     );
 }
+
+BillingSettings.layout = {
+    breadcrumbs: [{ title: 'Billing', href: billingIndex().url }],
+};

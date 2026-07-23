@@ -138,7 +138,7 @@ function DetailItem({
     }
 
     return (
-        <div className="rounded-lg border border-border bg-muted px-3 py-2.5">
+        <div className="rounded-none border border-border bg-muted px-3 py-2.5">
             <dt className="text-xs text-muted-foreground">{label}</dt>
             <dd className="mt-0.5 text-sm font-medium">{value}</dd>
         </div>
@@ -493,16 +493,28 @@ export default function LoansShow({
                         <CardContent className="pt-6">
                             <Form
                                 {...disburse.form(loan.id)}
+                                disableWhileProcessing
                                 className="space-y-4"
                             >
-                                <DisburseLoanFormFields
-                                    errors={errors}
-                                    paymentChannels={paymentChannels}
-                                    defaultPhone={loan.customer.phone}
-                                    mobileMoney={mobileMoney}
-                                    defaultChannel={defaultDisbursementChannel}
-                                />
-                                <Button type="submit">Disburse loan</Button>
+                                {({ processing }) => (
+                                    <>
+                                        <DisburseLoanFormFields
+                                            errors={errors}
+                                            paymentChannels={paymentChannels}
+                                            defaultPhone={loan.customer.phone}
+                                            mobileMoney={mobileMoney}
+                                            defaultChannel={
+                                                defaultDisbursementChannel
+                                            }
+                                        />
+                                        <Button
+                                            type="submit"
+                                            disabled={processing}
+                                        >
+                                            Disburse loan
+                                        </Button>
+                                    </>
+                                )}
                             </Form>
                         </CardContent>
                     </Card>

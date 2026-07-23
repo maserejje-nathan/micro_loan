@@ -14,6 +14,7 @@ test('welcome page includes cms content', function () {
             ->component('welcome')
             ->has('content')
             ->where('content.hero_headline_highlight', 'growing MFIs')
+            ->where('content.mobile_app_title', 'Manage loans from your phone')
             ->has('content.banner_slides', 3)
         );
 });
@@ -41,6 +42,32 @@ test('welcome page banner slides include resolved image urls', function () {
         );
 });
 
+test('welcome page includes configured mobile app store urls', function () {
+    $admin = User::factory()->create(['is_super_admin' => true]);
+    $this->actingAs($admin);
+
+    $defaults = PlatformSettingsDefaults::welcome();
+
+    $this->put(route('admin.settings.welcome.update'), [
+        ...$defaults,
+        'ios_app_url' => 'https://apps.apple.com/app/avango',
+        'android_app_url' => 'https://play.google.com/store/apps/details?id=com.avango.lender',
+        'banner_slides' => $defaults['banner_slides'],
+        'steps' => $defaults['steps'],
+        'features' => $defaults['features'],
+    ])->assertRedirect();
+
+    $this->get(route('home'))
+        ->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->where('content.ios_app_url', 'https://apps.apple.com/app/avango')
+            ->where(
+                'content.android_app_url',
+                'https://play.google.com/store/apps/details?id=com.avango.lender',
+            )
+        );
+});
+
 test('super admin can update welcome content', function () {
     $admin = User::factory()->create(['is_super_admin' => true]);
     $this->actingAs($admin);
@@ -57,6 +84,10 @@ test('super admin can update welcome content', function () {
         'cta_title' => 'CTA',
         'cta_description' => 'CTA body',
         'footer_tagline' => 'Footer',
+        'mobile_app_title' => 'Get the app',
+        'mobile_app_description' => 'Download for iOS and Android.',
+        'ios_app_url' => 'https://apps.apple.com/app/avango',
+        'android_app_url' => null,
         'popular_plan_slug' => 'starter',
         'logo_url' => PlatformSettingsDefaults::welcome()['logo_url'],
         'banner_slides' => PlatformSettingsDefaults::welcome()['banner_slides'],
@@ -70,6 +101,8 @@ test('super admin can update welcome content', function () {
         ->assertInertia(fn ($page) => $page
             ->where('content.meta_title', 'Custom title')
             ->where('content.hero_headline_highlight', 'Highlight')
+            ->where('content.mobile_app_title', 'Get the app')
+            ->where('content.ios_app_url', 'https://apps.apple.com/app/avango')
         );
 });
 

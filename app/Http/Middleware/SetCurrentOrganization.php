@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use App\Support\OrganizationContext;
 use Closure;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class SetCurrentOrganization
 
         $user = $request->user();
 
-        if ($user !== null && $user->current_organization_id !== null) {
+        if ($user instanceof User && $user->current_organization_id !== null) {
             $user->loadMissing('currentOrganization');
             OrganizationContext::set($user->currentOrganization);
         }

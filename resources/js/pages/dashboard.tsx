@@ -32,6 +32,10 @@ import {
 import { useClipboard } from '@/hooks/use-clipboard';
 import { formatMoney } from '@/lib/format-money';
 import { dashboard } from '@/routes';
+import { index as customersIndex } from '@/routes/customers';
+import { index as loanApplicationsIndex } from '@/routes/loan-applications';
+import { index as loansIndex } from '@/routes/loans';
+import { index as repaymentsIndex } from '@/routes/repayments';
 
 type Stats = {
     active_loans: number;
@@ -85,7 +89,7 @@ export default function Dashboard({
                         </p>
                     </div>
                     {showLenderCode && (
-                        <div className="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-muted px-3 py-3 sm:px-4">
+                        <div className="flex flex-wrap items-center gap-2 rounded-none border border-border bg-muted px-3 py-3 sm:px-4">
                             <span className="text-sm font-medium">
                                 Client portal lender code
                             </span>
@@ -119,26 +123,30 @@ export default function Dashboard({
                     )}
                 </div>
 
-                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+                <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-5">
                     <StatCard
                         title="Active loans"
                         value={String(stats.active_loans)}
+                        description="Currently accruing"
                         icon={Wallet}
-                        href="/loans"
+                        href={loansIndex().url}
+                        tone="blue"
                     />
                     <StatCard
                         title="Pending applications"
                         value={String(stats.pending_applications)}
+                        description="Awaiting review"
                         icon={ClipboardList}
-                        href="/loan-applications"
-                        accentClassName="bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                        href={loanApplicationsIndex().url}
+                        tone="amber"
                     />
                     <StatCard
                         title="Customers"
                         value={String(stats.total_customers)}
+                        description="Borrowers on file"
                         icon={Users}
-                        href="/customers"
-                        accentClassName="bg-sky-500/10 text-sky-600 dark:text-sky-400"
+                        href={customersIndex().url}
+                        tone="sky"
                     />
                     <StatCard
                         title="Outstanding portfolio"
@@ -146,8 +154,10 @@ export default function Dashboard({
                             stats.portfolio_outstanding,
                             currency,
                         )}
+                        description="Balance on active loans"
                         icon={TrendingUp}
-                        accentClassName="bg-violet-500/10 text-violet-600 dark:text-violet-400"
+                        href={loansIndex().url}
+                        tone="violet"
                     />
                     <StatCard
                         title="Collected this month"
@@ -155,8 +165,11 @@ export default function Dashboard({
                             stats.repayments_this_month,
                             currency,
                         )}
+                        description="Repayments received"
                         icon={Coins}
-                        accentClassName="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                        href={repaymentsIndex().url}
+                        tone="emerald"
+                        className="sm:col-span-2 xl:col-span-1"
                     />
                 </div>
 
@@ -174,7 +187,9 @@ export default function Dashboard({
                             </div>
                         </div>
                         <Button variant="outline" size="sm" asChild>
-                            <Link href="/loan-applications">View all</Link>
+                            <Link href={loanApplicationsIndex().url}>
+                                View all
+                            </Link>
                         </Button>
                     </CardHeader>
                     <CardContent className="p-0">
@@ -220,7 +235,7 @@ export default function Dashboard({
                                             <TableCell className="hidden text-muted-foreground md:table-cell">
                                                 {app.product_name}
                                             </TableCell>
-                                            <TableCell className="text-right font-medium">
+                                            <TableCell className="text-right font-medium tabular-nums">
                                                 {formatMoney(
                                                     app.requested_amount,
                                                     currency,

@@ -60,7 +60,7 @@ export function PlatformLogoField({
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                 <div
                     className={cn(
-                        'flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-muted p-2',
+                        'flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-none border border-border bg-muted p-2',
                         showPreview && 'border-border',
                     )}
                 >

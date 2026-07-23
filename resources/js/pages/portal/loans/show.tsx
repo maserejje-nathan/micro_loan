@@ -121,7 +121,7 @@ function DetailItem({
     }
 
     return (
-        <div className="rounded-lg border border-border bg-muted px-3 py-2.5">
+        <div className="rounded-none border border-border bg-muted px-3 py-2.5">
             <dt className="text-xs text-muted-foreground">{label}</dt>
             <dd className="mt-0.5 text-sm font-medium">{value}</dd>
         </div>
@@ -220,7 +220,7 @@ export default function PortalLoanShow({
                 </div>
 
                 {loan.repayment_progress > 0 && loan.status === 'active' && (
-                    <div className="space-y-2 rounded-xl border bg-card p-4">
+                    <div className="space-y-2 rounded-none border bg-card p-4">
                         <div className="flex justify-between text-sm">
                             <span className="font-medium">
                                 Repayment progress

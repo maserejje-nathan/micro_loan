@@ -1,29 +1,47 @@
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import {
+  DMSans_400Regular,
+  DMSans_500Medium,
+  DMSans_600SemiBold,
+  DMSans_700Bold,
+} from '@expo-google-fonts/dm-sans';
+import {
+  Fraunces_600SemiBold,
+  Fraunces_700Bold,
+} from '@expo-google-fonts/fraunces';
+import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
-import { AuthProvider, useAuth } from './src/auth/AuthContext';
-import { DashboardScreen } from './src/screens/DashboardScreen';
-import { LoginScreen } from './src/screens/LoginScreen';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AuthProvider } from './src/auth/AuthContext';
+import { RootNavigator } from './src/navigation/RootNavigator';
+import { colors } from './src/theme/colors';
 
-function RootNavigator() {
-  const { user, bootstrapping } = useAuth();
+export default function App() {
+  const [fontsLoaded] = useFonts({
+    DMSans_400Regular,
+    DMSans_500Medium,
+    DMSans_600SemiBold,
+    DMSans_700Bold,
+    Fraunces_600SemiBold,
+    Fraunces_700Bold,
+  });
 
-  if (bootstrapping) {
+  if (!fontsLoaded) {
     return (
       <View style={styles.boot}>
-        <ActivityIndicator color="#1F6B57" size="large" />
+        <StatusBar style="light" />
+        <ActivityIndicator color={colors.leaf} size="large" />
       </View>
     );
   }
 
-  return user ? <DashboardScreen /> : <LoginScreen />;
-}
-
-export default function App() {
   return (
-    <AuthProvider>
-      <StatusBar style="light" />
-      <RootNavigator />
-    </AuthProvider>
+    <SafeAreaProvider>
+      <AuthProvider>
+        <StatusBar style="dark" />
+        <RootNavigator />
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }
 
@@ -32,6 +50,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0F2A24',
+    backgroundColor: colors.forestDeep,
   },
 });

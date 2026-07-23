@@ -42,7 +42,7 @@ export default function AuthCardLayout({
                     <AppLogo />
                 </Link>
 
-                <Card variant="default" className="rounded-xl shadow-md">
+                <Card variant="default" className="shadow-md">
                     <CardHeader className="space-y-1 px-6 pt-8 pb-0 text-center sm:px-10">
                         <CardTitle className="text-2xl font-semibold tracking-tight">
                             {title}

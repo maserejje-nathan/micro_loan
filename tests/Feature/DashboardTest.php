@@ -25,6 +25,14 @@ test('authenticated users can visit the dashboard', function () {
     $this->get(route('dashboard'))
         ->assertOk()
         ->assertInertia(fn ($page) => $page
+            ->component('dashboard')
+            ->has('stats.active_loans')
+            ->has('stats.pending_applications')
+            ->has('stats.total_customers')
+            ->has('stats.portfolio_outstanding')
+            ->has('stats.repayments_this_month')
+            ->has('recentApplications')
+            ->has('currency')
             ->has('loanCalculator')
             ->has('loanCalculator.products')
             ->has('loanCalculator.defaults'));

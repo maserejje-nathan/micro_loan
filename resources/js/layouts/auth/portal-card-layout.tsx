@@ -60,7 +60,7 @@ export default function PortalCardLayout({
                     </div>
                 </div>
 
-                <Card variant="default" className="rounded-xl shadow-md">
+                <Card variant="default" className="shadow-md">
                     <CardHeader className="space-y-1 px-4 pt-6 pb-0 text-center sm:px-10 sm:pt-8">
                         <CardTitle className="text-xl font-semibold tracking-tight sm:text-2xl">
                             {title}

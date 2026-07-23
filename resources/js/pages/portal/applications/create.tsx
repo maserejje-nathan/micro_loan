@@ -1,5 +1,6 @@
 import { Form, Head, Link } from '@inertiajs/react';
 import { ArrowLeft, ClipboardList, Info } from 'lucide-react';
+import { FormActions } from '@/components/form-actions';
 import { PortalApplicationFormFields } from '@/components/portal/portal-application-form-fields';
 import { PortalPage } from '@/components/portal/portal-page';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,10 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { formatMoney } from '@/lib/format-money';
+import {
+    index as applicationsIndex,
+    store,
+} from '@/routes/portal/applications';
 
 type Product = {
     id: number;
@@ -56,7 +61,7 @@ export default function PortalApplicationCreate({
                         asChild
                         className="mb-2 -ml-2"
                     >
-                        <Link href="/portal/applications">
+                        <Link href={applicationsIndex().url}>
                             <ArrowLeft className="mr-2 size-4" />
                             Applications
                         </Link>
@@ -116,8 +121,8 @@ export default function PortalApplicationCreate({
                             </CardHeader>
                             <CardContent className="p-6">
                                 <Form
-                                    action="/portal/applications"
-                                    method="post"
+                                    {...store.form()}
+                                    disableWhileProcessing
                                     className="space-y-6"
                                 >
                                     {({ processing, errors }) => (
@@ -131,23 +136,13 @@ export default function PortalApplicationCreate({
                                                 currency={currency}
                                                 values={formDefaults}
                                             />
-                                            <div className="flex flex-wrap gap-3 border-t pt-6">
-                                                <Button
-                                                    type="submit"
-                                                    disabled={processing}
-                                                >
-                                                    Save as draft
-                                                </Button>
-                                                <Button
-                                                    type="button"
-                                                    variant="outline"
-                                                    asChild
-                                                >
-                                                    <Link href="/portal/applications">
-                                                        Cancel
-                                                    </Link>
-                                                </Button>
-                                            </div>
+                                            <FormActions
+                                                processing={processing}
+                                                cancelHref={
+                                                    applicationsIndex().url
+                                                }
+                                                submitLabel="Save as draft"
+                                            />
                                         </>
                                     )}
                                 </Form>

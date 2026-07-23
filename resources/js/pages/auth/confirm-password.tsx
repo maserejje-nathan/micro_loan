@@ -1,8 +1,7 @@
 import { Form, Head } from '@inertiajs/react';
-import InputError from '@/components/input-error';
+import { AuthFormField } from '@/components/auth-form-field';
 import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { store } from '@/routes/password/confirm';
 
@@ -11,21 +10,29 @@ export default function ConfirmPassword() {
         <>
             <Head title="Confirm password" />
 
-            <Form {...store.form()} resetOnSuccess={['password']}>
+            <Form
+                {...store.form()}
+                resetOnSuccess={['password']}
+                disableWhileProcessing
+            >
                 {({ processing, errors }) => (
                     <div className="space-y-6">
-                        <div className="grid gap-2">
-                            <Label htmlFor="password">Password</Label>
+                        <AuthFormField
+                            id="password"
+                            label="Password"
+                            error={errors.password}
+                            required
+                        >
                             <PasswordInput
                                 id="password"
                                 name="password"
                                 placeholder="Password"
                                 autoComplete="current-password"
                                 autoFocus
+                                className="h-10"
+                                aria-invalid={!!errors.password}
                             />
-
-                            <InputError message={errors.password} />
-                        </div>
+                        </AuthFormField>
 
                         <div className="flex items-center">
                             <Button

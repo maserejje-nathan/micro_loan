@@ -1,6 +1,9 @@
 import { Head } from '@inertiajs/react';
 import AppearanceTabs from '@/components/appearance-tabs';
-import Heading from '@/components/heading';
+import {
+    SettingsPageHeader,
+    SettingsSection,
+} from '@/components/settings/settings-section';
 import { edit as editAppearance } from '@/routes/appearance';
 
 export default function Appearance() {
@@ -8,16 +11,17 @@ export default function Appearance() {
         <>
             <Head title="Appearance settings" />
 
-            <h1 className="sr-only">Appearance settings</h1>
+            <SettingsPageHeader
+                title="Appearance"
+                description="Choose how Avango looks for you on this device."
+            />
 
-            <div className="space-y-6">
-                <Heading
-                    variant="small"
-                    title="Appearance settings"
-                    description="Update the appearance settings for your account"
-                />
+            <SettingsSection
+                title="Theme"
+                description="Switch between light, dark, or match your system preference."
+            >
                 <AppearanceTabs />
-            </div>
+            </SettingsSection>
         </>
     );
 }

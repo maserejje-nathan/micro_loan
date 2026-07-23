@@ -78,7 +78,7 @@ export default function ReportsIndex({
                             statements
                         </p>
                     </div>
-                    <div className="flex items-center gap-2 rounded-lg border border-border bg-muted px-3 py-2 text-sm">
+                    <div className="flex items-center gap-2 rounded-none border border-border bg-muted px-3 py-2 text-sm">
                         <BarChart3 className="size-4 text-primary" />
                         <span className="text-muted-foreground">Currency:</span>
                         <span className="font-medium">{currency}</span>

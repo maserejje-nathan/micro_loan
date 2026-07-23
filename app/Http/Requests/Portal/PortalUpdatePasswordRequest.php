@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Portal;
 
+use App\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
@@ -9,7 +10,8 @@ class PortalUpdatePasswordRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user('portal') !== null;
+        return $this->user('portal') instanceof Customer
+            || $this->user() instanceof Customer;
     }
 
     /**

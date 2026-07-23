@@ -1,0 +1,15 @@
+export const colors = {
+  forestDeep: '#061612',
+  forest: '#0B2420',
+  forestMid: '#143D34',
+  forestBright: '#1F6B57',
+  forestGlow: '#2F8F74',
+  leaf: '#A8D5C4',
+  sand: '#F3EEE6',
+  sandSoft: '#FAF7F2',
+  ink: '#12201B',
+  inkMuted: '#5C6B64',
+  line: '#D8DFD9',
+  danger: '#B42318',
+  white: '#FFFFFF',
+};

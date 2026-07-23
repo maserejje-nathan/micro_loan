@@ -4,6 +4,7 @@ import { BillingStatusBadge } from '@/components/admin/billing-status-badge';
 import { SubscriptionPeriod } from '@/components/admin/subscription-period';
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
+import { FormField } from '@/components/form-field';
 import { StatCard } from '@/components/stat-card';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,8 +14,8 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
 import { NativeSelect } from '@/components/ui/native-select';
+import { Spinner } from '@/components/ui/spinner';
 import {
     Table,
     TableBody,
@@ -191,20 +192,26 @@ export default function AdminOrganizationShow({
                     <CardContent className="pt-6">
                         <Form
                             {...updateSubscription.form(organization.id)}
+                            disableWhileProcessing
                             className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
                         >
-                            {({ processing }) => (
+                            {({ processing, errors }) => (
                                 <>
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="subscription_plan_id">
-                                            Plan
-                                        </Label>
+                                    <FormField
+                                        id="subscription_plan_id"
+                                        label="Plan"
+                                        error={errors.subscription_plan_id}
+                                        required
+                                    >
                                         <NativeSelect
                                             id="subscription_plan_id"
                                             name="subscription_plan_id"
                                             defaultValue={
                                                 subscription?.plan_id ??
                                                 plans[0]?.id
+                                            }
+                                            aria-invalid={
+                                                !!errors.subscription_plan_id
                                             }
                                         >
                                             {plans.map((plan) => (
@@ -221,15 +228,20 @@ export default function AdminOrganizationShow({
                                                 </option>
                                             ))}
                                         </NativeSelect>
-                                    </div>
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="status">Status</Label>
+                                    </FormField>
+                                    <FormField
+                                        id="status"
+                                        label="Status"
+                                        error={errors.status}
+                                        required
+                                    >
                                         <NativeSelect
                                             id="status"
                                             name="status"
                                             defaultValue={
                                                 subscription?.status ?? 'active'
                                             }
+                                            aria-invalid={!!errors.status}
                                         >
                                             {statuses.map((status) => (
                                                 <option
@@ -240,12 +252,14 @@ export default function AdminOrganizationShow({
                                                 </option>
                                             ))}
                                         </NativeSelect>
-                                    </div>
+                                    </FormField>
                                     <div className="flex items-end sm:col-span-2 lg:col-span-2">
                                         <Button
                                             type="submit"
                                             disabled={processing}
+                                            className="min-w-44"
                                         >
+                                            {processing && <Spinner />}
                                             Update subscription
                                         </Button>
                                     </div>

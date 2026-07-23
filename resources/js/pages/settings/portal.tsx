@@ -1,16 +1,15 @@
 import { Form, Head } from '@inertiajs/react';
 import { ExternalLink } from 'lucide-react';
-import Heading from '@/components/heading';
-import { Button } from '@/components/ui/button';
+import { FormField } from '@/components/form-field';
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
+    SettingsPageHeader,
+    SettingsSection,
+} from '@/components/settings/settings-section';
+import { Button } from '@/components/ui/button';
+import { NativeSelect } from '@/components/ui/native-select';
+import { Spinner } from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
+import { edit, update } from '@/routes/settings/portal';
 
 type PortalSettings = {
     enabled: boolean;
@@ -18,6 +17,16 @@ type PortalSettings = {
     allow_self_registration: boolean;
     welcome_message: string;
 };
+
+const onOffOptions = [
+    { value: '1', label: 'On' },
+    { value: '0', label: 'Off' },
+];
+
+const yesNoOptions = [
+    { value: '1', label: 'Yes' },
+    { value: '0', label: 'No' },
+];
 
 export default function PortalSettingsPage({
     portal,
@@ -33,183 +42,164 @@ export default function PortalSettingsPage({
     return (
         <>
             <Head title="Client portal" />
-            <div className="space-y-6">
-                <Heading
-                    title="Client portal"
-                    description="Let borrowers sign in to view loans, apply online, and update their profile."
-                />
 
-                {portal.enabled && portalLoginUrl && (
-                    <Card>
-                        <CardContent className="flex flex-col gap-4 p-6">
-                            <div className="flex flex-wrap items-center justify-between gap-4">
+            <SettingsPageHeader
+                title="Client portal"
+                description="Let borrowers sign in to view loans, apply online, and update their profile."
+            />
+
+            {portal.enabled && portalLoginUrl && (
+                <SettingsSection
+                    title="Share links"
+                    description="Send these URLs to customers who need portal access."
+                >
+                    <div className="flex flex-col gap-4">
+                        <div className="flex flex-wrap items-center justify-between gap-4">
+                            <div>
+                                <p className="font-medium">
+                                    Portal sign-in URL
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                    Share this link with customers who have
+                                    portal access.
+                                </p>
+                            </div>
+                            <Button variant="outline" size="sm" asChild>
+                                <a
+                                    href={portalLoginUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <ExternalLink className="mr-2 size-4" />
+                                    Open portal
+                                </a>
+                            </Button>
+                        </div>
+                        {portalRegisterUrl && (
+                            <div className="flex flex-wrap items-center justify-between gap-4 border-t pt-4">
                                 <div>
                                     <p className="font-medium">
-                                        Portal sign-in URL
+                                        Self-registration URL
                                     </p>
                                     <p className="text-sm text-muted-foreground">
-                                        Share this link with customers who have
-                                        portal access.
+                                        New customers can create an account at
+                                        this link.
                                     </p>
                                 </div>
                                 <Button variant="outline" size="sm" asChild>
                                     <a
-                                        href={portalLoginUrl}
+                                        href={portalRegisterUrl}
                                         target="_blank"
                                         rel="noreferrer"
                                     >
                                         <ExternalLink className="mr-2 size-4" />
-                                        Open portal
+                                        Open registration
                                     </a>
                                 </Button>
                             </div>
-                            {portalRegisterUrl && (
-                                <div className="flex flex-wrap items-center justify-between gap-4 border-t pt-4">
-                                    <div>
-                                        <p className="font-medium">
-                                            Self-registration URL
-                                        </p>
-                                        <p className="text-sm text-muted-foreground">
-                                            New customers can create an account
-                                            at this link.
-                                        </p>
-                                    </div>
-                                    <Button variant="outline" size="sm" asChild>
-                                        <a
-                                            href={portalRegisterUrl}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            <ExternalLink className="mr-2 size-4" />
-                                            Open registration
-                                        </a>
-                                    </Button>
-                                </div>
-                            )}
-                        </CardContent>
-                    </Card>
-                )}
+                        )}
+                    </div>
+                </SettingsSection>
+            )}
 
-                <Card>
-                    <CardHeader className="border-b">
-                        <CardTitle className="text-base">
-                            Configuration
-                        </CardTitle>
-                        <CardDescription>
-                            Portal for {organization.name}
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="p-6">
-                        <Form
-                            action="/settings/portal"
-                            method="put"
-                            className="flex max-w-lg flex-col gap-6"
-                        >
-                            {({ processing, errors }) => (
-                                <>
-                                    <div className="flex items-center justify-between gap-4 rounded-lg border p-4">
-                                        <div>
-                                            <Label htmlFor="enabled">
-                                                Enable client portal
-                                            </Label>
-                                            <p className="text-sm text-muted-foreground">
-                                                When off, customers cannot sign
-                                                in even if individually enabled.
-                                            </p>
-                                        </div>
-                                        <select
-                                            id="enabled"
-                                            name="enabled"
-                                            defaultValue={
-                                                portal.enabled ? '1' : '0'
-                                            }
-                                            className="h-10 rounded-md border px-3 text-sm"
-                                        >
-                                            <option value="1">On</option>
-                                            <option value="0">Off</option>
-                                        </select>
-                                    </div>
+            <SettingsSection
+                title="Configuration"
+                description={`Portal for ${organization.name}`}
+            >
+                <Form
+                    {...update.form()}
+                    disableWhileProcessing
+                    className="flex max-w-2xl flex-col gap-6"
+                >
+                    {({ processing, errors }) => (
+                        <>
+                            <FormField
+                                id="enabled"
+                                label="Enable client portal"
+                                error={errors.enabled}
+                                hint="When off, customers cannot sign in even if individually enabled."
+                            >
+                                <NativeSelect
+                                    id="enabled"
+                                    name="enabled"
+                                    defaultValue={portal.enabled ? '1' : '0'}
+                                    options={onOffOptions}
+                                    aria-invalid={!!errors.enabled}
+                                />
+                            </FormField>
 
-                                    <div className="flex items-center justify-between gap-4 rounded-lg border p-4">
-                                        <div>
-                                            <Label htmlFor="allow_self_registration">
-                                                Allow self-registration
-                                            </Label>
-                                            <p className="text-sm text-muted-foreground">
-                                                New customers can create their
-                                                own portal account and enter
-                                                their details.
-                                            </p>
-                                        </div>
-                                        <select
-                                            id="allow_self_registration"
-                                            name="allow_self_registration"
-                                            defaultValue={
-                                                portal.allow_self_registration
-                                                    ? '1'
-                                                    : '0'
-                                            }
-                                            className="h-10 rounded-md border px-3 text-sm"
-                                        >
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
-                                        </select>
-                                    </div>
+                            <FormField
+                                id="allow_self_registration"
+                                label="Allow self-registration"
+                                error={errors.allow_self_registration}
+                                hint="New customers can create their own portal account and enter their details."
+                            >
+                                <NativeSelect
+                                    id="allow_self_registration"
+                                    name="allow_self_registration"
+                                    defaultValue={
+                                        portal.allow_self_registration
+                                            ? '1'
+                                            : '0'
+                                    }
+                                    options={yesNoOptions}
+                                    aria-invalid={
+                                        !!errors.allow_self_registration
+                                    }
+                                />
+                            </FormField>
 
-                                    <div className="flex items-center justify-between gap-4 rounded-lg border p-4">
-                                        <div>
-                                            <Label htmlFor="allow_applications">
-                                                Allow online applications
-                                            </Label>
-                                            <p className="text-sm text-muted-foreground">
-                                                Customers can submit new loan
-                                                applications from the portal.
-                                            </p>
-                                        </div>
-                                        <select
-                                            id="allow_applications"
-                                            name="allow_applications"
-                                            defaultValue={
-                                                portal.allow_applications
-                                                    ? '1'
-                                                    : '0'
-                                            }
-                                            className="h-10 rounded-md border px-3 text-sm"
-                                        >
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
-                                        </select>
-                                    </div>
+                            <FormField
+                                id="allow_applications"
+                                label="Allow online applications"
+                                error={errors.allow_applications}
+                                hint="Customers can submit new loan applications from the portal."
+                            >
+                                <NativeSelect
+                                    id="allow_applications"
+                                    name="allow_applications"
+                                    defaultValue={
+                                        portal.allow_applications ? '1' : '0'
+                                    }
+                                    options={yesNoOptions}
+                                    aria-invalid={!!errors.allow_applications}
+                                />
+                            </FormField>
 
-                                    <div className="grid gap-2">
-                                        <Label htmlFor="welcome_message">
-                                            Welcome message
-                                        </Label>
-                                        <Textarea
-                                            id="welcome_message"
-                                            name="welcome_message"
-                                            rows={3}
-                                            defaultValue={
-                                                portal.welcome_message
-                                            }
-                                            placeholder="Optional message on the customer dashboard"
-                                        />
-                                        {errors.welcome_message && (
-                                            <p className="text-sm text-destructive">
-                                                {errors.welcome_message}
-                                            </p>
-                                        )}
-                                    </div>
+                            <FormField
+                                id="welcome_message"
+                                label="Welcome message"
+                                error={errors.welcome_message}
+                                hint="Optional message shown on the customer dashboard."
+                            >
+                                <Textarea
+                                    id="welcome_message"
+                                    name="welcome_message"
+                                    rows={3}
+                                    defaultValue={portal.welcome_message}
+                                    placeholder="Welcome to your loan portal…"
+                                    aria-invalid={!!errors.welcome_message}
+                                />
+                            </FormField>
 
-                                    <Button type="submit" disabled={processing}>
-                                        Save settings
-                                    </Button>
-                                </>
-                            )}
-                        </Form>
-                    </CardContent>
-                </Card>
-            </div>
+                            <div>
+                                <Button
+                                    type="submit"
+                                    disabled={processing}
+                                    className="min-w-36"
+                                >
+                                    {processing && <Spinner />}
+                                    Save settings
+                                </Button>
+                            </div>
+                        </>
+                    )}
+                </Form>
+            </SettingsSection>
         </>
     );
 }
+
+PortalSettingsPage.layout = {
+    breadcrumbs: [{ title: 'Client portal', href: edit().url }],
+};

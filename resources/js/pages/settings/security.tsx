@@ -1,13 +1,16 @@
 import { Form, Head } from '@inertiajs/react';
 import { useRef } from 'react';
 import SecurityController from '@/actions/App/Http/Controllers/Settings/SecurityController';
-import Heading from '@/components/heading';
-import InputError from '@/components/input-error';
+import { FormField } from '@/components/form-field';
 import type { Props as ManageTwoFactorProps } from '@/components/manage-two-factor';
 import ManageTwoFactor from '@/components/manage-two-factor';
 import PasswordInput from '@/components/password-input';
+import {
+    SettingsPageHeader,
+    SettingsSection,
+} from '@/components/settings/settings-section';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
+import { Spinner } from '@/components/ui/spinner';
 import { edit } from '@/routes/security';
 
 type Props = {
@@ -22,15 +25,15 @@ export default function Security(props: Props) {
         <>
             <Head title="Security settings" />
 
-            <h1 className="sr-only">Security settings</h1>
+            <SettingsPageHeader
+                title="Security"
+                description="Keep your account secure with a strong password and two-factor authentication."
+            />
 
-            <div className="space-y-6">
-                <Heading
-                    variant="small"
-                    title="Update password"
-                    description="Ensure your account is using a long, random password to stay secure"
-                />
-
+            <SettingsSection
+                title="Update password"
+                description="Use a long, unique password you do not reuse elsewhere."
+            >
                 <Form
                     {...SecurityController.update.form()}
                     options={{
@@ -42,6 +45,7 @@ export default function Security(props: Props) {
                         'current_password',
                     ]}
                     resetOnSuccess
+                    disableWhileProcessing
                     onError={(errors) => {
                         if (errors.password) {
                             passwordInput.current?.focus();
@@ -51,74 +55,76 @@ export default function Security(props: Props) {
                             currentPasswordInput.current?.focus();
                         }
                     }}
-                    className="space-y-6"
+                    className="max-w-lg space-y-6"
                 >
                     {({ errors, processing }) => (
                         <>
-                            <div className="grid gap-2">
-                                <Label htmlFor="current_password">
-                                    Current password
-                                </Label>
-
+                            <FormField
+                                id="current_password"
+                                label="Current password"
+                                error={errors.current_password}
+                                required
+                            >
                                 <PasswordInput
                                     id="current_password"
                                     ref={currentPasswordInput}
                                     name="current_password"
-                                    className="mt-1 block w-full"
+                                    className="h-10"
                                     autoComplete="current-password"
                                     placeholder="Current password"
+                                    aria-invalid={!!errors.current_password}
                                 />
+                            </FormField>
 
-                                <InputError message={errors.current_password} />
-                            </div>
-
-                            <div className="grid gap-2">
-                                <Label htmlFor="password">New password</Label>
-
+                            <FormField
+                                id="password"
+                                label="New password"
+                                error={errors.password}
+                                required
+                            >
                                 <PasswordInput
                                     id="password"
                                     ref={passwordInput}
                                     name="password"
-                                    className="mt-1 block w-full"
+                                    className="h-10"
                                     autoComplete="new-password"
                                     placeholder="New password"
                                     passwordrules={props.passwordRules}
+                                    aria-invalid={!!errors.password}
                                 />
+                            </FormField>
 
-                                <InputError message={errors.password} />
-                            </div>
-
-                            <div className="grid gap-2">
-                                <Label htmlFor="password_confirmation">
-                                    Confirm password
-                                </Label>
-
+                            <FormField
+                                id="password_confirmation"
+                                label="Confirm password"
+                                error={errors.password_confirmation}
+                                required
+                            >
                                 <PasswordInput
                                     id="password_confirmation"
                                     name="password_confirmation"
-                                    className="mt-1 block w-full"
+                                    className="h-10"
                                     autoComplete="new-password"
                                     placeholder="Confirm password"
                                     passwordrules={props.passwordRules}
+                                    aria-invalid={
+                                        !!errors.password_confirmation
+                                    }
                                 />
+                            </FormField>
 
-                                <InputError
-                                    message={errors.password_confirmation}
-                                />
-                            </div>
-
-                            <div className="flex items-center gap-4">
-                                <Button
-                                    disabled={processing}
-                                    data-test="update-password-button"
-                                >
-                                    Save
-                                </Button>
-                            </div>
+                            <Button
+                                disabled={processing}
+                                className="min-w-28"
+                                data-test="update-password-button"
+                            >
+                                {processing && <Spinner />}
+                                Save
+                            </Button>
                         </>
                     )}
                 </Form>
-            </div>
+            </SettingsSection>
 
             <ManageTwoFactor
                 canManageTwoFactor={props.canManageTwoFactor}

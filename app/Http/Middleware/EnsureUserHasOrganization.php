@@ -12,6 +12,10 @@ class EnsureUserHasOrganization
     {
         $user = $request->user();
 
+        if ($user?->isSuperAdmin()) {
+            return $next($request);
+        }
+
         if ($user === null || $user->current_organization_id === null) {
             if ($request->expectsJson()) {
                 abort(403, 'Organization workspace required.');

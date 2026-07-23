@@ -403,7 +403,7 @@ export function LoanCalculatorWidget({
                     )}
                 </div>
 
-                <div className="flex flex-col justify-center rounded-xl border border-border bg-muted p-4 sm:p-5">
+                <div className="flex flex-col justify-center rounded-none border border-border bg-muted p-4 sm:p-5">
                     <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         Estimated breakdown
                     </p>

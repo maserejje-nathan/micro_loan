@@ -31,22 +31,31 @@ export function HealthStatCard({
     const palette = statCardTones[statusTone ?? tone];
 
     return (
-        <Card className={cn('border shadow-sm', palette.card)}>
-            <CardContent className="flex items-start gap-4 p-5">
+        <Card
+            className={cn(
+                'relative gap-0 overflow-hidden border py-0 shadow-none',
+                palette.card,
+            )}
+        >
+            <div
+                className={cn('absolute inset-y-0 left-0 w-1', palette.accent)}
+                aria-hidden
+            />
+            <CardContent className="flex items-start gap-4 p-5 pl-6">
                 <div
                     className={cn(
-                        'flex size-10 shrink-0 items-center justify-center rounded-lg',
+                        'flex size-9 shrink-0 items-center justify-center',
                         palette.icon,
                     )}
                 >
-                    <Icon className="size-5" />
+                    <Icon className="size-4" />
                 </div>
-                <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-muted-foreground">
+                <div className="min-w-0 flex-1 space-y-1">
+                    <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
                         {label}
                     </p>
-                    <div className="mt-1 flex flex-wrap items-center gap-2">
-                        <p className="text-2xl font-semibold tracking-tight">
+                    <div className="flex flex-wrap items-center gap-2">
+                        <p className="text-2xl font-semibold tracking-tight tabular-nums">
                             {value}
                         </p>
                         {showStatus && (
@@ -56,7 +65,7 @@ export function HealthStatCard({
                         )}
                     </div>
                     {description && (
-                        <p className="mt-1 text-xs text-muted-foreground">
+                        <p className="text-xs text-muted-foreground">
                             {description}
                         </p>
                     )}

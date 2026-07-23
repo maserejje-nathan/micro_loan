@@ -1,89 +1,27 @@
-import { Link } from '@inertiajs/react';
 import type { PropsWithChildren } from 'react';
 import Heading from '@/components/heading';
-import { Button } from '@/components/ui/button';
+import { SettingsNav } from '@/components/settings/settings-nav';
 import { Separator } from '@/components/ui/separator';
-import { useCurrentUrl } from '@/hooks/use-current-url';
-import { cn, toUrl } from '@/lib/utils';
-import { edit as editAppearance } from '@/routes/appearance';
-import { edit } from '@/routes/profile';
-import { edit as editSecurity } from '@/routes/security';
-import type { NavItem } from '@/types';
-
-const sidebarNavItems: NavItem[] = [
-    {
-        title: 'Profile',
-        href: edit(),
-        icon: null,
-    },
-    {
-        title: 'Security',
-        href: editSecurity(),
-        icon: null,
-    },
-    {
-        title: 'Appearance',
-        href: editAppearance(),
-        icon: null,
-    },
-    {
-        title: 'Team',
-        href: '/settings/team',
-        icon: null,
-    },
-    {
-        title: 'Billing',
-        href: '/settings/billing',
-        icon: null,
-    },
-    {
-        title: 'Client portal',
-        href: '/settings/portal',
-        icon: null,
-    },
-];
 
 export default function SettingsLayout({ children }: PropsWithChildren) {
-    const { isCurrentOrParentUrl } = useCurrentUrl();
-
     return (
-        <div className="px-4 py-6">
+        <div className="flex flex-1 flex-col gap-6 px-3 pb-10 sm:gap-8 sm:px-4 sm:py-6">
             <Heading
                 title="Settings"
-                description="Manage your profile and account settings"
+                description="Manage your account, team workspace, billing, and borrower portal."
             />
 
-            <div className="flex flex-col lg:flex-row lg:space-x-12">
-                <aside className="w-full max-w-xl lg:w-48">
-                    <nav
-                        className="flex flex-col space-y-1 space-x-0"
-                        aria-label="Settings"
-                    >
-                        {sidebarNavItems.map((item, index) => (
-                            <Button
-                                key={`${toUrl(item.href)}-${index}`}
-                                size="sm"
-                                variant="ghost"
-                                asChild
-                                className={cn('w-full justify-start', {
-                                    'bg-muted': isCurrentOrParentUrl(item.href),
-                                })}
-                            >
-                                <Link href={item.href}>
-                                    {item.icon && (
-                                        <item.icon className="h-4 w-4" />
-                                    )}
-                                    {item.title}
-                                </Link>
-                            </Button>
-                        ))}
-                    </nav>
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
+                <aside className="w-full shrink-0 lg:sticky lg:top-20 lg:w-60">
+                    <SettingsNav />
                 </aside>
 
-                <Separator className="my-6 lg:hidden" />
+                <Separator className="lg:hidden" />
 
                 <div className="min-w-0 flex-1">
-                    <section className="w-full space-y-12">{children}</section>
+                    <section className="w-full max-w-3xl space-y-8">
+                        {children}
+                    </section>
                 </div>
             </div>
         </div>

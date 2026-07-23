@@ -18,9 +18,11 @@ class MeController extends Controller
 
         return response()->json([
             'user' => UserResource::make($user)->resolve(),
-            'permissions' => $role
-                ? $role->permissions()->pluck('name')->values()->all()
-                : [],
+            'permissions' => $user?->isSuperAdmin()
+                ? ['*']
+                : ($role
+                    ? $role->permissions()->pluck('name')->values()->all()
+                    : []),
         ]);
     }
 }

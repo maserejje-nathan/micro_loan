@@ -44,7 +44,7 @@ export function CustomerPhotoField({
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
                 <div
                     className={cn(
-                        'flex size-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-muted',
+                        'flex size-28 shrink-0 items-center justify-center overflow-hidden rounded-none border border-border bg-muted',
                         showPreview && 'border-border',
                     )}
                 >

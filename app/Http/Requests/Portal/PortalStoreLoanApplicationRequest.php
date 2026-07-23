@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Portal;
 
 use App\Http\Requests\Concerns\ValidatesLoanApplicationCollaterals;
+use App\Models\Customer;
 use App\Models\LoanProduct;
 use App\Support\LoanProductLimitValidator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,7 +15,8 @@ class PortalStoreLoanApplicationRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return $this->user('portal') !== null;
+        return $this->user('portal') instanceof Customer
+            || $this->user() instanceof Customer;
     }
 
     /**

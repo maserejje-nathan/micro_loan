@@ -1,9 +1,12 @@
 import { Form, Head, Link } from '@inertiajs/react';
+import { FormField } from '@/components/form-field';
 import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Spinner } from '@/components/ui/spinner';
+import { store } from '@/routes/portal/login';
 
 type Props = {
     organization: { name: string; slug: string } | null;
@@ -24,35 +27,39 @@ export default function PortalLogin({
             <Head title="Client portal sign in" />
 
             <Form
-                action="/portal/login"
-                method="post"
+                {...store.form()}
                 resetOnSuccess={['password']}
+                disableWhileProcessing
                 className="flex flex-col gap-5"
             >
                 {({ processing, errors }) => (
                     <>
                         {requiresOrganizationSlug && (
-                            <div className="grid gap-2">
-                                <Label htmlFor="organization_slug">
-                                    Lender code
-                                </Label>
+                            <FormField
+                                id="organization_slug"
+                                label="Lender code"
+                                error={errors.organization_slug}
+                                required
+                                hint="The code your lender shared for portal access."
+                            >
                                 <Input
                                     id="organization_slug"
                                     name="organization_slug"
                                     placeholder="your-company-slug"
                                     defaultValue={organization?.slug}
                                     required
+                                    className="h-10"
+                                    aria-invalid={!!errors.organization_slug}
                                 />
-                                {errors.organization_slug && (
-                                    <p className="text-sm text-destructive">
-                                        {errors.organization_slug}
-                                    </p>
-                                )}
-                            </div>
+                            </FormField>
                         )}
 
-                        <div className="grid gap-2">
-                            <Label htmlFor="phone">Phone number</Label>
+                        <FormField
+                            id="phone"
+                            label="Phone number"
+                            error={errors.phone}
+                            required
+                        >
                             <Input
                                 id="phone"
                                 name="phone"
@@ -60,27 +67,25 @@ export default function PortalLogin({
                                 autoFocus
                                 required
                                 placeholder="2567XXXXXXXX"
+                                className="h-10"
+                                aria-invalid={!!errors.phone}
                             />
-                            {errors.phone && (
-                                <p className="text-sm text-destructive">
-                                    {errors.phone}
-                                </p>
-                            )}
-                        </div>
+                        </FormField>
 
-                        <div className="grid gap-2">
-                            <Label htmlFor="password">Password</Label>
+                        <FormField
+                            id="password"
+                            label="Password"
+                            error={errors.password}
+                            required
+                        >
                             <PasswordInput
                                 id="password"
                                 name="password"
                                 required
+                                className="h-10"
+                                aria-invalid={!!errors.password}
                             />
-                            {errors.password && (
-                                <p className="text-sm text-destructive">
-                                    {errors.password}
-                                </p>
-                            )}
-                        </div>
+                        </FormField>
 
                         <div className="flex items-center gap-2">
                             <Checkbox id="remember" name="remember" value="1" />
@@ -94,6 +99,7 @@ export default function PortalLogin({
                             className="w-full"
                             disabled={processing}
                         >
+                            {processing && <Spinner />}
                             Sign in
                         </Button>
 

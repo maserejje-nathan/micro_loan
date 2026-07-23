@@ -42,7 +42,7 @@ function IdDocumentSlot({
         <div className="space-y-3">
             <div
                 className={cn(
-                    'flex aspect-[3/2] w-full items-center justify-center overflow-hidden rounded-xl border border-border bg-muted',
+                    'flex aspect-[3/2] w-full items-center justify-center overflow-hidden rounded-none border border-border bg-muted',
                     showPreview && 'border-border',
                 )}
             >

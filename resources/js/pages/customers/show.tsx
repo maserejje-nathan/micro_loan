@@ -16,6 +16,7 @@ import type { CustomerFormValues } from '@/components/customers/customer-form-fi
 import { DataTablePagination } from '@/components/data-table-pagination';
 import { EmptyState } from '@/components/empty-state';
 import { EntityStatusBadge } from '@/components/entity-status-badge';
+import { FormField } from '@/components/form-field';
 import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
 import {
@@ -25,7 +26,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
+import { Spinner } from '@/components/ui/spinner';
 import {
     Table,
     TableBody,
@@ -36,6 +37,7 @@ import {
 } from '@/components/ui/table';
 import { formatEnumLabel } from '@/lib/format-label';
 import { formatMoney } from '@/lib/format-money';
+import { disable, enable } from '@/routes/customers/portal';
 import type { Auth } from '@/types';
 import type { Paginated } from '@/types/pagination';
 
@@ -94,7 +96,7 @@ function DetailItem({
     }
 
     return (
-        <div className="rounded-lg border border-border bg-muted px-3 py-2.5">
+        <div className="rounded-none border border-border bg-muted px-3 py-2.5">
             <dt className="text-xs text-muted-foreground">{label}</dt>
             <dd className="mt-0.5 text-sm font-medium">{value}</dd>
         </div>
@@ -282,7 +284,7 @@ export default function CustomersShow({
                                     )}
                                 </div>
                                 {generatedPassword && (
-                                    <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 p-4">
+                                    <div className="rounded-none border border-amber-500/40 bg-amber-500/10 p-4">
                                         <p className="text-sm font-medium">
                                             Temporary password (share securely)
                                         </p>
@@ -304,8 +306,8 @@ export default function CustomersShow({
                                     </Button>
                                 )}
                                 <Form
-                                    action={`/customers/${customer.id}/portal/disable`}
-                                    method="post"
+                                    {...disable.form(customer.id)}
+                                    disableWhileProcessing
                                 >
                                     {({ processing }) => (
                                         <Button
@@ -314,6 +316,7 @@ export default function CustomersShow({
                                             size="sm"
                                             disabled={processing}
                                         >
+                                            {processing && <Spinner />}
                                             Disable portal access
                                         </Button>
                                     )}
@@ -321,35 +324,31 @@ export default function CustomersShow({
                             </>
                         ) : (
                             <Form
-                                action={`/customers/${customer.id}/portal/enable`}
-                                method="post"
+                                {...enable.form(customer.id)}
+                                disableWhileProcessing
                                 className="flex max-w-md flex-col gap-4"
                             >
                                 {({ processing, errors }) => (
                                     <>
-                                        <div className="grid gap-2">
-                                            <Label htmlFor="portal_password">
-                                                Password (optional)
-                                            </Label>
+                                        <FormField
+                                            id="portal_password"
+                                            label="Password (optional)"
+                                            error={errors.password}
+                                            hint="Leave blank to generate a secure password automatically."
+                                        >
                                             <PasswordInput
                                                 id="portal_password"
                                                 name="password"
                                                 autoComplete="new-password"
+                                                className="h-10"
+                                                aria-invalid={!!errors.password}
                                             />
-                                            <p className="text-xs text-muted-foreground">
-                                                Leave blank to generate a secure
-                                                password automatically.
-                                            </p>
-                                            {errors.password && (
-                                                <p className="text-sm text-destructive">
-                                                    {errors.password}
-                                                </p>
-                                            )}
-                                        </div>
+                                        </FormField>
                                         <Button
                                             type="submit"
                                             disabled={processing}
                                         >
+                                            {processing && <Spinner />}
                                             Enable portal access
                                         </Button>
                                     </>
@@ -449,7 +448,7 @@ export default function CustomersShow({
                                                     href={customer.id_front_url}
                                                     target="_blank"
                                                     rel="noreferrer"
-                                                    className="block overflow-hidden rounded-xl border border-border bg-muted"
+                                                    className="block overflow-hidden rounded-none border border-border bg-muted"
                                                 >
                                                     <img
                                                         src={
@@ -468,7 +467,7 @@ export default function CustomersShow({
                                                     href={customer.id_back_url}
                                                     target="_blank"
                                                     rel="noreferrer"
-                                                    className="block overflow-hidden rounded-xl border border-border bg-muted"
+                                                    className="block overflow-hidden rounded-none border border-border bg-muted"
                                                 >
                                                     <img
                                                         src={

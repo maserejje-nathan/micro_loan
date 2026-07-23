@@ -20,11 +20,11 @@ class PlatformSettingsDefaults
         return [
             'logo_url' => '/images/logo.svg',
             'logo_path' => null,
-            'meta_title' => 'Loan management for modern lenders',
+            'meta_title' => 'Avango Credit Platform — Loan management for modern lenders',
             'hero_badge' => 'Loan operations platform',
             'hero_headline_prefix' => 'Lending software built for',
             'hero_headline_highlight' => 'growing MFIs',
-            'hero_description' => '{app_name} helps microfinance institutions and small lenders run customers, loan products, disbursements, repayments, and teams from one secure, multi-tenant workspace.',
+            'hero_description' => 'Avango Credit Platform helps microfinance institutions and small lenders run customers, loan products, disbursements, repayments, and teams from one secure workspace.',
             'hero_primary_cta' => 'Start free trial',
             'hero_secondary_cta' => 'View pricing',
             'highlights' => [
@@ -34,7 +34,11 @@ class PlatformSettingsDefaults
             ],
             'cta_title' => 'Ready to modernize your lending operations?',
             'cta_description' => 'Create your company workspace, invite your team, and start managing loans with confidence.',
-            'footer_tagline' => '{app_name} — secure loan management for microfinance institutions and small lenders across East Africa.',
+            'footer_tagline' => 'Avango Credit Platform — secure loan management for microfinance institutions and small lenders across East Africa.',
+            'mobile_app_title' => 'Manage loans from your phone',
+            'mobile_app_description' => 'The Avango lender app keeps portfolio, approvals, and collections with your field team — same secure login as the web workspace.',
+            'ios_app_url' => '',
+            'android_app_url' => '',
             'popular_plan_slug' => 'professional',
             'banner_slides' => [
                 [

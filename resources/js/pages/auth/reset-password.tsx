@@ -1,9 +1,8 @@
 import { Form, Head } from '@inertiajs/react';
-import InputError from '@/components/input-error';
+import { AuthFormField } from '@/components/auth-form-field';
 import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 import { update } from '@/routes/password';
 
@@ -22,57 +21,60 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
                 {...update.form()}
                 transform={(data) => ({ ...data, token, email })}
                 resetOnSuccess={['password', 'password_confirmation']}
+                disableWhileProcessing
             >
                 {({ processing, errors }) => (
                     <div className="grid gap-6">
-                        <div className="grid gap-2">
-                            <Label htmlFor="email">Email</Label>
+                        <AuthFormField
+                            id="email"
+                            label="Email"
+                            error={errors.email}
+                        >
                             <Input
                                 id="email"
                                 type="email"
                                 name="email"
                                 autoComplete="email"
                                 value={email}
-                                className="mt-1 block w-full"
+                                className="h-10"
                                 readOnly
                             />
-                            <InputError
-                                message={errors.email}
-                                className="mt-2"
-                            />
-                        </div>
+                        </AuthFormField>
 
-                        <div className="grid gap-2">
-                            <Label htmlFor="password">Password</Label>
+                        <AuthFormField
+                            id="password"
+                            label="Password"
+                            error={errors.password}
+                            required
+                        >
                             <PasswordInput
                                 id="password"
                                 name="password"
                                 autoComplete="new-password"
-                                className="mt-1 block w-full"
+                                className="h-10"
                                 autoFocus
                                 placeholder="Password"
                                 passwordrules={passwordRules}
+                                aria-invalid={!!errors.password}
                             />
-                            <InputError message={errors.password} />
-                        </div>
+                        </AuthFormField>
 
-                        <div className="grid gap-2">
-                            <Label htmlFor="password_confirmation">
-                                Confirm password
-                            </Label>
+                        <AuthFormField
+                            id="password_confirmation"
+                            label="Confirm password"
+                            error={errors.password_confirmation}
+                            required
+                        >
                             <PasswordInput
                                 id="password_confirmation"
                                 name="password_confirmation"
                                 autoComplete="new-password"
-                                className="mt-1 block w-full"
+                                className="h-10"
                                 placeholder="Confirm password"
                                 passwordrules={passwordRules}
+                                aria-invalid={!!errors.password_confirmation}
                             />
-                            <InputError
-                                message={errors.password_confirmation}
-                                className="mt-2"
-                            />
-                        </div>
+                        </AuthFormField>
 
                         <Button
                             type="submit"

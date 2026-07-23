@@ -91,7 +91,7 @@ function QuickLinkCard({
         <Link
             href={href}
             prefetch
-            className="group flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-primary/30 hover:bg-muted"
+            className="group flex items-center gap-4 rounded-none border bg-card p-4 transition-colors hover:border-primary/30 hover:bg-muted"
         >
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
                 <Icon className="size-5" />

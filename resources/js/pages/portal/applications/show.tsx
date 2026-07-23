@@ -22,6 +22,7 @@ import {
 } from '@/components/ui/card';
 import { formatMoney } from '@/lib/format-money';
 import { cn } from '@/lib/utils';
+import { submit } from '@/routes/portal/applications';
 
 type Props = {
     application: {
@@ -95,7 +96,7 @@ function DetailItem({
     }
 
     return (
-        <div className="rounded-lg border border-border bg-muted px-3 py-2.5">
+        <div className="rounded-none border border-border bg-muted px-3 py-2.5">
             <dt className="text-xs text-muted-foreground">{label}</dt>
             <dd className="mt-0.5 text-sm font-medium">{value}</dd>
         </div>
@@ -189,7 +190,7 @@ export default function PortalApplicationShow({
             <Head title={application.reference_number} />
             <PortalPage>
                 {flash?.success && (
-                    <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-900 dark:text-emerald-100">
+                    <div className="rounded-none border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-900 dark:text-emerald-100">
                         {flash.success}
                     </div>
                 )}
@@ -220,8 +221,8 @@ export default function PortalApplicationShow({
                         <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
                             {canSubmit && (
                                 <Form
-                                    action={`/portal/applications/${application.id}/submit`}
-                                    method="post"
+                                    {...submit.form(application.id)}
+                                    disableWhileProcessing
                                 >
                                     {({ processing }) => (
                                         <Button
@@ -295,7 +296,7 @@ export default function PortalApplicationShow({
 
                 {(!amountInRange || !termInRange) &&
                     application.status === 'draft' && (
-                        <div className="rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-950 dark:text-amber-100">
+                        <div className="rounded-none border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-950 dark:text-amber-100">
                             Your request is outside this product&apos;s allowed
                             range (amount{' '}
                             {formatMoney(product.min_amount, currency)}–
@@ -366,7 +367,7 @@ export default function PortalApplicationShow({
                                 </p>
                             )}
                             {application.rejection_reason && (
-                                <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+                                <div className="rounded-none border border-destructive/30 bg-destructive/5 p-4">
                                     <p className="text-xs font-medium text-destructive">
                                         Rejection reason
                                     </p>
